@@ -1,0 +1,550 @@
+<title>Pocket CEO</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=JetBrains+Mono:wght@500;700&display=swap">
+<!--
+THESIS: Same bench-instrument world as the Lead Shark engine deck. A dark canvas where each helper
+glows in its own phosphor colour, then the deck turns into the setup survey itself.
+STORY: Meet your CEO -> see seven helpers -> watch five of them work on realistic examples ->
+get set up on the last four slides without leaving the deck.
+FORM: 1920x1080 stage scaled to fit, click/keyboard driven, 11 slides.
+-->
+<style>
+/* Layout: fixed 1920x1080 stage, slides cross-fade; the stage colour follows the current helper. */
+@property --field { syntax: '<color>'; inherits: true; initial-value: #4A86FF; }
+:root{
+  color-scheme:dark;
+  --canvas:#060912; --panel:#0E1524; --panel2:#0A0F1B; --hair:#1C2840;
+  --ink:#EEF3FF; --ink-soft:#A7B7DA; --ink-faint:#6B7CA3;
+  --blue:#4A86FF; --cyan:#2EE3FF; --green:#3DF5A6; --amber:#FFB547; --rose:#FF6B8B;
+  --ease-out:cubic-bezier(.23,1,.32,1);
+  --display:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden;background:var(--canvas);color:var(--ink)}
+body{font-family:var(--display);-webkit-font-smoothing:antialiased;--field:var(--blue);transition:--field 1100ms var(--ease-out)}
+body[data-c=blue]{--field:var(--blue)} body[data-c=cyan]{--field:var(--cyan)} body[data-c=green]{--field:var(--green)} body[data-c=amber]{--field:var(--amber)}
+.atmos{position:fixed;inset:0;pointer-events:none;background:
+  radial-gradient(55% 65% at 82% 22%, color-mix(in srgb, var(--field) 20%, transparent), transparent 72%),
+  radial-gradient(45% 55% at 6% 104%, color-mix(in srgb, var(--field) 13%, transparent), transparent 70%),
+  radial-gradient(120% 90% at 50% 50%, transparent 55%, rgba(0,0,0,.55) 100%)}
+.deck{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform:translate(-50%,-50%) scale(var(--s,1));transform-origin:center}
+.slide{position:absolute;inset:0;opacity:0;visibility:hidden;transform:scale(.985);transition:opacity 240ms ease,transform 240ms ease,visibility 0s 240ms}
+.slide.on{opacity:1;visibility:visible;transform:none;transition:opacity 600ms var(--ease-out),transform 700ms var(--ease-out)}
+[data-in]{opacity:0;transform:translateY(26px);transition:opacity 0s 240ms,transform 0s 240ms}
+.on [data-in]{opacity:1;transform:none;transition:opacity 700ms var(--ease-out),transform 800ms var(--ease-out);transition-delay:calc(140ms + var(--d,0)*90ms)}
+.mono{font-family:var(--mono);font-weight:700;text-transform:uppercase;letter-spacing:.14em}
+.c-blue{--c:var(--blue)} .c-cyan{--c:var(--cyan)} .c-green{--c:var(--green)} .c-amber{--c:var(--amber)}
+.neon{color:color-mix(in oklab,var(--c) 18%,#fff);text-shadow:0 0 2px color-mix(in oklab,var(--c) 35%,#fff),0 0 10px color-mix(in srgb,var(--c) 80%,transparent),0 0 26px color-mix(in srgb,var(--c) 50%,transparent),0 0 64px color-mix(in srgb,var(--c) 26%,transparent)}
+.phos{color:var(--c);text-shadow:0 0 14px color-mix(in srgb,var(--c) 45%,transparent),0 0 44px color-mix(in srgb,var(--c) 22%,transparent)}
+
+/* shared slide chrome */
+.kick{position:absolute;left:120px;top:96px;display:flex;align-items:center;gap:16px;font:700 24px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft)}
+.kick i{width:13px;height:13px;border-radius:50%;background:var(--c,var(--blue));box-shadow:0 0 16px var(--c,var(--blue))}
+.h{position:absolute;left:112px;top:170px;margin:0;font-weight:900;letter-spacing:-.025em;line-height:.92;font-size:120px;max-width:900px}
+.lede{position:absolute;left:120px;top:440px;margin:0;width:760px;font-size:40px;font-weight:600;line-height:1.3;color:var(--ink-soft)}
+.lede b{color:var(--ink)}
+.bullets{position:absolute;left:120px;top:640px;width:760px;display:flex;flex-direction:column;gap:22px;margin:0;padding:0;list-style:none}
+.bullets li{display:flex;gap:20px;align-items:baseline;font-size:32px;font-weight:600;color:var(--ink)}
+.bullets li::before{content:"";flex:none;width:12px;height:12px;border-radius:50%;background:var(--c);box-shadow:0 0 12px var(--c);transform:translateY(-6px)}
+
+/* glass screen used for examples */
+.screen{background:linear-gradient(180deg,var(--panel),var(--panel2));border-radius:28px;border:1.5px solid color-mix(in srgb,var(--c) 45%,var(--hair));box-shadow:0 0 0 1px rgba(255,255,255,.03) inset,0 30px 90px -30px color-mix(in srgb,var(--c) 55%,transparent);padding:34px}
+.ex{position:absolute;right:110px;top:150px;width:880px;display:flex;flex-direction:column;gap:22px}
+.tagx{font:700 18px/1 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint)}
+.you{align-self:flex-end;max-width:620px;background:color-mix(in srgb,var(--c) 18%,var(--panel));border-radius:26px 26px 6px 26px;padding:22px 28px;font-size:30px;font-weight:600}
+.ans{font-size:28px;line-height:1.42;color:var(--ink-soft);font-weight:500}
+.ans b{color:var(--ink);font-weight:800}
+.ans .big1{display:block;font-size:40px;font-weight:900;color:var(--ink);line-height:1.15;margin-bottom:14px}
+.risk{display:flex;gap:14px;align-items:baseline;margin-top:10px}
+.pill{flex:none;font:700 16px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;border-radius:999px;padding:7px 12px}
+.pill.low{background:rgba(61,245,166,.14);color:var(--green)} .pill.med{background:rgba(255,181,71,.16);color:var(--amber)} .pill.high{background:rgba(255,107,139,.16);color:var(--rose)}
+.steps{margin:12px 0 0;padding-left:34px;display:flex;flex-direction:column;gap:6px}
+
+/* 1. TITLE */
+.brand{position:absolute;left:120px;top:96px;display:flex;align-items:center;gap:18px;font:700 22px/1 var(--mono);letter-spacing:.24em;text-transform:uppercase;color:var(--ink-soft)}
+.brand i{width:14px;height:14px;border-radius:50%;background:var(--blue);box-shadow:0 0 0 4px rgba(74,134,255,.18),0 0 18px var(--blue)}
+.t-title{position:absolute;left:104px;top:220px;margin:0;font-weight:900;letter-spacing:-.03em;line-height:.84}
+.t-the{display:block;font-size:150px;font-weight:800;font-stretch:90%;margin-left:10px}
+.t-big{display:block;font-size:250px;font-stretch:80%;text-transform:uppercase;line-height:.86}
+.on .t-big .flick{animation:flick 1100ms steps(1,end) 380ms both}
+@keyframes flick{0%{opacity:0}12%{opacity:.85}18%{opacity:.1}26%{opacity:1}34%{opacity:.35}42%{opacity:1}100%{opacity:1}}
+.t-sub{position:absolute;left:120px;top:840px;margin:0;width:1000px;font-size:44px;font-weight:600;line-height:1.25;color:var(--ink-soft)}
+.t-sub b{color:var(--ink);font-weight:800} .t-sub .g{color:var(--green);text-shadow:0 0 22px rgba(61,245,166,.55)}
+.fan{position:absolute;right:90px;top:150px;width:660px;height:760px}
+.mini{position:absolute;width:340px;background:linear-gradient(180deg,var(--panel),var(--panel2));border-radius:30px;padding:26px;border:1.5px solid color-mix(in srgb,var(--c) 50%,var(--hair));box-shadow:0 30px 80px -30px color-mix(in srgb,var(--c) 70%,transparent);display:flex;flex-direction:column;gap:12px}
+.mini h5{margin:0;font:700 15px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--c)}
+.mini p{margin:0;font-size:22px;line-height:1.35;color:var(--ink-soft);font-weight:500}
+.mini p b{color:var(--ink)}
+.mini:nth-child(1){left:0;top:120px;transform:rotate(-8deg)}
+.mini:nth-child(2){left:170px;top:20px;transform:rotate(1deg);z-index:2}
+.mini:nth-child(3){left:330px;top:200px;transform:rotate(9deg)}
+.on .mini{animation:rise 900ms var(--ease-out) both}
+.on .mini:nth-child(2){animation-delay:120ms}.on .mini:nth-child(3){animation-delay:240ms}
+@keyframes rise{from{opacity:0;translate:0 60px}to{opacity:1;translate:0 0}}
+
+/* 2. MAP */
+.grid7{position:absolute;left:120px;right:120px;top:420px;display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
+.tile{background:linear-gradient(180deg,var(--panel),var(--panel2));border-radius:24px;padding:28px 28px 30px;border:1.5px solid color-mix(in srgb,var(--c) 40%,var(--hair));display:flex;flex-direction:column;gap:12px;min-height:240px}
+.tile .ico{width:54px;height:54px;border-radius:16px;display:grid;place-items:center;background:color-mix(in srgb,var(--c) 16%,transparent);color:var(--c);box-shadow:0 0 24px color-mix(in srgb,var(--c) 30%,transparent)}
+.tile .ico svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.tile h4{margin:0;font-size:36px;font-weight:900;letter-spacing:-.01em}
+.tile p{margin:0;font-size:24px;font-weight:600;color:var(--ink-soft);line-height:1.3}
+.tile.you2{border-style:dashed;justify-content:center}
+.mapnote{position:absolute;left:120px;bottom:90px;font-size:30px;font-weight:600;color:var(--ink-soft)}
+.mapnote b{color:var(--green)}
+
+/* inbox mock */
+.mail{display:flex;flex-direction:column;gap:0}
+.row{display:grid;grid-template-columns:150px 1fr auto;gap:18px;align-items:center;padding:18px 4px;border-bottom:1px solid var(--hair);font-size:25px}
+.row:last-child{border-bottom:0}
+.lab{font:700 15px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;border-radius:8px;padding:8px 10px;text-align:center}
+.lab.u{background:rgba(255,107,139,.16);color:var(--rose)} .lab.c{background:rgba(46,227,255,.14);color:var(--cyan)} .lab.m{background:rgba(61,245,166,.14);color:var(--green)} .lab.n{background:rgba(167,183,218,.12);color:var(--ink-faint)}
+.row .who{font-weight:700} .row .who span{display:block;font-weight:500;color:var(--ink-soft);font-size:22px}
+.row .st{font:700 16px/1 var(--mono);color:var(--green);letter-spacing:.06em}
+.draft{font-size:26px;line-height:1.45;color:var(--ink)}
+.draft .dt{font:700 16px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--c);margin-bottom:12px;display:block}
+
+/* brief mock */
+.brief{font-size:28px;line-height:1.5}
+.brief .subj{font-weight:800;font-size:30px;margin-bottom:16px;color:var(--ink)}
+.brief .ln{display:grid;grid-template-columns:54px 1fr;gap:10px;align-items:baseline;color:var(--ink-soft);margin:6px 0}
+.brief .ln b{color:var(--ink)}
+.brief .pow{color:var(--amber);font-weight:800;text-shadow:0 0 16px rgba(255,181,71,.5)}
+.brief hr{border:0;border-top:1px solid var(--hair);margin:16px 0}
+
+/* grow: two screens */
+.pair{position:absolute;right:110px;top:160px;width:900px;display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.plan h6,.reel h6{margin:0 0 14px;font:700 16px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--c)}
+.plan .wk{border-left:3px solid var(--c);padding:6px 0 6px 16px;margin:12px 0;font-size:23px;color:var(--ink-soft);line-height:1.35}
+.plan .wk b{display:block;color:var(--ink);font-size:24px}
+.phone{aspect-ratio:9/16;max-width:100%;border-radius:26px;background:linear-gradient(160deg,#1b2a44,#0b1222 60%,#132238);position:relative;overflow:hidden;border:2px solid var(--hair)}
+.phone .face{position:absolute;left:50%;top:30%;width:44%;aspect-ratio:1;border-radius:50%;transform:translateX(-50%);background:radial-gradient(circle at 50% 40%,#3a4d70,#1a2640)}
+.phone .body{position:absolute;left:50%;top:52%;width:80%;height:60%;border-radius:40% 40% 0 0;transform:translateX(-50%);background:linear-gradient(#2a3c5e,#18233a)}
+.phone .cap{position:absolute;left:0;right:0;top:68%;text-align:center;font:900 40px/1 var(--display);color:#fff;-webkit-text-stroke:2px #000;paint-order:stroke fill}
+.phone .ttl{position:absolute;left:0;right:0;top:7%;text-align:center;font:900 26px/1.1 var(--display);color:#fff;text-shadow:0 2px 8px #000}
+
+/* SETUP slides */
+.setup .h{font-size:84px;top:160px;max-width:none;white-space:nowrap}
+.panel{position:absolute;left:120px;right:120px;top:330px;bottom:150px;display:grid;gap:40px}
+.cols2{grid-template-columns:1fr 1fr}
+.colx{display:flex;flex-direction:column;gap:22px;min-width:0}
+label.q,legend{font-size:26px;font-weight:800;color:var(--ink);padding:0}
+.hint{font-size:21px;color:var(--ink-soft);font-weight:500}
+.req{color:var(--rose)}
+.f{display:flex;flex-direction:column;gap:8px;min-width:0}
+input[type=text],select,textarea{width:100%;font:500 26px/1.3 var(--display);color:var(--ink);background:var(--panel2);border:2px solid var(--hair);border-radius:16px;padding:16px 20px}
+input[type=text]:focus,select:focus,textarea:focus{outline:none;border-color:var(--field);box-shadow:0 0 0 4px color-mix(in srgb,var(--field) 25%,transparent)}
+textarea{resize:none}
+fieldset{border:0;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;min-width:0}
+.pills{display:flex;flex-wrap:wrap;gap:10px}
+.pills label{display:inline-flex;align-items:center;gap:10px;border:2px solid var(--hair);border-radius:999px;padding:12px 20px;font-size:23px;font-weight:700;cursor:pointer;background:var(--panel2)}
+.pills input{accent-color:var(--field);width:22px;height:22px}
+.pills label:has(input:checked){border-color:var(--field);box-shadow:0 0 18px color-mix(in srgb,var(--field) 35%,transparent)}
+.bigbtn{display:inline-flex;align-items:center;justify-content:center;gap:14px;min-height:90px;padding:20px 40px;border:0;border-radius:24px;background:var(--field);color:#04120B;font:900 34px/1 var(--display);cursor:pointer;text-decoration:none;box-shadow:0 18px 60px -18px var(--field)}
+.bigbtn.ghost{background:transparent;color:var(--ink);border:2px solid var(--field);box-shadow:none}
+.bigbtn:disabled{opacity:.45;cursor:not-allowed}
+.check{display:flex;gap:18px;align-items:center;font-size:30px;font-weight:800;cursor:pointer}
+.check input{width:38px;height:38px;accent-color:var(--field)}
+.note{background:var(--panel);border:1.5px solid var(--hair);border-radius:20px;padding:22px 26px;font-size:25px;color:var(--ink-soft);line-height:1.4}
+.note b{color:var(--ink)}
+.err{color:var(--rose);font-size:24px;font-weight:800}
+.ok{color:var(--green);font-size:26px;font-weight:800}
+pre{white-space:pre-wrap;word-break:break-word;background:var(--panel2);border-radius:14px;padding:16px;font:500 16px/1.45 var(--mono);color:var(--ink-soft);max-height:220px;overflow:auto;margin:10px 0 0}
+details summary{cursor:pointer;font-size:21px;color:var(--ink-soft);font-weight:700}
+.abc{display:flex;flex-direction:column;gap:12px;margin:0;padding:0;list-style:none}
+.abc li{display:flex;gap:14px;align-items:baseline;font-size:23px;color:var(--ink-soft)}
+.k{flex:none;width:40px;height:40px;border-radius:50%;background:var(--amber);color:#2A1A00;display:inline-grid;place-items:center;font:900 21px/1 var(--display)}
+/* final slide visual steps */
+.five{position:absolute;left:120px;right:120px;top:300px;align-items:start;display:grid;grid-template-columns:repeat(5,1fr);gap:22px}
+.st5{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1.5px solid var(--hair);border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:16px;min-width:0}
+.st5 h4{margin:0;font-size:28px;font-weight:900;line-height:1.15}
+.st5 p{margin:0;font-size:21px;color:var(--ink-soft);line-height:1.35}
+.vis{background:var(--canvas);border:1.5px solid var(--hair);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:10px;align-items:center}
+.tabs{display:flex;gap:4px;background:var(--panel2);border-radius:10px;padding:4px}
+.tb{padding:8px 10px;border-radius:8px;font:800 17px/1 var(--display);color:var(--ink-faint)}
+.tb.on{background:var(--green);color:#04120B;box-shadow:0 0 0 3px var(--amber)}
+.ptr{color:var(--amber);font-size:26px;line-height:1}
+.ptag{background:var(--amber);color:#2A1A00;border-radius:999px;padding:5px 12px;font-weight:800;font-size:17px}
+.newb{background:var(--green);color:#04120B;border-radius:10px;padding:10px 14px;font:900 19px/1 var(--display);box-shadow:0 0 0 3px var(--amber)}
+.mbox{width:100%;display:flex;justify-content:space-between;align-items:center;border:2px solid var(--green);border-radius:12px;padding:12px;box-shadow:0 0 0 3px var(--amber);font-size:18px;color:var(--ink-soft)}
+.mbox i{width:28px;height:28px;border-radius:50%;background:var(--green);display:grid;place-items:center;color:#04120B;font-style:normal;font-weight:900}
+.allow{display:flex;gap:10px}
+.allow span{border-radius:10px;padding:10px 14px;font-weight:800;font-size:18px;border:2px solid var(--hair);color:var(--ink-soft)}
+.allow span.y{background:var(--green);color:#04120B;border-color:var(--green);box-shadow:0 0 0 3px var(--amber)}
+kbd{font:800 17px/1 var(--display);background:var(--panel2);border:1.5px solid var(--hair);border-bottom-width:4px;border-radius:7px;padding:3px 8px;color:var(--ink)}
+.copyrow{position:absolute;left:120px;top:190px;right:120px;display:flex;align-items:center;gap:30px}
+
+/* nav */
+.nav{position:fixed;right:24px;bottom:18px;display:flex;gap:10px;z-index:10}
+.nav button{font:800 16px/1 var(--display);color:var(--ink);background:rgba(14,21,36,.85);border:1.5px solid var(--hair);border-radius:999px;padding:12px 18px;cursor:pointer}
+.nav button.next{background:var(--field);color:#04120B;border-color:transparent}
+.dots{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);display:flex;gap:6px;z-index:10;opacity:.45}
+.dots button{width:24px;height:20px;border:0;padding:0;background:transparent;cursor:pointer;position:relative}
+.dots button::after{content:"";position:absolute;left:4px;right:4px;top:9px;height:3px;border-radius:2px;background:var(--ink-faint)}
+.dots button[aria-current]::after{background:var(--ink)}
+button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){.slide,.slide.on,[data-in],.on [data-in]{transform:none!important;transition:none!important}.on .t-big .flick,.on .mini{animation:none}}
+</style>
+
+<div class="atmos"></div>
+<main class="deck" id="deck">
+
+<!-- 1. TITLE -->
+<section class="slide" data-c="blue" aria-label="Pocket CEO">
+  <div class="brand"><i></i>Lead Shark Marketing presents</div>
+  <h1 class="t-title"><span class="t-the" data-in style="--d:0">Meet your</span><span class="t-big neon c-blue"><span class="flick">Pocket<br>CEO</span></span></h1>
+  <p class="t-sub" data-in style="--d:3">Your accountant, lawyer, inbox manager, video editor and coach. <b>In one app.</b> <span class="g">Set up in 10 minutes.</span></p>
+  <div class="fan" aria-hidden="true">
+    <div class="mini c-amber"><h5>☀️ Your morning</h5><p><b>-4°C, sunny.</b> Flames 7:00 pm on Sportsnet. <b>12 cm</b> overnight at Sunshine.</p></div>
+    <div class="mini c-green"><h5>Can I write it off?</h5><p><b>Yes, about 70%.</b> Keep a 2-week log of business trips. Saves you roughly $1,900.</p></div>
+    <div class="mini c-cyan"><h5>Contract check</h5><p><b>Sign with 2 changes.</b> Cap your liability. Fix the auto-renewal.</p></div>
+  </div>
+</section>
+
+<!-- 2. MAP -->
+<section class="slide c-blue" data-c="blue" aria-label="Seven helpers">
+  <div class="kick"><i></i>What you get</div>
+  <h2 class="h" style="font-size:96px;max-width:none;white-space:nowrap" data-in>One CEO. Seven helpers.</h2>
+  <p class="lede" style="top:300px;width:1300px;--d:1" data-in>Just talk to it like a person. It figures out which helper you need.</p>
+  <div class="grid7">
+    <div class="tile c-green" data-in style="--d:2"><span class="ico"><svg viewBox="0 0 24 24"><path d="M12 3v18M17 7H9.5a3 3 0 0 0 0 6h5a3 3 0 0 1 0 6H6"/></svg></span><h4>Accountant</h4><p>Write-offs, CRA letters, and every receipt saved safely.</p></div>
+    <div class="tile c-cyan" data-in style="--d:3"><span class="ico"><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6zM14 3v5h5M9 13h7M9 17h5"/></svg></span><h4>Lawyer</h4><p>Reads contracts. Tells you what to change, with the words to use.</p></div>
+    <div class="tile c-blue" data-in style="--d:4"><span class="ico"><svg viewBox="0 0 24 24"><path d="M3 6h18v12H3zM3 7l9 6 9-6"/></svg></span><h4>Inbox</h4><p>Flags what's urgent. Drafts replies that sound like you.</p></div>
+    <div class="tile c-amber" data-in style="--d:5"><span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M5 19l1.5-1.5M17.5 6.5 19 5"/></svg></span><h4>Morning brief</h4><p>Weather, your games, the snow report and your day.</p></div>
+    <div class="tile c-green" data-in style="--d:6"><span class="ico"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg></span><h4>Consultant</h4><p>Finds what's holding you back. Gives you a 90-day plan.</p></div>
+    <div class="tile c-cyan" data-in style="--d:7"><span class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="13" height="14" rx="2"/><path d="M16 10l5-3v10l-5-3"/></svg></span><h4>Video editor</h4><p>Captions, Reels, clean sound and thumbnails.</p></div>
+    <div class="tile c-blue" data-in style="--d:8"><span class="ico"><svg viewBox="0 0 24 24"><path d="M12 3l2.5 5.5L20 11l-5.5 2.5L12 19l-2.5-5.5L4 11l5.5-2.5z"/></svg></span><h4>AI coach</h4><p>One new way to save time, every Monday.</p></div>
+    <div class="tile you2 c-green" data-in style="--d:9"><h4 class="phos c-green">You</h4><p>Just ask. Your notes stay private, on your own computer.</p></div>
+  </div>
+</section>
+
+<!-- 3. MONEY -->
+<section class="slide c-green" data-c="green" aria-label="Money and tax">
+  <div class="kick"><i></i>Helper 1 · Accountant</div>
+  <h2 class="h" data-in>Money &amp; tax, <span class="phos c-green">sorted.</span></h2>
+  <p class="lede" data-in style="--d:1">Straight answers in dollars, for <b>your province</b>. It checks the rules on CRA's own site before it answers.</p>
+  <ul class="bullets"><li data-in style="--d:2">"Can I write this off?" in seconds</li><li data-in style="--d:3">Snap a receipt. It's filed and kept safe</li><li data-in style="--d:4">CRA letter? It explains it and drafts your reply</li></ul>
+  <div class="ex" data-in style="--d:2">
+    <span class="tagx">Example</span>
+    <div class="you">Can I write off my truck? I use it for client visits.</div>
+    <div class="screen ans"><span class="big1">Yes, the business part. About 70% for most owners like you.</span>
+      Divide business km by total km, and apply that to gas, insurance, repairs and depreciation. At your income, that's roughly <b>$1,900 back this year</b>.
+      <ol class="steps"><li>Keep a simple km log for one full year (or a 3-month sample).</li><li>Snap every gas receipt into your Receipts folder.</li></ol>
+      <div class="risk"><span class="pill low">Low risk</span><span>Commuting to one regular workplace doesn't count. Keep the log and you're covered.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 3b. RECEIPTS -->
+<section class="slide c-green" data-c="green" aria-label="Receipts">
+  <div class="kick"><i></i>Helper 1 · Receipts</div>
+  <h2 class="h" data-in>Snap it. <span class="phos c-green">Never lose it.</span></h2>
+  <p class="lede" data-in style="--d:1">Snap any receipt. It's read, filed and <b>locked away in two safe places</b>.</p>
+  <ul class="bullets"><li data-in style="--d:2">Reads the store, date, GST/HST and total for you</li><li data-in style="--d:3">Saved, locked, and backed up automatically</li><li data-in style="--d:4">"Find my laptop receipt" pulls it up in seconds</li></ul>
+  <div class="ex" data-in style="--d:2">
+    <div class="you">📸 <i>photo of a receipt</i></div>
+    <div class="screen ans"><span class="big1">Saved and backed up.</span>
+      Costco, Oct 14, <b>$84.17</b> (GST $4.01). Office supplies, 100% business.
+      <div class="risk"><span class="pill low">Safe</span><span>2 copies, locked. This month: $1,240 in expenses.</span></div>
+    </div>
+    <div class="you">Find my laptop receipt from March</div>
+    <div class="screen mail">
+      <div class="row"><span class="lab m">Found</span><span class="who">Best Buy · Mar 3<span>MacBook Air · $1,749.99 · Equipment</span></span><span class="st">OPEN ↗</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. LEGAL -->
+<section class="slide c-cyan" data-c="cyan" aria-label="Contracts and legal">
+  <div class="kick"><i></i>Helper 2 · Lawyer</div>
+  <h2 class="h" data-in>Read the fine print <span class="phos c-cyan">for you.</span></h2>
+  <p class="lede" data-in style="--d:1">Drop in a contract. Get a plain-English verdict and the exact words to send back. <b>No fearmongering.</b></p>
+  <ul class="bullets"><li data-in style="--d:2">Employment, privacy and consumer rules for your province</li><li data-in style="--d:3">Sued, or a letter from CRA? It helps first, with a plan and a draft</li><li data-in style="--d:4">Tells you when it's worth a lawyer's hour, and why</li></ul>
+  <div class="ex" data-in style="--d:2">
+    <span class="tagx">Example · commercial lease</span>
+    <div class="screen ans"><span class="big1">Sign with these 2 changes.</span>
+      <div class="risk"><span class="pill high">High</span><span><b>Personal guarantee, no limit.</b> Cap it at 12 months of rent.</span></div>
+      <div class="risk"><span class="pill med">Medium</span><span><b>Auto-renews for 5 years</b> unless you give 9 months' notice. Ask for 3 months.</span></div>
+      <div class="risk"><span class="pill low">Fine</span><span>Rent, deposit, repairs and insurance look normal.</span></div>
+      <p style="margin:18px 0 0;color:var(--ink)">Want me to write the email asking for these changes?</p>
+    </div>
+  </div>
+</section>
+
+<!-- 5. INBOX -->
+<section class="slide c-blue" data-c="blue" aria-label="Inbox">
+  <div class="kick"><i></i>Helper 3 · Inbox</div>
+  <h2 class="h" data-in>Your inbox, <span class="phos c-blue">handled.</span></h2>
+  <p class="lede" data-in style="--d:1">It reads how you write, sorts every email, and drafts replies <b>in your voice</b>. You always press Send.</p>
+  <ul class="bullets"><li data-in style="--d:2">Urgent, Clients, Money, Admin, Newsletters</li><li data-in style="--d:3">Drafts sit in Gmail, ready to review</li><li data-in style="--d:4">It never sends anything on its own</li></ul>
+  <div class="ex" data-in style="--d:2">
+    <div class="screen mail">
+      <div class="row"><span class="lab u">Urgent</span><span class="who">Sarah K.<span>Invoice 1042 link isn't working</span></span><span class="st">DRAFTED ✓</span></div>
+      <div class="row"><span class="lab u">Urgent</span><span class="who">Landlord<span>Lease renewal, notice due Nov 1</span></span><span class="st">DRAFTED ✓</span></div>
+      <div class="row"><span class="lab m">Money</span><span class="who">CRA<span>Notice of assessment, nothing owing</span></span><span class="st">FILED</span></div>
+      <div class="row"><span class="lab c">Clients</span><span class="who">New lead<span>Asking about Saturday availability</span></span><span class="st">DRAFTED ✓</span></div>
+      <div class="row"><span class="lab n">News</span><span class="who">12 newsletters<span>Nothing needs you</span></span><span class="st">SORTED</span></div>
+    </div>
+    <div class="screen draft"><span class="dt">Draft in your voice · to Sarah K.</span>Hey Sarah! So sorry about that, here's a fresh link that should work: [link]. Let me know if it gives you any trouble. Cheers, Mike</div>
+  </div>
+</section>
+
+<!-- 6. MORNING -->
+<section class="slide c-amber" data-c="amber" aria-label="Morning brief">
+  <div class="kick"><i></i>Helper 4 · Morning brief</div>
+  <h2 class="h" data-in>Your day, <span class="phos c-amber">before coffee.</span></h2>
+  <p class="lede" data-in style="--d:1">One short email every morning. The stuff you actually care about, at a glance.</p>
+  <ul class="bullets"><li data-in style="--d:2">Weather and warnings for your city</li><li data-in style="--d:3">Your teams' games, with local start times</li><li data-in style="--d:4">Snow, golf or fishing conditions for your spots</li><li data-in style="--d:5">Urgent emails, meetings and tax deadlines</li></ul>
+  <div class="ex" data-in style="--d:2">
+    <span class="tagx">Example · 7:00 am</span>
+    <div class="screen brief">
+      <div class="subj">☀️ Your day: -4°C, Flames 7pm, 12 cm at Sunshine</div>
+      <div class="ln"><span>🌤</span><span><b>-4°C, sunny</b>, high of 2. Snow after 9 pm.</span></div>
+      <div class="ln"><span>🏒</span><span><b>Flames vs Oilers</b>, 7:00 pm on Sportsnet. Last night: Jays won 5-3.</span></div>
+      <div class="ln"><span>🏂</span><span>Sunshine Village: <b>12 cm overnight</b>, 18 more by morning. <span class="pow">Powder day!</span></span></div>
+      <hr>
+      <div class="ln"><span>📬</span><span><b>2 urgent emails</b>: Sarah (invoice), landlord (lease)</span></div>
+      <div class="ln"><span>📅</span><span><b>10:00</b> call with Dr. Lee</span></div>
+      <div class="ln"><span>🧾</span><span>GST/HST return due in <b>9 days</b></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. GROW & CREATE -->
+<section class="slide c-green" data-c="green" aria-label="Grow and create">
+  <div class="kick"><i></i>Helpers 5, 6, 7</div>
+  <h2 class="h" data-in>Grow it. <span class="phos c-green">Film it.</span></h2>
+  <p class="lede" data-in style="--d:1">A consultant that finds the <b>one thing</b> holding you back, a video editor that makes your clips post-ready, and a coach that keeps you ahead on AI.</p>
+  <ul class="bullets"><li data-in style="--d:2">A 90-day plan built from your own numbers</li><li data-in style="--d:3">Drag in a clip: captions, Reel size, clean sound</li><li data-in style="--d:4">Every Monday: one AI trick that saves you time</li></ul>
+  <div class="pair" data-in style="--d:2">
+    <div class="screen plan c-green"><h6>Your 90-day plan</h6>
+      <div class="wk"><b>Weeks 1–2</b>Fix the offer: one clear package instead of per-visit pricing.</div>
+      <div class="wk"><b>Weeks 3–6</b>Follow up every new lead within 5 minutes.</div>
+      <div class="wk"><b>Weeks 7–12</b>Turn on ads to the new offer. Track cost per booking.</div>
+      <div class="risk"><span class="pill low">On track</span><span style="font-size:22px;color:var(--ink-soft)">One number to watch: bookings per week.</span></div>
+    </div>
+    <div class="screen reel c-cyan"><h6>Your Reel, captioned</h6>
+      <div class="phone"><div class="ttl">3 WAYS TO<br>SLEEP BETTER</div><div class="face"></div><div class="body"></div><div class="cap">tonight</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. SETUP 1 -->
+<section class="slide setup c-blue" data-c="blue" aria-label="Setup step 1">
+  <div class="kick"><i></i>Let's set you up · Step 1 of 3</div>
+  <h2 class="h" data-in>Get the Claude app</h2>
+  <div class="panel cols2">
+    <div class="colx">
+      <p class="note" data-in style="--d:1">Pocket CEO lives inside the <b>Claude app</b>. Download it, open it, and sign in. You'll need a paid plan: if it asks, choose <b>Pro</b>.</p>
+      <a class="bigbtn" href="https://claude.ai/download" target="_blank" rel="noopener" data-in style="--d:2">Download Claude ↗</a>
+      <label class="check" data-in style="--d:3"><input type="checkbox" id="ready"> Claude is open and I'm signed in</label>
+    </div>
+    <div class="colx" data-in style="--d:2">
+      <div class="note"><b>What happens next</b><br>Step 2: answer a few easy questions (about 4 minutes).<br>Step 3: copy one message, paste it into Claude, and it sets everything up for you.</div>
+      <div class="note"><b>Your privacy</b><br>Your answers stay on your computer. Pocket CEO never sends an email to anyone for you. It only writes drafts.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 9. SETUP 2 -->
+<section class="slide setup c-cyan" data-c="cyan" aria-label="Setup step 2">
+  <div class="kick"><i></i>Step 2 of 3 · About you</div>
+  <h2 class="h" data-in>Tell us about your business</h2>
+  <form class="panel cols2" id="f1" novalidate onsubmit="return false">
+    <div class="colx">
+      <div class="f"><label class="q" for="first">First name <span class="req">*</span></label><input type="text" id="first" autocomplete="given-name" placeholder="Example: Sarah"></div>
+      <div class="f"><label class="q" for="biz">Business name <span class="req">*</span></label><input type="text" id="biz" autocomplete="organization" placeholder="Example: Northside Wellness"></div>
+      <div class="f"><label class="q" for="what">What does it do? <span class="req">*</span></label><input type="text" id="what" placeholder="Example: Naturopathic care for women's hormones"></div>
+      <div class="f"><label class="q" for="prov">Province or territory <span class="req">*</span></label>
+        <select id="prov"><option value="">Pick one</option><option>Alberta</option><option>British Columbia</option><option>Manitoba</option><option>New Brunswick</option><option>Newfoundland and Labrador</option><option>Nova Scotia</option><option>Ontario</option><option>Prince Edward Island</option><option>Quebec</option><option>Saskatchewan</option><option>Northwest Territories</option><option>Nunavut</option><option>Yukon</option></select></div>
+      <div class="f"><label class="q" for="reg">Regulated profession? <span class="hint">(leave blank if not)</span></label><input type="text" id="reg" placeholder="Example: Naturopathic doctor"></div>
+    </div>
+    <div class="colx">
+      <fieldset><legend>How is it set up? <span class="req">*</span></legend><span class="hint">Never registered an "Inc." or "Ltd."? Pick "Just me".</span>
+        <div class="pills"><label><input type="radio" name="struct" value="Sole proprietor (just me, not incorporated)"> Just me</label><label><input type="radio" name="struct" value="Corporation (Inc. or Ltd.)"> Inc. or Ltd.</label><label><input type="radio" name="struct" value="Partnership"> Partnership</label><label><input type="radio" name="struct" value="Not sure"> Not sure</label></div></fieldset>
+      <fieldset><legend>Do you charge GST or HST?</legend>
+        <div class="pills"><label><input type="radio" name="gst" value="Yes"> Yes</label><label><input type="radio" name="gst" value="No"> No</label><label><input type="radio" name="gst" value="Not sure"> Not sure</label></div></fieldset>
+      <fieldset><legend>Yearly revenue (roughly)</legend>
+        <div class="pills"><label><input type="radio" name="rev" value="Under $30,000"> Under $30k</label><label><input type="radio" name="rev" value="$30,000 to $100,000"> $30–100k</label><label><input type="radio" name="rev" value="$100,000 to $500,000"> $100–500k</label><label><input type="radio" name="rev" value="Over $500,000"> $500k+</label></div></fieldset>
+      <div class="f"><label class="q" for="team">Staff or contractors?</label><input type="text" id="team" placeholder="Example: 2 part-time staff"></div>
+      <p class="err" id="err1" hidden></p>
+    </div>
+  </form>
+</section>
+
+<!-- 10. SETUP 2b -->
+<section class="slide setup c-amber" data-c="amber" aria-label="Setup step 2 continued">
+  <div class="kick"><i></i>Step 2 of 3 · Your morning &amp; your history</div>
+  <h2 class="h" data-in>Make it yours</h2>
+  <div class="panel cols2">
+    <div class="colx">
+      <div class="f"><label class="q" for="city">Your city</label><input type="text" id="city" placeholder="Example: Calgary"></div>
+      <div class="f"><label class="q" for="teams">Teams you love watching</label><input type="text" id="teams" placeholder="Example: Calgary Flames, Toronto Blue Jays"></div>
+      <div class="f"><label class="q" for="hobbies">Hobbies, and where</label><input type="text" id="hobbies" placeholder="Example: Snowboarding at Sunshine Village"></div>
+      <fieldset><legend>Brief time and delivery</legend>
+        <div class="pills"><label><input type="radio" name="time" value="6:00 am"> 6 am</label><label><input type="radio" name="time" value="7:00 am" checked> 7 am</label><label><input type="radio" name="time" value="8:00 am"> 8 am</label>
+          <label><input type="radio" name="deliver" value="Email it to me (only to me)" checked> Email me</label><label><input type="radio" name="deliver" value="Just show it in the Claude app"> In the app</label></div></fieldset>
+    </div>
+    <div class="colx">
+      <div class="note"><b>Using ChatGPT or another AI already? Don't start over.</b>
+        <ol class="abc" style="margin-top:14px"><li><span class="k">a</span><span>Copy the message below.</span></li><li><span class="k">b</span><span>Paste it into the AI you've been using and send it.</span></li><li><span class="k">c</span><span>Paste what it writes back into the box here.</span></li></ol></div>
+      <button class="bigbtn ghost" type="button" id="copyExport">Copy the message for my old AI</button>
+      <p class="ok" id="okExport" hidden>Copied! Paste it into your old AI chat.</p>
+      <details id="peekExport"><summary>See the message</summary><pre id="exportMsg"></pre></details>
+      <textarea id="history" rows="4" placeholder="Paste what your old AI wrote back (optional)"></textarea>
+    </div>
+  </div>
+</section>
+
+<!-- 11. SETUP 3 -->
+<section class="slide setup c-green" data-c="green" aria-label="Setup step 3">
+  <div class="kick"><i></i>Step 3 of 3 · Copy, paste, done</div>
+  <div class="copyrow">
+    <button class="bigbtn" type="button" id="copy">Copy my setup message</button>
+    <div><p class="ok" id="ok" hidden>Copied! Now follow B to E below.</p><details id="peek"><summary>See the message</summary><pre id="msg"></pre></details></div>
+  </div>
+  <div class="five">
+    <div class="st5"><span class="k">A</span><h4>Copy your message</h4><p>Click the big green button above.</p></div>
+    <div class="st5"><span class="k">B</span><h4>Click <span class="phos c-green">Code</span> at the top</h4>
+      <div class="vis"><div class="tabs"><span class="tb">Chat</span><span class="tb">Cowork</span><span class="tb on">Code</span></div><span class="ptr">▲</span><span class="ptag">Click Code</span></div>
+      <p>You might be on Chat or Cowork. That's normal.</p></div>
+    <div class="st5"><span class="k">C</span><h4>Start a new chat</h4>
+      <div class="vis"><span class="newb">+ New session</span><span class="ptr">▲</span><span class="ptag">Top left</span></div>
+      <p>Click <b>+ New session</b>.</p></div>
+    <div class="st5"><span class="k">D</span><h4>Paste and press Enter</h4>
+      <div class="vis"><div class="mbox">Paste here… <i>↑</i></div></div>
+      <p><kbd>⌘</kbd>+<kbd>V</kbd> on Mac<br><kbd>Ctrl</kbd>+<kbd>V</kbd> on Windows<br>then <kbd>Enter</kbd></p></div>
+    <div class="st5"><span class="k">E</span><h4>Click Allow</h4>
+      <div class="vis"><div class="allow"><span>Deny</span><span class="y">Allow</span></div></div>
+      <p>It may ask a few times. That's normal and safe. Then it does the rest.</p></div>
+  </div>
+</section>
+
+</main>
+
+<nav class="dots" id="dots" aria-label="Slides"></nav>
+<div class="nav"><button type="button" id="prev">← Back</button><button type="button" class="next" id="next">Next →</button></div>
+
+<script>
+// GitHub repo that holds the Pocket CEO plugin marketplace.
+const REPO = "andrewdvass/pocket-ceo";
+
+const $ = id => document.getElementById(id);
+const slides = [...document.querySelectorAll(".slide")];
+const SETUP1 = 8, SETUP2 = 9, LAST = slides.length - 1;
+let cur = 0;
+
+function fit(){ const s = Math.min(innerWidth/1920, innerHeight/1080); document.documentElement.style.setProperty("--s", s); $("deck").style.setProperty("--s", s); }
+addEventListener("resize", fit); fit();
+
+slides.forEach((_, i) => { const b = document.createElement("button"); b.type = "button"; b.setAttribute("aria-label", "Slide " + (i+1)); b.onclick = () => go(i); $("dots").appendChild(b); });
+
+function radio(n){ const r = document.querySelector(`input[name="${n}"]:checked`); return r ? r.value : ""; }
+function missing(){
+  const m = [];
+  if (!$("first").value.trim()) m.push("your first name");
+  if (!$("biz").value.trim()) m.push("your business name");
+  if (!$("what").value.trim()) m.push("what it does");
+  if (!$("prov").value) m.push("your province");
+  if (!radio("struct")) m.push("how it's set up");
+  return m;
+}
+function go(i){
+  i = Math.max(0, Math.min(LAST, i));
+  if (i > SETUP1 && !$("ready").checked) { i = SETUP1; $("ready").focus(); }
+  if (i > SETUP2 && missing().length) { i = SETUP2; $("err1").textContent = "Almost there. Please add " + missing().join(", ") + "."; $("err1").hidden = false; }
+  else if (i > SETUP2) { $("err1").hidden = true; }
+  cur = i;
+  slides.forEach((s, k) => s.classList.toggle("on", k === i));
+  document.body.dataset.c = slides[i].dataset.c;
+  [...$("dots").children].forEach((b, k) => b.toggleAttribute("aria-current", k === i));
+  $("prev").disabled = i === 0;
+  $("next").textContent = i === LAST ? "Done ✓" : i >= SETUP1 ? "Next step →" : "Next →";
+  if (i === LAST) $("msg").textContent = buildMessage();
+  try { history.replaceState(null, "", "#s" + (i+1)); } catch(e) {}
+}
+$("prev").onclick = () => go(cur - 1);
+$("next").onclick = () => go(cur + 1);
+addEventListener("keydown", e => {
+  if (e.target.closest("input,textarea,select")) return;
+  if (["ArrowRight","PageDown"," "].includes(e.key)) { e.preventDefault(); go(cur + 1); }
+  if (["ArrowLeft","PageUp"].includes(e.key)) { e.preventDefault(); go(cur - 1); }
+});
+
+// remember a half-finished form in this browser only
+const fields = ["first","biz","what","prov","team","reg","city","teams","hobbies","history"];
+const radios = ["struct","gst","rev","time","deliver"];
+const store = { get(k){ try { return localStorage.getItem(k); } catch(e){ return null; } }, set(k,v){ try { localStorage.setItem(k,v); } catch(e){} } };
+try {
+  const saved = JSON.parse(store.get("pceo-deck") || "{}");
+  fields.forEach(f => { if (saved[f]) $(f).value = saved[f]; });
+  radios.forEach(n => { if (saved[n]) { const r = document.querySelector(`input[name="${n}"][value="${CSS.escape(saved[n])}"]`); if (r) r.checked = true; } });
+  if (saved.ready) $("ready").checked = true;
+} catch(e) {}
+function save(){ const o = {}; fields.forEach(f => o[f] = $(f).value.trim()); radios.forEach(n => o[n] = radio(n)); o.ready = $("ready").checked; store.set("pceo-deck", JSON.stringify(o)); }
+document.addEventListener("input", save); document.addEventListener("change", save);
+
+const EXPORT_MSG = `I'm moving to a new AI assistant for my business, and I don't want to start over. Please write a complete summary of everything you know about me from our past conversations and your memory, so my new assistant can pick up exactly where we left off.
+
+Use these headings:
+1. About me: name, role, where I live, how I like to be spoken to.
+2. My business: what it does, who my customers are, my services and prices, my team, the tools and software I use.
+3. My goals: for this month and this year.
+4. What I'm working on right now: each project, where it's at, the next step, and any deadlines.
+5. Important decisions we made, and why.
+6. People I work with: name, who they are, and anything important about them.
+7. How I write and talk: my tone, phrases I use, what I don't like.
+8. Anything else a new assistant should know to help me well.
+
+Rules: only include things you actually know from our conversations; write "unknown" instead of guessing. Leave out passwords, SIN, and any bank or card numbers. Put everything in one block of plain text I can copy.`;
+$("exportMsg").textContent = EXPORT_MSG;
+
+function copyText(text, okEl, pre, details){
+  const ok = () => { okEl.hidden = false; };
+  const fb = () => { details.open = true; const s = getSelection(), r = document.createRange(); r.selectNodeContents(pre); s.removeAllRanges(); s.addRange(r);
+    okEl.hidden = false; okEl.textContent = "It's selected below. Press ⌘+C (Mac) or Ctrl+C (Windows) to copy it."; };
+  try { navigator.clipboard.writeText(text).then(ok, fb); } catch(e) { fb(); }
+}
+$("copyExport").onclick = () => copyText(EXPORT_MSG, $("okExport"), $("exportMsg"), $("peekExport"));
+
+function buildMessage(){
+  const v = f => $(f).value.trim() || "(skipped)";
+  const r = n => radio(n) || "(skipped)";
+  const hist = $("history").value.trim();
+  return `Hi Claude! I'm setting up Pocket CEO. I'm not technical, so please do every step for me and keep it simple.
+
+1. Check that Git is installed (run: git --version). If it isn't, install it for me first:
+   Mac: run xcode-select --install and tell me to click Install in the popup.
+   Windows: run winget install -e --id Git.Git
+2. Install Pocket CEO by running these two commands:
+   claude plugin marketplace add ${REPO}
+   claude plugin install pocket-ceo@pocket-ceo
+3. Open the Pocket CEO setup instructions in the installed plugin (skills/setup/SKILL.md) and follow them.
+4. Use my answers below. Don't ask me these questions again.
+5. If I included "What my old AI knew about me", save it to Documents/Pocket CEO/background.md, use it to fill in anything missing from my profile, and treat it as what you already know about me and my work.
+6. When everything is done, tell me to start a new chat so Pocket CEO is fully loaded.
+
+My answers:
+- First name: ${v("first")}
+- Business name: ${v("biz")}
+- What the business does: ${v("what")}
+- Province or territory: ${v("prov")}
+- Business structure: ${r("struct")}
+- Charges GST/HST: ${r("gst")}
+- Yearly revenue: ${r("rev")}
+- Staff or contractors: ${v("team")}
+- Regulated profession: ${v("reg")}
+- City: ${v("city")}
+- Sports teams I follow: ${v("teams")}
+- Hobbies and where: ${v("hobbies")}
+- Morning brief time: ${r("time")}
+- Morning brief delivery: ${r("deliver")}` + (hist ? `
+
+What my old AI knew about me:
+${hist}` : "");
+}
+$("copy").onclick = () => { const t = buildMessage(); $("msg").textContent = t; copyText(t, $("ok"), $("msg"), $("peek")); };
+
+const start = parseInt((location.hash.match(/^#s(\d+)$/) || [])[1] || "1", 10) - 1;
+go(isNaN(start) ? 0 : start);
+</script>

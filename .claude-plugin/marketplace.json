@@ -1,0 +1,16 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "pocket-ceo",
+  "description": "Pocket CEO: your accountant, contract reviewer, inbox manager, business consultant and AI coach in one plugin.",
+  "owner": {
+    "name": "Lead Shark Marketing"
+  },
+  "plugins": [
+    {
+      "name": "pocket-ceo",
+      "description": "A CEO in your pocket for Canadian small-business owners. Type /start to set it up.",
+      "source": "./plugin",
+      "category": "productivity"
+    }
+  ]
+}

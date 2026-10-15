@@ -1,0 +1,363 @@
+<title>Pocket CEO Setup</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap">
+<style>
+/* Layout: one narrow column, three big numbered steps that open in order; the copy button is the finish line. */
+:root{
+  --bg:#F3F6F2; --card:#FFFFFF; --ink:#15241C; --soft:#4C5E54; --line:#D5DED7;
+  --go:#1E8A53; --go-ink:#FFFFFF; --sun:#FFD15C; --sun-ink:#2A2100; --warn:#B4441F;
+  --display:"Bricolage Grotesque","Avenir Next","Segoe UI",system-ui,sans-serif;
+  --body:"Nunito Sans","Segoe UI",system-ui,-apple-system,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0E1612; --card:#16211B; --ink:#E8F1EB; --soft:#9FB3A7; --line:#2A3A31;
+  --go:#3DBA7B; --go-ink:#06140C; --sun:#FFD15C; --sun-ink:#2A2100; --warn:#FF8A63; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E1612; --card:#16211B; --ink:#E8F1EB; --soft:#9FB3A7; --line:#2A3A31;
+  --go:#3DBA7B; --go-ink:#06140C; --sun:#FFD15C; --sun-ink:#2A2100; --warn:#FF8A63; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:400 18px/1.55 var(--body);padding-inline:16px;padding-block:28px 80px}
+.wrap{max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:22px}
+header{display:flex;flex-direction:column;gap:6px}
+.brand{font:800 15px/1 var(--display);letter-spacing:.08em;text-transform:uppercase;color:var(--go)}
+h1{font:800 clamp(34px,8vw,48px)/1.02 var(--display);letter-spacing:-.02em;margin:0;text-wrap:balance}
+.lede{color:var(--soft);margin:0;font-size:19px}
+.step{background:var(--card);border:2px solid var(--line);border-radius:22px;padding:22px;display:flex;flex-direction:column;gap:16px}
+.step.locked{opacity:.55}
+.step.done{border-color:var(--go)}
+.head{display:flex;gap:14px;align-items:center}
+.num{flex:none;width:48px;height:48px;border-radius:50%;background:var(--sun);color:var(--sun-ink);display:grid;place-items:center;font:800 24px/1 var(--display)}
+.step.done .num{background:var(--go);color:var(--go-ink)}
+h2{font:800 26px/1.1 var(--display);margin:0;text-wrap:balance}
+.time{color:var(--soft);font-size:15px}
+p{margin:0}
+.big{display:inline-flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:64px;padding:14px 22px;border:0;border-radius:16px;background:var(--go);color:var(--go-ink);font:800 21px/1.2 var(--display);text-decoration:none;cursor:pointer}
+.big.alt{background:transparent;color:var(--go);border:2px solid var(--go)}
+.big:disabled{cursor:not-allowed;opacity:.5}
+.big:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+.check{display:flex;gap:12px;align-items:center;font-weight:700;font-size:19px;cursor:pointer}
+.check input{width:28px;height:28px;accent-color:var(--go);flex:none}
+.note{background:var(--bg);border-radius:14px;padding:12px 14px;font-size:16px;color:var(--soft)}
+form{display:flex;flex-direction:column;gap:18px}
+.field{display:flex;flex-direction:column;gap:6px;min-width:0}
+label.q{font-weight:700;font-size:18px}
+.hint{color:var(--soft);font-size:15px}
+input[type=text],select,textarea{width:100%;font:400 18px/1.4 var(--body);color:var(--ink);background:var(--bg);border:2px solid var(--line);border-radius:12px;padding:12px 14px}
+textarea{min-height:84px;resize:vertical}
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pills label{display:inline-flex;align-items:center;gap:8px;border:2px solid var(--line);border-radius:999px;padding:10px 16px;font-weight:600;cursor:pointer;background:var(--bg)}
+.pills input{accent-color:var(--go);width:20px;height:20px}
+.pills label:has(input:checked){border-color:var(--go)}
+fieldset{border:0;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;min-width:0}
+legend{font-weight:700;font-size:18px;padding:0;margin-bottom:2px}
+.group{font:800 14px/1 var(--display);letter-spacing:.08em;text-transform:uppercase;color:var(--soft);padding-top:6px;border-top:2px dashed var(--line)}
+.req{color:var(--warn);font-weight:700}
+.err{color:var(--warn);font-weight:700;font-size:16px}
+ol.how{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px}
+ol.how li{display:flex;gap:12px;align-items:flex-start;font-size:19px}
+ol.how b.k{flex:none;width:34px;height:34px;border-radius:50%;background:var(--sun);color:var(--sun-ink);display:grid;place-items:center;font:800 17px/1 var(--display)}
+kbd{font:700 16px/1 var(--body);background:var(--bg);border:2px solid var(--line);border-bottom-width:4px;border-radius:8px;padding:3px 8px}
+details{font-size:16px;color:var(--soft)}
+summary{cursor:pointer;font-weight:700}
+pre{white-space:pre-wrap;word-break:break-word;background:var(--bg);border-radius:12px;padding:14px;font:400 14px/1.5 ui-monospace,Menlo,Consolas,monospace;color:var(--ink);max-height:280px;overflow:auto;margin:10px 0 0}
+.copied{font-weight:800;color:var(--go);font-size:19px;text-align:center}
+.carry{display:flex;flex-direction:column;gap:14px;background:var(--bg);border-radius:16px;padding:16px}
+.carry .big.alt{background:var(--card)}
+.carry textarea{background:var(--card)}
+ol.how.small li{font-size:17px}
+ol.how.small b.k{width:28px;height:28px;font-size:15px}
+textarea.tall{min-height:160px}
+.sub{display:flex;flex-direction:column;gap:12px;padding-top:16px;border-top:2px dashed var(--line)}
+.subhead{display:flex;gap:12px;align-items:flex-start;font-size:19px;font-weight:700}
+.subhead b.k{flex:none;width:34px;height:34px;border-radius:50%;background:var(--sun);color:var(--sun-ink);display:grid;place-items:center;font:800 17px/1 var(--display)}
+.mock{background:var(--bg);border:2px solid var(--line);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:10px;overflow:hidden}
+.bar{display:flex;align-items:center;gap:12px;background:var(--card);border-radius:10px;padding:10px 12px;flex-wrap:wrap}
+.dots{display:flex;gap:6px}.dots i{width:11px;height:11px;border-radius:50%;background:var(--line)}
+.tabs{display:flex;gap:4px;background:var(--bg);border-radius:10px;padding:4px;margin:0 auto}
+.tab{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:8px;font:700 16px/1 var(--body);color:var(--soft)}
+.tab svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.tab.on{background:var(--go);color:var(--go-ink);box-shadow:0 0 0 4px var(--sun)}
+.pointer{display:flex;flex-direction:column;align-items:center;gap:2px}
+.pointer.left{align-items:flex-start;padding-left:18px}
+.arrow{color:var(--sun);font-size:30px;line-height:1;text-shadow:0 1px 0 var(--sun-ink)}
+.tag{background:var(--sun);color:var(--sun-ink);font-weight:700;border-radius:999px;padding:6px 14px;font-size:16px}
+.side{display:flex;flex-direction:column;gap:8px;background:var(--card);border-radius:10px;padding:12px;max-width:240px}
+.newbtn{font:800 17px/1 var(--display);color:var(--go-ink);background:var(--go);border-radius:9px;padding:10px 12px;box-shadow:0 0 0 4px var(--sun)}
+.ghost{font-size:14px;color:var(--soft)}.ghost.short{height:10px;width:60%;background:var(--line);border-radius:5px}
+.box{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--card);border:2px solid var(--go);border-radius:14px;padding:16px;box-shadow:0 0 0 4px var(--sun)}
+.ph{color:var(--soft);font-size:18px}
+.send{width:36px;height:36px;border-radius:50%;background:var(--go);color:var(--go-ink);display:grid;place-items:center;font-weight:800}
+.keys{font-size:17px;margin:0;line-height:1.9}
+footer{color:var(--soft);font-size:15px;text-align:center}
+@media (prefers-reduced-motion:no-preference){.step{transition:opacity .2s,border-color .2s}}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="brand">Pocket CEO</div>
+    <h1>Let's set you up</h1>
+    <p class="lede">3 steps. About 10 minutes. You only need to click and type.</p>
+  </header>
+
+  <!-- STEP 1 -->
+  <section class="step" id="s1" aria-labelledby="h1s">
+    <div class="head"><span class="num">1</span><div><h2 id="h1s">Get the Claude app</h2><div class="time">About 3 minutes</div></div></div>
+    <p>Pocket CEO lives inside the Claude app. Download it, open it, and sign in.</p>
+    <a class="big" href="https://claude.ai/download" target="_blank" rel="noopener">Download Claude</a>
+    <p class="note">You need a paid Claude plan (Pro or higher). If the app asks you to pick a plan, choose <b>Pro</b>.</p>
+    <label class="check"><input type="checkbox" id="ready"> Claude is open and I'm signed in</label>
+  </section>
+
+  <!-- STEP 2 -->
+  <section class="step locked" id="s2" aria-labelledby="h2s">
+    <div class="head"><span class="num">2</span><div><h2 id="h2s">Tell us about you</h2><div class="time">About 4 minutes</div></div></div>
+    <p>Answer what you can. Questions with a <span class="req">*</span> are needed. You can change any answer later.</p>
+    <form id="f" novalidate>
+      <div class="group">You and your business</div>
+      <div class="field"><label class="q" for="first">Your first name <span class="req">*</span></label>
+        <input type="text" id="first" autocomplete="given-name" placeholder="Example: Sarah"></div>
+      <div class="field"><label class="q" for="biz">Your business name <span class="req">*</span></label>
+        <input type="text" id="biz" autocomplete="organization" placeholder="Example: Northside Wellness"></div>
+      <div class="field"><label class="q" for="what">What does your business do? <span class="req">*</span></label>
+        <span class="hint">One sentence is perfect.</span>
+        <input type="text" id="what" placeholder="Example: Naturopathic care for women's hormones"></div>
+      <div class="field"><label class="q" for="prov">Which province or territory? <span class="req">*</span></label>
+        <select id="prov">
+          <option value="">Pick one</option>
+          <option>Alberta</option><option>British Columbia</option><option>Manitoba</option><option>New Brunswick</option>
+          <option>Newfoundland and Labrador</option><option>Nova Scotia</option><option>Ontario</option><option>Prince Edward Island</option>
+          <option>Quebec</option><option>Saskatchewan</option><option>Northwest Territories</option><option>Nunavut</option><option>Yukon</option>
+        </select></div>
+      <fieldset><legend>How is your business set up? <span class="req">*</span></legend>
+        <span class="hint">If you never registered a company with "Inc." or "Ltd." in the name, pick "Just me".</span>
+        <div class="pills">
+          <label><input type="radio" name="struct" value="Sole proprietor (just me, not incorporated)"> Just me</label>
+          <label><input type="radio" name="struct" value="Corporation (Inc. or Ltd.)"> Inc. or Ltd.</label>
+          <label><input type="radio" name="struct" value="Partnership"> Partnership</label>
+          <label><input type="radio" name="struct" value="Not sure"> Not sure</label>
+        </div></fieldset>
+      <fieldset><legend>Do you charge GST or HST?</legend>
+        <div class="pills">
+          <label><input type="radio" name="gst" value="Yes"> Yes</label>
+          <label><input type="radio" name="gst" value="No"> No</label>
+          <label><input type="radio" name="gst" value="Not sure"> Not sure</label>
+        </div></fieldset>
+      <fieldset><legend>Roughly how much does it bring in per year?</legend>
+        <div class="pills">
+          <label><input type="radio" name="rev" value="Under $30,000"> Under $30k</label>
+          <label><input type="radio" name="rev" value="$30,000 to $100,000"> $30k to $100k</label>
+          <label><input type="radio" name="rev" value="$100,000 to $500,000"> $100k to $500k</label>
+          <label><input type="radio" name="rev" value="Over $500,000"> Over $500k</label>
+        </div></fieldset>
+      <div class="field"><label class="q" for="team">Do you have staff or contractors?</label>
+        <input type="text" id="team" placeholder="Example: 2 part-time staff, 1 bookkeeper"></div>
+      <div class="field"><label class="q" for="reg">Are you in a regulated profession?</label>
+        <span class="hint">For example health care, law, real estate, trades. Leave blank if not.</span>
+        <input type="text" id="reg" placeholder="Example: Naturopathic doctor"></div>
+
+      <div class="group">Your morning brief</div>
+      <p class="hint">Every morning we can send you your weather, your games and your day.</p>
+      <div class="field"><label class="q" for="city">What city are you in?</label>
+        <input type="text" id="city" autocomplete="address-level2" placeholder="Example: Calgary"></div>
+      <div class="field"><label class="q" for="teams">Sports teams you love watching</label>
+        <input type="text" id="teams" placeholder="Example: Calgary Flames, Toronto Blue Jays"></div>
+      <div class="field"><label class="q" for="hobbies">Hobbies to keep an eye on, and where</label>
+        <textarea id="hobbies" placeholder="Example: Snowboarding at Sunshine Village. Golf at Canmore."></textarea></div>
+      <fieldset><legend>What time do you want it?</legend>
+        <div class="pills">
+          <label><input type="radio" name="time" value="6:00 am"> 6:00 am</label>
+          <label><input type="radio" name="time" value="7:00 am" checked> 7:00 am</label>
+          <label><input type="radio" name="time" value="8:00 am"> 8:00 am</label>
+        </div></fieldset>
+      <fieldset><legend>How should we send it?</legend>
+        <div class="pills">
+          <label><input type="radio" name="deliver" value="Email it to me (only to me)" checked> Email it to me</label>
+          <label><input type="radio" name="deliver" value="Just show it in the Claude app"> Just in the app</label>
+        </div></fieldset>
+      <div class="group">Already using an AI chat? (optional)</div>
+      <div class="carry">
+        <p><b>Don't start over.</b> If you've been using ChatGPT, Gemini, Copilot or Claude and it knows a lot about you and your work, bring that with you:</p>
+        <ol class="how small">
+          <li><b class="k">a</b><span>Click the button below to copy a message.</span></li>
+          <li><b class="k">b</b><span>Open the AI chat you've been using, paste it in, and send it.</span></li>
+          <li><b class="k">c</b><span>Copy everything it writes back, and paste it in the box below.</span></li>
+        </ol>
+        <button class="big alt" type="button" id="copyExport">Copy the message for my old AI</button>
+        <p class="copied" id="okExport" hidden>Copied! Paste it into your old AI chat.</p>
+        <details id="peekExport"><summary>See the message</summary><pre id="exportMsg"></pre></details>
+        <div class="field"><label class="q" for="history">Paste what your old AI wrote back</label>
+          <textarea id="history" class="tall" placeholder="Paste the summary here. It's okay if it's long."></textarea></div>
+      </div>
+      <p class="err" id="err" hidden></p>
+      <button class="big" type="submit" id="next">I'm done, next step</button>
+    </form>
+  </section>
+
+  <!-- STEP 3 -->
+  <section class="step locked" id="s3" aria-labelledby="h3s">
+    <div class="head"><span class="num">3</span><div><h2 id="h3s">Copy, paste, done</h2><div class="time">About 3 minutes · 5 tiny steps</div></div></div>
+    <div class="sub">
+      <div class="subhead"><b class="k">A</b><span>Copy your message</span></div>
+      <button class="big" type="button" id="copy" disabled>Copy my setup message</button>
+      <p class="copied" id="ok" hidden>Copied! Now go to the Claude app.</p>
+      <details id="peek"><summary>See the message</summary><pre id="msg"></pre></details>
+    </div>
+
+    <div class="sub">
+      <div class="subhead"><b class="k">B</b><span>Open the Claude app and look at the very top. Click <b>Code</b>.</span></div>
+      <p class="hint">You'll see three choices: Chat, Cowork and Code. You might be on Chat or Cowork right now. That's normal.</p>
+      <div class="mock" aria-label="Drawing of the top of the Claude app with Code highlighted">
+        <div class="bar">
+          <span class="dots"><i></i><i></i><i></i></span>
+          <div class="tabs">
+            <span class="tab"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg>Chat</span>
+            <span class="tab"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg>Cowork</span>
+            <span class="tab on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5"/></svg>Code</span>
+          </div>
+        </div>
+        <div class="pointer"><span class="arrow">▲</span><span class="tag">Click this one: <b>Code</b></span></div>
+      </div>
+    </div>
+
+    <div class="sub">
+      <div class="subhead"><b class="k">C</b><span>Start a new chat. Click <b>+ New session</b> in the top left corner.</span></div>
+      <div class="mock" aria-label="Drawing of the New session button">
+        <div class="side">
+          <span class="newbtn">+ New session</span>
+          <span class="ghost">Earlier chats</span>
+          <span class="ghost short"></span>
+        </div>
+        <div class="pointer left"><span class="arrow">▲</span><span class="tag">Click <b>+ New session</b></span></div>
+      </div>
+    </div>
+
+    <div class="sub">
+      <div class="subhead"><b class="k">D</b><span>Click the message box at the bottom, paste, and press Enter.</span></div>
+      <div class="mock" aria-label="Drawing of the message box">
+        <div class="box"><span class="ph">Paste here…</span><span class="send">↑</span></div>
+        <p class="keys">Paste: <kbd>⌘</kbd> + <kbd>V</kbd> on a Mac, or <kbd>Ctrl</kbd> + <kbd>V</kbd> on Windows.<br>Then press <kbd>Enter</kbd>.</p>
+      </div>
+    </div>
+
+    <div class="sub">
+      <div class="subhead"><b class="k">E</b><span>When Claude asks for permission, click <b>Allow</b>.</span></div>
+      <p class="hint">It may ask a few times while it sets things up. Clicking Allow each time is normal and safe. Then sit back: it does the rest and tells you when you're done.</p>
+    </div>
+  </section>
+
+  <footer>Your answers stay on your computer until you paste them into your own Claude app.</footer>
+</div>
+
+<script>
+// Set this to the GitHub repo that holds the Pocket CEO marketplace.
+const REPO = "andrewdvass/pocket-ceo";
+
+const $ = id => document.getElementById(id);
+const store = { get(k){ try { return localStorage.getItem(k); } catch(e){ return null; } },
+                set(k,v){ try { localStorage.setItem(k,v); } catch(e){} } };
+const fields = ["first","biz","what","prov","team","reg","city","teams","hobbies","history"];
+
+// The message people paste into the AI chat they already use, so nothing is lost.
+const EXPORT_MSG = `I'm moving to a new AI assistant for my business, and I don't want to start over. Please write a complete summary of everything you know about me from our past conversations and your memory, so my new assistant can pick up exactly where we left off.
+
+Use these headings:
+1. About me: name, role, where I live, how I like to be spoken to.
+2. My business: what it does, who my customers are, my services and prices, my team, the tools and software I use.
+3. My goals: for this month and this year.
+4. What I'm working on right now: each project, where it's at, the next step, and any deadlines.
+5. Important decisions we made, and why.
+6. People I work with: name, who they are, and anything important about them.
+7. How I write and talk: my tone, phrases I use, what I don't like.
+8. Anything else a new assistant should know to help me well.
+
+Rules: only include things you actually know from our conversations; write "unknown" instead of guessing. Leave out passwords, SIN, and any bank or card numbers. Put everything in one block of plain text I can copy.`;
+document.getElementById("exportMsg").textContent = EXPORT_MSG;
+document.getElementById("copyExport").addEventListener("click", () => {
+  const ok = () => { document.getElementById("okExport").hidden = false; };
+  const fb = () => { const d = document.getElementById("peekExport"); d.open = true; const s = window.getSelection(), r = document.createRange();
+    r.selectNodeContents(document.getElementById("exportMsg")); s.removeAllRanges(); s.addRange(r);
+    const t = document.getElementById("okExport"); t.hidden = false; t.textContent = "The message is selected below. Press ⌘+C (Mac) or Ctrl+C (Windows) to copy it."; };
+  try { navigator.clipboard.writeText(EXPORT_MSG).then(ok, fb); } catch(e) { fb(); }
+});
+const radios = ["struct","gst","rev","time","deliver"];
+
+function unlock(id){ $(id).classList.remove("locked"); }
+function radio(n){ const r = document.querySelector(`input[name="${n}"]:checked`); return r ? r.value : ""; }
+
+// restore a half-finished form (this browser only)
+try {
+  const saved = JSON.parse(store.get("pceo-form") || "{}");
+  fields.forEach(f => { if (saved[f]) $(f).value = saved[f]; });
+  radios.forEach(n => { if (saved[n]) { const r = document.querySelector(`input[name="${n}"][value="${CSS.escape(saved[n])}"]`); if (r) r.checked = true; } });
+  if (saved.ready) { $("ready").checked = true; $("s1").classList.add("done"); unlock("s2"); }
+} catch(e) {}
+function save(){
+  const o = {}; fields.forEach(f => o[f] = $(f).value.trim()); radios.forEach(n => o[n] = radio(n)); o.ready = $("ready").checked;
+  store.set("pceo-form", JSON.stringify(o));
+}
+document.addEventListener("input", save); document.addEventListener("change", save);
+
+$("ready").addEventListener("change", e => {
+  $("s1").classList.toggle("done", e.target.checked);
+  if (e.target.checked) { unlock("s2"); $("first").focus(); } else { $("s2").classList.add("locked"); }
+});
+
+function buildMessage(){
+  const v = f => $(f).value.trim() || "(skipped)";
+  const r = n => radio(n) || "(skipped)";
+  return `Hi Claude! I'm setting up Pocket CEO. I'm not technical, so please do every step for me and keep it simple.
+
+1. Check that Git is installed (run: git --version). If it isn't, install it for me first:
+   Mac: run xcode-select --install and tell me to click Install in the popup.
+   Windows: run winget install -e --id Git.Git
+2. Install Pocket CEO by running these two commands:
+   claude plugin marketplace add ${REPO}
+   claude plugin install pocket-ceo@pocket-ceo
+3. Open the Pocket CEO setup instructions in the installed plugin (skills/setup/SKILL.md) and follow them.
+4. Use my answers below. Don't ask me these questions again.
+5. If I included "What my old AI knew about me", save it to Documents/Pocket CEO/background.md, use it to fill in anything missing from my profile, and treat it as what you already know about me and my work.
+6. When everything is done, tell me to start a new chat so Pocket CEO is fully loaded.
+
+My answers:
+- First name: ${v("first")}
+- Business name: ${v("biz")}
+- What the business does: ${v("what")}
+- Province or territory: ${v("prov")}
+- Business structure: ${r("struct")}
+- Charges GST/HST: ${r("gst")}
+- Yearly revenue: ${r("rev")}
+- Staff or contractors: ${v("team")}
+- Regulated profession: ${v("reg")}
+- City: ${v("city")}
+- Sports teams I follow: ${v("teams")}
+- Hobbies and where: ${v("hobbies")}
+- Morning brief time: ${r("time")}
+- Morning brief delivery: ${r("deliver")}` + ($("history").value.trim() ? `
+
+What my old AI knew about me:
+${$("history").value.trim()}` : "");
+}
+
+$("f").addEventListener("submit", e => {
+  e.preventDefault();
+  const missing = [];
+  if (!$("first").value.trim()) missing.push("your first name");
+  if (!$("biz").value.trim()) missing.push("your business name");
+  if (!$("what").value.trim()) missing.push("what your business does");
+  if (!$("prov").value) missing.push("your province");
+  if (!radio("struct")) missing.push("how your business is set up");
+  if (missing.length) { $("err").textContent = "Almost there. Please add " + missing.join(", ") + "."; $("err").hidden = false; return; }
+  $("err").hidden = true;
+  $("s2").classList.add("done"); unlock("s3");
+  $("copy").disabled = false;
+  $("msg").textContent = buildMessage();
+  $("s3").scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block:"start"});
+});
+
+$("copy").addEventListener("click", () => {
+  const text = buildMessage(); $("msg").textContent = text;
+  const done = () => { $("ok").hidden = false; $("copy").textContent = "Copied ✓  (click to copy again)"; };
+  const fallback = () => { $("peek").open = true; const sel = window.getSelection(), rg = document.createRange(); rg.selectNodeContents($("msg")); sel.removeAllRanges(); sel.addRange(rg);
+    $("ok").hidden = false; $("ok").textContent = "Your message is selected below. Press ⌘+C (Mac) or Ctrl+C (Windows) to copy it, then:"; };
+  try { navigator.clipboard.writeText(text).then(done, fallback); } catch(e) { fallback(); }
+});
+</script>
