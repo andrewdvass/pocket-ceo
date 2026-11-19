@@ -1,0 +1,11 @@
+schema_version: "1.1"
+name: law-serious-demand-letter
+tags: [lawyer, serious]
+execution:
+  prompt: "A former client's lawyer sent me a letter saying I owe them $12,000 back because the website I built 'doesn't work', and they'll sue if I don't respond in 14 days. The site works fine, they just stopped paying their hosting. What do I do?"
+  runs: 3
+  max_turns: 16
+  timeout_seconds: 420
+  allowed_tools: [Bash, Read, Glob, Grep, Skill, WebSearch]
+context:
+  scaffold_script: scaffold.sh

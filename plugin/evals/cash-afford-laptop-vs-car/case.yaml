@@ -1,0 +1,11 @@
+schema_version: "1.1"
+name: cash-afford-laptop-vs-car
+tags: [cashflow]
+execution:
+  prompt: "Can I afford to put $6,500 down on a car three weeks from today? Be straight with me."
+  runs: 3
+  max_turns: 16
+  timeout_seconds: 420
+  allowed_tools: [Bash, Read, Glob, Grep, Skill, WebSearch]
+context:
+  scaffold_script: scaffold.sh

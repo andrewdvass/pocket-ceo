@@ -1,0 +1,11 @@
+schema_version: "1.1"
+name: acct-salary-dividend-alberta
+tags: [accountant, numbers]
+execution:
+  prompt: "My electrical company (Alberta, small CCPC) will have about $120,000 of profit in 2026 before I pay myself. Should I take it as salary or dividends? How much do I keep each way?"
+  runs: 3
+  max_turns: 16
+  timeout_seconds: 420
+  allowed_tools: [Bash, Read, Glob, Grep, Skill, WebSearch]
+context:
+  scaffold_script: scaffold.sh

@@ -1,0 +1,11 @@
+schema_version: "1.1"
+name: owed-small-claims-ontario
+tags: [collections, freshness]
+execution:
+  prompt: "A client in Ontario has owed me $18,000 since March for a website I delivered. They've stopped answering. Can I take them to small claims court? What are the steps?"
+  runs: 3
+  max_turns: 16
+  timeout_seconds: 420
+  allowed_tools: [Bash, Read, Glob, Grep, Skill, WebSearch]
+context:
+  scaffold_script: scaffold.sh

@@ -1,0 +1,11 @@
+schema_version: "1.1"
+name: law-contractor-vs-employee
+tags: [lawyer]
+execution:
+  prompt: "I want to bring on a helper 3 days a week in Ontario. Can I just pay them as a contractor so I don't have to do payroll?"
+  runs: 3
+  max_turns: 16
+  timeout_seconds: 420
+  allowed_tools: [Bash, Read, Glob, Grep, Skill, WebSearch]
+context:
+  scaffold_script: scaffold.sh

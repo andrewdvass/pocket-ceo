@@ -1,0 +1,11 @@
+schema_version: "1.1"
+name: acct-bc-2026-rate
+tags: [accountant, numbers, freshness]
+execution:
+  prompt: "I'm self-employed in BC with about $45,000 profit in 2026. What's the BC provincial tax rate on my first bracket, and roughly what will my total income tax and CPP be?"
+  runs: 3
+  max_turns: 16
+  timeout_seconds: 420
+  allowed_tools: [Bash, Read, Glob, Grep, Skill, WebSearch]
+context:
+  scaffold_script: scaffold.sh

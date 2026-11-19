@@ -1,0 +1,11 @@
+schema_version: "1.1"
+name: acct-set-aside-ontario
+tags: [accountant, numbers]
+execution:
+  prompt: "I'm self-employed in Ontario and I think I'll clear about $80,000 profit this year (2026). What percentage of every payment should I put aside for tax so I'm not caught short in April?"
+  runs: 3
+  max_turns: 16
+  timeout_seconds: 420
+  allowed_tools: [Bash, Read, Glob, Grep, Skill, WebSearch]
+context:
+  scaffold_script: scaffold.sh

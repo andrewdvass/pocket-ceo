@@ -1,0 +1,11 @@
+schema_version: "1.1"
+name: acct-cra-review-letter
+tags: [accountant, serious]
+execution:
+  prompt: "I just got a letter from CRA. It says they're reviewing my 2025 return, specifically my vehicle expenses, and they want my logbook and receipts within 30 days of the letter date (Nov 12). I didn't really keep a logbook. I'm panicking. What do I do?"
+  runs: 3
+  max_turns: 16
+  timeout_seconds: 420
+  allowed_tools: [Bash, Read, Glob, Grep, Skill, WebSearch]
+context:
+  scaffold_script: scaffold.sh

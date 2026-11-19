@@ -1,0 +1,11 @@
+schema_version: "1.1"
+name: acct-laptop-cca
+tags: [accountant, cca]
+execution:
+  prompt: "I bought a $2,000 laptop (plus HST) for my design business in October 2026. I'm HST registered. How much can I deduct for it on my 2026 return?"
+  runs: 3
+  max_turns: 16
+  timeout_seconds: 420
+  allowed_tools: [Bash, Read, Glob, Grep, Skill, WebSearch]
+context:
+  scaffold_script: scaffold.sh

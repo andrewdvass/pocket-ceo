@@ -189,8 +189,11 @@ def gst_estimates(R, prov, today=None, period="quarterly", registered=True):
                 a, b = D(y, 3 * q + 1, 1), (D(y, 3 * q + 4, 1) if q < 3 else D(y + 1, 1, 1))
                 due = (b + datetime.timedelta(days=31)).replace(day=1) - datetime.timedelta(days=1)
                 if due >= today and a < today:
-                    out.append((due.isoformat(), -r2(max(0.0, net(a.isoformat(), b.isoformat()))),
-                                "GST/HST for %d Q%d (estimate)" % (y, q + 1)))
+                    est = net(a.isoformat(), min(b, today).isoformat())
+                    if today < b:  # quarter still running: scale what's happened so far to the full quarter
+                        est *= (b - a).days / max(1, (today - a).days)
+                    out.append((due.isoformat(), -r2(max(0.0, est)),
+                                "GST/HST for %d Q%d (estimate%s)" % (y, q + 1, ", quarter not over yet" if today < b else "")))
     elif period == "annual":
         a, b = D(today.year - 1, 1, 1), D(today.year, 1, 1)
         due = D(today.year, 4, 30)

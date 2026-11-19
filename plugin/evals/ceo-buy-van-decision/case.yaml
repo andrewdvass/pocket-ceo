@@ -1,0 +1,11 @@
+schema_version: "1.1"
+name: ceo-buy-van-decision
+tags: [ceo]
+execution:
+  prompt: "Should I buy a $9,000 used van for the business next month? I'd use it about 70% for work."
+  runs: 3
+  max_turns: 16
+  timeout_seconds: 420
+  allowed_tools: [Bash, Read, Glob, Grep, Skill, WebSearch]
+context:
+  scaffold_script: scaffold.sh

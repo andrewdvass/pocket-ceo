@@ -1,0 +1,195 @@
+<title>Pocket CEO Brand Directions</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Archivo+Narrow:wght@600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Source+Sans+3:wght@400;600&display=swap">
+<style>
+/* Layout: three stacked boards; each shows palette, type, and two real Pocket CEO outputs side by side. */
+:root {
+  --bg: #f6f7f9; --fg: #17202b; --muted: #5b6673; --line: #dde2e8; --panel: #ffffff;
+  --ui: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  /* A: Ledger */
+  --a-ink: #10392f; --a-paper: #f3f8f4; --a-grid: #d4e6da; --a-accent: #b8742a; --a-text: #1a2a24; --a-soft: #5d7268;
+  /* B: Hi-Vis */
+  --b-ink: #0f2a44; --b-paper: #ffffff; --b-accent: #ff6a13; --b-steel: #e7ecf2; --b-text: #0f1c2b; --b-soft: #55667a;
+  /* C: Porch Light */
+  --c-ink: #3b1f4a; --c-paper: #fbf9ff; --c-accent: #2f8f83; --c-blush: #efe6f7; --c-text: #231630; --c-soft: #6b5d78;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0f141a; --fg: #e8edf2; --muted: #9aa6b3; --line: #26303b; --panel: #161d25; color-scheme: dark } }
+:root[data-theme="dark"] { --bg: #0f141a; --fg: #e8edf2; --muted: #9aa6b3; --line: #26303b; --panel: #161d25; color-scheme: dark }
+* { box-sizing: border-box }
+body { background: var(--bg); color: var(--fg); font: 15px/1.55 var(--ui); margin: 0 }
+.wrap { max-width: 1080px; margin: 0 auto; padding-block: 32px 56px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+header h1 { font: 700 28px/1.2 var(--ui); margin: 0 0 6px; text-wrap: balance }
+header p { margin: 0; color: var(--muted); max-width: 66ch }
+.board { margin-top: 36px; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 22px; display: grid; gap: 18px }
+.board-head { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; justify-content: space-between }
+.board-head h2 { margin: 0; font: 700 20px/1.2 var(--ui) }
+.letter { font: 600 12px/1 var(--ui); letter-spacing: .08em; text-transform: uppercase; color: var(--muted) }
+.board-head p { margin: 4px 0 0; color: var(--muted); max-width: 70ch }
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px }
+.row > * { min-width: 0 }
+@media (max-width: 760px) { .row { grid-template-columns: 1fr } }
+.swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: 8px }
+.sw { border-radius: 10px; border: 1px solid var(--line); overflow: hidden; background: var(--panel) }
+.sw i { display: block; height: 52px }
+.sw b { display: block; font: 600 12px/1.3 var(--ui); padding: 7px 9px 0 }
+.sw span { display: block; font: 400 11.5px/1.3 var(--ui); color: var(--muted); padding: 0 9px 8px; font-variant-numeric: tabular-nums }
+.type { border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; display: grid; gap: 6px }
+.type small { color: var(--muted); font-size: 12px }
+.label { font: 600 11px/1 var(--ui); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px }
+/* Specimens: each sets its own background and text, so it reads the same on light and dark pages. */
+.spec { border-radius: 12px; padding: 18px; min-width: 0; overflow: hidden }
+.spec .t { margin: 0 0 10px }
+.spec ul { margin: 8px 0 0; padding-left: 18px }
+.spec li { margin: 3px 0 }
+.kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 12px 0 }
+.kpis div { border-radius: 8px; padding: 8px 10px; min-width: 0 }
+.kpis em { display: block; font-style: normal; font-size: 11.5px; opacity: .8 }
+.kpis strong { display: block; font-size: 17px; font-variant-numeric: tabular-nums; white-space: nowrap }
+.btn { display: inline-block; border-radius: 8px; padding: 8px 14px; font-weight: 600; font-size: 14px; margin-top: 12px }
+.num { font-variant-numeric: tabular-nums }
+.why { color: var(--muted); font-size: 13.5px; margin: 0 }
+
+/* A: Ledger */
+.a-brief { background: var(--a-paper); color: var(--a-text); font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  background-image: linear-gradient(var(--a-grid) 1px, transparent 1px); background-size: 100% 26px; border: 1px solid var(--a-grid) }
+.a-brief .t { font: 600 18px/1.25 "IBM Plex Sans", sans-serif; color: var(--a-ink) }
+.a-brief .money { font-family: "IBM Plex Mono", ui-monospace, monospace; color: var(--a-ink) }
+.a-pdf { background: var(--a-ink); color: #eef6f1; font-family: "IBM Plex Sans", sans-serif }
+.a-pdf .t { font: 600 19px/1.2 "IBM Plex Sans", sans-serif }
+.a-pdf .kpis div { background: rgba(255,255,255,.08) }
+.a-pdf .kpis strong { font-family: "IBM Plex Mono", monospace }
+.a-btn { background: var(--a-accent); color: #fffaf2 }
+.a-type .d { font: 600 26px/1.15 "IBM Plex Sans", sans-serif; color: var(--fg) }
+.a-type .m { font: 500 18px/1.3 "IBM Plex Mono", monospace; color: var(--fg) }
+
+/* B: Hi-Vis */
+.b-brief { background: var(--b-paper); color: var(--b-text); font-family: "Inter", sans-serif; border: 1px solid var(--b-steel); border-top: 6px solid var(--b-accent) }
+.b-brief .t { font: 800 21px/1.1 "Archivo", sans-serif; color: var(--b-ink); text-transform: uppercase; letter-spacing: .01em }
+.b-brief .tag { display: inline-block; background: var(--b-ink); color: #fff; font: 700 11px/1 "Archivo Narrow", sans-serif; letter-spacing: .08em; padding: 4px 7px; border-radius: 4px; text-transform: uppercase }
+.b-pdf { background: var(--b-ink); color: #f2f6fa; font-family: "Inter", sans-serif }
+.b-pdf .t { font: 800 22px/1.1 "Archivo", sans-serif; text-transform: uppercase }
+.b-pdf .kpis div { background: rgba(255,255,255,.08); border-left: 3px solid var(--b-accent) }
+.b-pdf .kpis strong { font-family: "Archivo", sans-serif }
+.b-btn { background: var(--b-accent); color: #1a0c02 }
+.b-type .d { font: 800 28px/1.05 "Archivo", sans-serif; text-transform: uppercase; color: var(--fg) }
+.b-type .m { font: 700 17px/1.3 "Archivo Narrow", sans-serif; letter-spacing: .04em; text-transform: uppercase; color: var(--fg) }
+
+/* C: Porch Light */
+.c-brief { background: var(--c-paper); color: var(--c-text); font-family: "Source Sans 3", sans-serif; font-size: 15.5px; border: 1px solid var(--c-blush); border-radius: 18px }
+.c-brief .t { font: 800 22px/1.15 "Bricolage Grotesque", sans-serif; color: var(--c-ink) }
+.c-brief .chip { display: inline-block; background: var(--c-blush); color: var(--c-ink); border-radius: 999px; padding: 3px 10px; font-size: 13px; font-weight: 600 }
+.c-pdf { background: var(--c-ink); color: #f6f0fb; font-family: "Source Sans 3", sans-serif; border-radius: 18px }
+.c-pdf .t { font: 800 22px/1.15 "Bricolage Grotesque", sans-serif }
+.c-pdf .kpis div { background: rgba(255,255,255,.09); border-radius: 12px }
+.c-btn { background: var(--c-accent); color: #ffffff; border-radius: 999px }
+.c-type .d { font: 800 28px/1.1 "Bricolage Grotesque", sans-serif; color: var(--fg) }
+.c-type .m { font: 400 18px/1.4 "Source Sans 3", sans-serif; color: var(--fg) }
+footer { margin-top: 36px; color: var(--muted); font-size: 14px; max-width: 70ch }
+</style>
+
+<div class="wrap">
+<header>
+  <h1>Pocket CEO brand directions</h1>
+  <p>Three ways the product could look. Each board shows the palette, the two typefaces, and two things an owner actually receives: the morning brief and the cover of the year-end package. Pick one (or say what to steal from another), and it becomes one CSS file every email, PDF and page uses.</p>
+</header>
+
+<section class="board" aria-labelledby="a-h">
+  <div class="board-head">
+    <div><div class="letter">Direction A</div><h2 id="a-h">Ledger</h2>
+    <p>The trusted bookkeeper. Deep account-book green, a bronze accent for the one thing to act on, and a monospaced face for every dollar so numbers line up like a real ledger. Says "your money is in careful hands".</p></div>
+  </div>
+  <div class="row">
+    <div><div class="label">Palette</div><div class="swatches">
+      <div class="sw"><i style="background:#10392f"></i><b>Ledger green</b><span>#10392F · headings, PDF cover</span></div>
+      <div class="sw"><i style="background:#f3f8f4"></i><b>Ruled paper</b><span>#F3F8F4 · email background</span></div>
+      <div class="sw"><i style="background:#d4e6da"></i><b>Rule line</b><span>#D4E6DA · dividers</span></div>
+      <div class="sw"><i style="background:#b8742a"></i><b>Bronze</b><span>#B8742A · buttons, alerts</span></div>
+      <div class="sw"><i style="background:#5d7268"></i><b>Sage grey</b><span>#5D7268 · secondary text</span></div>
+    </div></div>
+    <div class="type a-type"><div class="label">Type</div>
+      <div class="d">Set aside 28% of every payment</div>
+      <div class="m">$22,126.00 · Line 9369</div>
+      <small>IBM Plex Sans for words, IBM Plex Mono for money. Both free on Google Fonts.</small></div>
+  </div>
+  <div class="row">
+    <div class="spec a-brief"><p class="t">Good morning, Maya. Here's Thursday.</p>
+      <div>Weather: −4°C, sunny, high of 2. Snow after 9 pm.</div>
+      <ul><li>2 urgent emails (Sarah re: invoice, landlord re: lease)</li>
+      <li>Cash: rent <span class="money">$1,450.00</span> on Dec 1; HST <span class="money">$2,150.00</span> due Jan 31</li>
+      <li>Owed to you: <span class="money">$2,050.00</span> overdue (Sarah 49 days)</li></ul>
+      <span class="btn a-btn">Review the Sarah reminder</span></div>
+    <div class="spec a-pdf"><p class="t">Year-end package, 2026</p><div style="opacity:.8;font-size:13px">Ontario sole proprietor · prepared for your accountant</div>
+      <div class="kpis"><div><em>Sales</em><strong>$44,779</strong></div><div><em>Expenses</em><strong>$19,633</strong></div><div><em>Net income</em><strong>$25,146</strong></div></div>
+      <div style="font-size:13px;opacity:.85">T2125 lines · HST worksheet · CCA schedule · 214 receipts</div></div>
+  </div>
+  <p class="why">Best fit if the main selling point is the accountant and year-end package. Risk: can feel a little "bank".</p>
+</section>
+
+<section class="board" aria-labelledby="b-h">
+  <div class="board-head">
+    <div><div class="letter">Direction B</div><h2 id="b-h">Hi-Vis</h2>
+    <p>Built for people who run trades, studios and shops. Lake-deep navy with safety orange, a bold condensed headline face, and labels like job-site tags. Fast to scan on a phone in a truck. Says "this gets the job done".</p></div>
+  </div>
+  <div class="row">
+    <div><div class="label">Palette</div><div class="swatches">
+      <div class="sw"><i style="background:#0f2a44"></i><b>Lake navy</b><span>#0F2A44 · headings, PDF cover</span></div>
+      <div class="sw"><i style="background:#ff6a13"></i><b>Safety orange</b><span>#FF6A13 · the one action</span></div>
+      <div class="sw"><i style="background:#e7ecf2"></i><b>Steel</b><span>#E7ECF2 · panels, dividers</span></div>
+      <div class="sw"><i style="background:#ffffff"></i><b>White</b><span>#FFFFFF · email background</span></div>
+      <div class="sw"><i style="background:#55667a"></i><b>Slate</b><span>#55667A · secondary text</span></div>
+    </div></div>
+    <div class="type b-type"><div class="label">Type</div>
+      <div class="d">Set aside 28%</div>
+      <div class="m">Cash · Owed · Deadlines</div>
+      <small>Archivo (bold, wide) for headlines and labels, Inter for reading. Free on Google Fonts.</small></div>
+  </div>
+  <div class="row">
+    <div class="spec b-brief"><span class="tag">Thursday</span><p class="t" style="margin-top:8px">Your day, Jordan</p>
+      <div>−4°C, sunny. Flames 7 pm on Sportsnet.</div>
+      <ul><li>2 urgent emails (supplier quote, homeowner change order)</li>
+      <li class="num">Cash: payroll $3,180 Friday; GST $2,150 due Jan 31</li>
+      <li class="num">Owed to you: $6,400 overdue (Patel reno 52 days)</li></ul>
+      <span class="btn b-btn">Open the reminder draft</span></div>
+    <div class="spec b-pdf"><p class="t">Year-end 2026</p><div style="opacity:.8;font-size:13px">Northline Electric Ltd. · working papers for your accountant</div>
+      <div class="kpis"><div><em>Revenue</em><strong>$312,400</strong></div><div><em>Expenses</em><strong>$198,750</strong></div><div><em>Profit</em><strong>$113,650</strong></div></div>
+      <div style="font-size:13px;opacity:.85">Salary vs dividend · GST worksheet · CCA (truck, class 10)</div></div>
+  </div>
+  <p class="why">Best fit if most buyers are trades and hands-on owners. Risk: loud for clinics, lawyers and coaches.</p>
+</section>
+
+<section class="board" aria-labelledby="c-h">
+  <div class="board-head">
+    <div><div class="letter">Direction C</div><h2 id="c-h">Porch Light</h2>
+    <p>The friendly right hand. Plum and teal, soft rounded shapes, and a characterful grotesque headline face. Warm enough for clinics, salons and coaches, still serious about money. Says "someone's got your back".</p></div>
+  </div>
+  <div class="row">
+    <div><div class="label">Palette</div><div class="swatches">
+      <div class="sw"><i style="background:#3b1f4a"></i><b>Plum</b><span>#3B1F4A · headings, PDF cover</span></div>
+      <div class="sw"><i style="background:#2f8f83"></i><b>Teal</b><span>#2F8F83 · buttons, good news</span></div>
+      <div class="sw"><i style="background:#efe6f7"></i><b>Lilac mist</b><span>#EFE6F7 · chips, panels</span></div>
+      <div class="sw"><i style="background:#fbf9ff"></i><b>Morning white</b><span>#FBF9FF · email background</span></div>
+      <div class="sw"><i style="background:#6b5d78"></i><b>Dusk grey</b><span>#6B5D78 · secondary text</span></div>
+    </div></div>
+    <div class="type c-type"><div class="label">Type</div>
+      <div class="d">You're on track, Priya</div>
+      <div class="m">Set aside 26% of each payment: about $1,180 a month.</div>
+      <small>Bricolage Grotesque for headlines, Source Sans 3 for reading. Free on Google Fonts.</small></div>
+  </div>
+  <div class="row">
+    <div class="spec c-brief"><p class="t">Good morning, Priya ☀</p>
+      <span class="chip">Kelowna · 3°C, cloudy</span>
+      <ul><li>1 urgent email (client needs payroll files by noon)</li>
+      <li class="num">Cash: you're fine. Lowest week is $4,820 (Jan 12)</li>
+      <li class="num">Coming up: GST/HST return Jan 31</li></ul>
+      <span class="btn c-btn">See today's drafts</span></div>
+    <div class="spec c-pdf"><p class="t">Your 2026 year-end package</p><div style="opacity:.8;font-size:13px">Priya Shah Bookkeeping · ready for your accountant</div>
+      <div class="kpis"><div><em>Sales</em><strong>$71,200</strong></div><div><em>Expenses</em><strong>$12,940</strong></div><div><em>Net income</em><strong>$58,260</strong></div></div>
+      <div style="font-size:13px;opacity:.85">Home office · mileage log · 168 receipts</div></div>
+  </div>
+  <p class="why">Best fit if buyers are service businesses and the pitch is "a CEO on your side". Risk: less obviously "finance-grade".</p>
+</section>
+
+<footer>All figures are sample data. Whichever you pick, the next step is one shared stylesheet in <code>plugin/shared/brand/</code>, then a designed morning-brief email, the year-end PDF, and the setup page built from it.</footer>
+</div>

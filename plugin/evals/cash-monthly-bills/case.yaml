@@ -1,0 +1,11 @@
+schema_version: "1.1"
+name: cash-monthly-bills
+tags: [cashflow]
+execution:
+  prompt: "What are all my regular monthly bills and what do they add up to?"
+  runs: 3
+  max_turns: 16
+  timeout_seconds: 420
+  allowed_tools: [Bash, Read, Glob, Grep, Skill, WebSearch]
+context:
+  scaffold_script: scaffold.sh

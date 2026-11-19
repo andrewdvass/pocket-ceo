@@ -18,6 +18,8 @@
   python3 pceo.py cash afford 8400 2027-03-01 --what "truck"
   python3 pceo.py cash brief
   python3 pceo.py brief money                              all money lines for the morning brief
+  python3 pceo.py contract redline lease.docx changes.json "lease - requested changes.docx"
+  python3 pceo.py contract text lease.docx                 read a Word contract as plain text
   python3 pceo.py receipts reconcile --year 2026
   python3 pceo.py yearend build --year 2026
   python3 pceo.py invoices add "Sarah Chen" 1200 [--due 2026-12-01] | paid INV-2026-001 | aging | match
@@ -32,7 +34,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "lib"))
 from pocketceo import load_rates, data_dir, province_code, money, source_lines  # noqa: E402
 from pocketceo import tax, bank, cashflow, reconcile, yearend  # noqa: E402
 from pocketceo import collections_ as inv  # noqa: E402
-from pocketceo import mileage, brief  # noqa: E402
+from pocketceo import mileage, brief, redline  # noqa: E402
 
 
 def profile():
@@ -75,6 +77,7 @@ def out(a, data, text):
 
 
 M = lambda x: money(x)
+_day = lambda iso: datetime.date.fromisoformat(iso).strftime("%B %-d, %Y")
 MC = lambda x: money(x, True)
 
 
@@ -94,6 +97,8 @@ def c_set_aside(a):
     if a.revenue:
         t.append("As a share of every payment that comes in: %d%%." % s["set_aside_pct_of_revenue"])
     t.append("Each extra dollar of profit costs about %.0f cents in tax and CPP." % (s["marginal_rate_on_next_dollar"] * 100))
+    t.append("For %d: pay the balance by %s (interest starts the next day); self-employed returns are due %s. If you owed over %s last year too, CRA may expect instalments: run tax instalments." % (
+        R["tax_year"], _day(s["due"]["pay_by"]), _day(s["due"]["file_by"]), M(R["instalments"]["threshold_quebec" if p == "QC" else "threshold_net_tax_owing"])))
     t.append(s["sales_tax_reminder"])
     t += ["Note: " + n for n in s["notes"]]
     t.append("Basic credits only (no RRSP, spouse, tuition, medical or donation credits unless given).")
@@ -307,10 +312,17 @@ def c_brief(a):
 def c_reconcile(a):
     r = reconcile.reconcile(a.year, a.min)
     t = [r["headline"], "Checked %d business purchases; %d matched a receipt." % (r["bank_purchases_checked"], r["matched"])]
-    for m in r["missing_receipts"][: a.limit]:
-        t.append("  %s  %10s  %s  [%s]" % (m["date"], MC(m["amount"]), m["description"], m["category"]))
-    if len(r["missing_receipts"]) > a.limit:
-        t.append("  ...and %d more." % (len(r["missing_receipts"]) - a.limit))
+    groups = {}
+    for m in r["missing_receipts"]:
+        k = cashflow._merchant(m["description"]) or m["description"][:30].upper()
+        g = groups.setdefault(k, {"n": 0, "total": 0.0, "dates": [], "cat": m["category"]})
+        g["n"] += 1; g["total"] += m["amount"]; g["dates"].append(m["date"])
+    t.append("By merchant (biggest first):")
+    for k, g in sorted(groups.items(), key=lambda kv: -kv[1]["total"])[: a.limit]:
+        when = g["dates"][0] if g["n"] == 1 else "%s to %s" % (min(g["dates"]), max(g["dates"]))
+        t.append("  %-28s %2d x  %11s  %s  [%s]" % (k.title()[:28], g["n"], MC(g["total"]), when, g["cat"]))
+    if len(groups) > a.limit:
+        t.append("  ...and %d more merchants (--json for every row)." % (len(groups) - a.limit))
     if r["receipts_without_bank_match"]:
         t.append("%d receipts have no bank match (cash, or a card not imported yet)." % len(r["receipts_without_bank_match"]))
     out(a, r, "\n".join(t))
@@ -396,6 +408,19 @@ def c_brief_money(a):
     out(a, {"lines": lines}, "\n".join(lines))
 
 
+def c_redline(a):
+    changes = json.loads(Path(a.changes).read_text(encoding="utf-8"))
+    r = redline.redline(a.contract, changes, a.out)
+    t = ["Tracked-changes copy: %s (%d changes, %d comments)." % (r["file"], r["applied"], r["comments"])]
+    for f in r["not_found"]:
+        t.append("NOT FOUND, not applied: \"%s\". Copy the exact wording from the contract and try again." % f[:90])
+    out(a, r, "\n".join(t))
+
+
+def c_docx_text(a):
+    print(redline.docx_text(a.file))
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(prog="pceo", description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--json", action="store_true")
@@ -413,7 +438,7 @@ def main(argv=None):
             p.add_argument(*a[0], **a[1])
         return p
     groups = {}
-    for g in ("tax", "rates", "money", "cash", "receipts", "yearend", "invoices", "mileage", "brief"):
+    for g in ("tax", "rates", "money", "cash", "receipts", "yearend", "invoices", "mileage", "brief", "contract"):
         groups[g] = sub.add_parser(g).add_subparsers(dest="cmd", required=True)
     f = lambda *n, **k: (n, k)
     num = dict(type=float, default=0.0)
@@ -456,6 +481,8 @@ def main(argv=None):
     cmd("mileage", "odometer", c_mi_odo, f("date"), f("reading", type=float))
     cmd("mileage", "summary", c_mi_sum)
     cmd("brief", "money", c_brief_money, f("--days", type=int, default=14), f("--employees", action="store_true"), *cash_args)
+    cmd("contract", "redline", c_redline, f("contract"), f("changes"), f("out"))
+    cmd("contract", "text", c_docx_text, f("file"))
     a = ap.parse_args(argv)
     if a.year and not 2000 < a.year < 2100:
         sys.exit("Year looks wrong: %s" % a.year)

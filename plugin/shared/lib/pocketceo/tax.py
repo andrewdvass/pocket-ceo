@@ -195,6 +195,9 @@ def set_aside(R, prov, net_business_income, employment=0.0, other=0.0, deduction
     }
     if revenue:
         out["set_aside_pct_of_revenue"] = math.ceil(owing / revenue * 100)
+    dl = R["deadlines"]
+    y = R["tax_year"] + 1
+    out["due"] = {"pay_by": "%d-%s" % (y, dl["personal_return_and_balance_due"]), "file_by": "%d-%s" % (y, dl["self_employed_return_due"])}
     st = R["provinces"][prov]["sales_tax"]
     out["sales_tax_reminder"] = ("If you charge %s, the %s%% you collect is never yours: park all of it on top of this."
                                  % ("GST/HST" if st["type"] in ("GST", "HST") else st["type"].replace("+", " and "),

@@ -1,0 +1,11 @@
+schema_version: "1.1"
+name: acct-instalments
+tags: [accountant, numbers]
+execution:
+  prompt: "Ontario sole proprietor. At tax time I owed $4,500 for 2025 and $0 for 2024. For 2026 I expect to owe about $6,000. Do I have to pay quarterly instalments this year, and how much on which dates?"
+  runs: 3
+  max_turns: 16
+  timeout_seconds: 420
+  allowed_tools: [Bash, Read, Glob, Grep, Skill, WebSearch]
+context:
+  scaffold_script: scaffold.sh

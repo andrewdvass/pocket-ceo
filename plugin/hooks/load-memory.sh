@@ -23,6 +23,7 @@ N=$(find "$DIR/receipts/inbox" -maxdepth 1 -type f ! -name '.*' 2>/dev/null | wc
 PCEO="${CLAUDE_PLUGIN_ROOT:-}/shared/tools/pceo.sh"
 if [ -f "$PCEO" ]; then
   echo; echo "Pocket CEO calculator: bash \"$PCEO\" (house rules: ${CLAUDE_PLUGIN_ROOT}/shared/rules.md)"
+  echo "For any business question, load the matching Pocket CEO skill first (accountant, cashflow, collections, receipts, lawyer, inbox, consultant, ceo): it says which calculator command to run and how to answer."
   if [ -f "$DIR/money/transactions.csv" ] || [ -f "$DIR/money/invoices.csv" ]; then
     LINES=$(bash "$PCEO" brief money 2>/dev/null | head -3)
     [ -n "$LINES" ] && echo "Money today: $LINES"

@@ -1,0 +1,11 @@
+schema_version: "1.1"
+name: acct-gst-threshold
+tags: [accountant, gst]
+execution:
+  prompt: "I'm a sole proprietor graphic designer in Ontario and I'm NOT registered for HST yet. My sales: Jan-Mar 2026 $6,000; Apr-Jun $8,000; Jul-Sep $9,000; Oct-Dec I'll do about $8,000. Do I have to register? When do I have to start charging HST?"
+  runs: 3
+  max_turns: 16
+  timeout_seconds: 420
+  allowed_tools: [Bash, Read, Glob, Grep, Skill, WebSearch]
+context:
+  scaffold_script: scaffold.sh

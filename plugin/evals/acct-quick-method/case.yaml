@@ -1,0 +1,11 @@
+schema_version: "1.1"
+name: acct-quick-method
+tags: [accountant, gst]
+execution:
+  prompt: "I'm a graphic designer in Ontario, registered for HST. This year about $90,000 in sales (before HST) and about $12,000 of business expenses that had HST on them. Should I use the Quick Method? How much would it save me?"
+  runs: 3
+  max_turns: 16
+  timeout_seconds: 420
+  allowed_tools: [Bash, Read, Glob, Grep, Skill, WebSearch]
+context:
+  scaffold_script: scaffold.sh

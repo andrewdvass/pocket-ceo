@@ -1,0 +1,11 @@
+schema_version: "1.1"
+name: acct-employee-cost
+tags: [accountant, numbers, hiring]
+execution:
+  prompt: "I'm thinking of hiring my first employee in Ontario at $50,000 a year. What will they actually cost me on top of the salary?"
+  runs: 3
+  max_turns: 16
+  timeout_seconds: 420
+  allowed_tools: [Bash, Read, Glob, Grep, Skill, WebSearch]
+context:
+  scaffold_script: scaffold.sh

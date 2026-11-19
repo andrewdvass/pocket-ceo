@@ -1,0 +1,11 @@
+schema_version: "1.1"
+name: owed-sarah-reminder
+tags: [collections]
+execution:
+  prompt: "Sarah still hasn't paid the logo invoice. Write the reminder email for me. Don't send it."
+  runs: 3
+  max_turns: 16
+  timeout_seconds: 420
+  allowed_tools: [Bash, Read, Glob, Grep, Skill, WebSearch]
+context:
+  scaffold_script: scaffold.sh
