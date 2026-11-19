@@ -1,0 +1,1271 @@
+{
+ "tax_year": 2026,
+ "checked": "2026-11-16",
+ "how_to_use": "Skills read numbers from this file first and cite the source id. Web-search only when a value is null/missing, marked verified=false, listed under watch, or the question is about a different tax year.",
+ "sources": {
+  "cra_t4127": {
+   "name": "CRA T4127 Payroll Deductions Formulas, 122nd edition, effective January 1, 2026 (Tables 8.1 to 8.8)",
+   "url": "https://www.canada.ca/en/revenue-agency/services/forms-publications/payroll/t4127-payroll-deductions-formulas/t4127-jan/t4127-jan-payroll-deductions-formulas-computer-programs.html",
+   "kind": "official",
+   "checked": "2026-11-16"
+  },
+  "tt_rates": {
+   "name": "TaxTips.ca 2026 federal, provincial and territorial tax rate pages (revised Nov 8, 2026; reconciled to CRA)",
+   "url": "https://www.taxtips.ca/marginal-tax-rates-in-canada.htm",
+   "kind": "secondary",
+   "checked": "2026-11-16"
+  },
+  "tt_dtc_e": {
+   "name": "TaxTips.ca eligible dividend tax credit rates",
+   "url": "https://www.taxtips.ca/dtc/eligible-dividends/eligible-dividend-tax-credit-rates.htm",
+   "kind": "secondary",
+   "checked": "2026-11-16"
+  },
+  "tt_dtc_n": {
+   "name": "TaxTips.ca non-eligible dividend tax credit rates",
+   "url": "https://www.taxtips.ca/dtc/non-eligible-dividend-tax-credit.htm",
+   "kind": "secondary",
+   "checked": "2026-11-16"
+  },
+  "tt_corp": {
+   "name": "TaxTips.ca 2026 corporate income tax rates (revised Nov 12, 2026)",
+   "url": "https://www.taxtips.ca/smallbusiness/corporatetax/corporate-tax-rates-2026.htm",
+   "kind": "secondary",
+   "checked": "2026-11-16"
+  },
+  "tt_cpp": {
+   "name": "TaxTips.ca CPP/QPP contribution rates (revised Nov 13, 2026)",
+   "url": "https://www.taxtips.ca/cpp-qpp-and-ei/cpp-qpp-contribution-rates.htm",
+   "kind": "secondary",
+   "checked": "2026-11-16"
+  },
+  "tt_ei": {
+   "name": "TaxTips.ca EI premium rates (revised Nov 14, 2026)",
+   "url": "https://www.taxtips.ca/cpp-qpp-and-ei/employment-insurance-premium-rates.htm",
+   "kind": "secondary",
+   "checked": "2026-11-16"
+  },
+  "tt_sales": {
+   "name": "TaxTips.ca 2026 sales tax rates (revised Aug 28, 2026)",
+   "url": "https://www.taxtips.ca/salestaxes/sales-tax-rates-2026.htm",
+   "kind": "secondary",
+   "checked": "2026-11-16"
+  },
+  "tt_ohp": {
+   "name": "TaxTips.ca Ontario Health Premium",
+   "url": "https://www.taxtips.ca/ontax/ontario-health-premium.htm",
+   "kind": "secondary",
+   "checked": "2026-11-16"
+  },
+  "tt_due": {
+   "name": "TaxTips.ca personal tax return due dates (revised Nov 8, 2026)",
+   "url": "https://www.taxtips.ca/filing/tax-return-due-date.htm",
+   "kind": "secondary",
+   "checked": "2026-11-16"
+  },
+  "tt_gst": {
+   "name": "TaxTips.ca GST/HST registration, small supplier and filing",
+   "url": "https://www.taxtips.ca/gst/small-supplier.htm",
+   "kind": "secondary",
+   "checked": "2026-11-16"
+  },
+  "tt_veh": {
+   "name": "TaxTips.ca passenger vehicle limits and tax-free vehicle allowance rates (revised Nov 8, 2026)",
+   "url": "https://www.taxtips.ca/smallbusiness/passenger-vehicle-limits.htm",
+   "kind": "secondary",
+   "checked": "2026-11-16"
+  },
+  "tt_cca": {
+   "name": "TaxTips.ca capital cost allowance",
+   "url": "https://www.taxtips.ca/smallbusiness/capital-cost-allowance.htm",
+   "kind": "secondary",
+   "checked": "2026-11-16"
+  },
+  "cra_inst": {
+   "name": "CRA: who has to pay income tax instalments (checked 2026-10-14, see plugin/SOURCES.md)",
+   "url": "https://www.canada.ca/en/revenue-agency/services/payments/payments-cra/individual-payments/income-tax-instalments/who-pays-instalments.html",
+   "kind": "official",
+   "checked": "2026-10-14"
+  },
+  "cra_rc4058": {
+   "name": "CRA RC4058 Quick Method of Accounting for GST/HST",
+   "url": "https://www.canada.ca/en/revenue-agency/services/forms-publications/publications/rc4058/quick-method-accounting-gst-hst.html",
+   "kind": "official",
+   "checked": null
+  },
+  "cra_cca": {
+   "name": "CRA CCA classes",
+   "url": "https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/sole-proprietorships-partnerships/report-business-income-expenses/claiming-capital-cost-allowance/classes.html",
+   "kind": "official",
+   "checked": null
+  },
+  "cra_t2125": {
+   "name": "CRA Form T2125 Statement of Business or Professional Activities",
+   "url": "https://www.canada.ca/en/revenue-agency/services/forms-publications/forms/t2125.html",
+   "kind": "official",
+   "checked": null
+  },
+  "fin_mega": {
+   "name": "Department of Finance: Productivity Mega Deduction announcement, Sept 15, 2026",
+   "url": "https://www.canada.ca/en/department-finance/news/2026/09/government-of-canada-introduces-new-productivity-mega-deduction-to-boost-canadas-advantage-as-the-most-competitive-g7-country-for-new-business-inve.html",
+   "kind": "official",
+   "checked": null
+  },
+  "small_claims": {
+   "name": "Provincial court sites (limits found via search on 2026-11-16; only ON, QC, BC, AB located)",
+   "url": "https://www.ontario.ca/laws/regulation/r25042",
+   "kind": "secondary",
+   "checked": "2026-11-16"
+  }
+ },
+ "federal": {
+  "brackets": [
+   {
+    "over": 0,
+    "rate": 0.14
+   },
+   {
+    "over": 58523,
+    "rate": 0.205
+   },
+   {
+    "over": 117045,
+    "rate": 0.26
+   },
+   {
+    "over": 181440,
+    "rate": 0.29
+   },
+   {
+    "over": 258482,
+    "rate": 0.33
+   }
+  ],
+  "credit_rate": 0.14,
+  "bpa": {
+   "max": 16452,
+   "min": 14829,
+   "phase_start": 181440,
+   "phase_end": 258482
+  },
+  "canada_employment_amount": 1501,
+  "quebec_abatement": 0.165,
+  "dividends": {
+   "eligible": {
+    "gross_up": 0.38,
+    "dtc": 0.150198
+   },
+   "non_eligible": {
+    "gross_up": 0.15,
+    "dtc": 0.090301
+   }
+  },
+  "source": [
+   "cra_t4127",
+   "tt_rates",
+   "tt_dtc_e",
+   "tt_dtc_n"
+  ]
+ },
+ "cpp": {
+  "ympe": 74600,
+  "basic_exemption": 3500,
+  "yampe": 85000,
+  "employee_rate": 0.0595,
+  "base_rate": 0.0495,
+  "first_additional_rate": 0.01,
+  "cpp2_rate": 0.04,
+  "max_employee": 4230.45,
+  "max_cpp2_employee": 416.0,
+  "max_self_employed_total": 9292.9,
+  "source": [
+   "cra_t4127",
+   "tt_cpp"
+  ]
+ },
+ "qpp": {
+  "ympe": 74600,
+  "basic_exemption": 3500,
+  "yampe": 85000,
+  "employee_rate": 0.063,
+  "base_rate": 0.053,
+  "first_additional_rate": 0.01,
+  "cpp2_rate": 0.04,
+  "max_employee": 4479.3,
+  "max_cpp2_employee": 416.0,
+  "max_self_employed_total": 9790.6,
+  "source": [
+   "cra_t4127",
+   "tt_cpp"
+  ]
+ },
+ "ei": {
+  "max_insurable": 68900,
+  "employee_rate": 0.0163,
+  "employer_multiplier": 1.4,
+  "max_employee": 1123.07,
+  "max_employer": 1572.3,
+  "quebec_employee_rate": 0.013,
+  "quebec_max_employee": 895.7,
+  "quebec_max_employer": 1253.98,
+  "self_employed_min_earnings_prior_year": 9254,
+  "note": "Self-employed people only pay EI if they opt in (special benefits only); they pay the employee rate, no employer share.",
+  "source": [
+   "cra_t4127",
+   "tt_ei"
+  ]
+ },
+ "qpip": {
+  "max_insurable": 103000,
+  "employee_rate": 0.0043,
+  "employer_rate": 0.00602,
+  "self_employed_rate": 0.00764,
+  "self_employed_rate_verified": false,
+  "note": "Employee and employer rates are from CRA T4127. The self-employed rate (0.764%) was found only on secondary sites; confirm on revenuquebec.ca before quoting.",
+  "source": [
+   "cra_t4127"
+  ]
+ },
+ "provinces": {
+  "AB": {
+   "name": "Alberta",
+   "brackets": [
+    {
+     "over": 0,
+     "rate": 0.08
+    },
+    {
+     "over": 61200,
+     "rate": 0.1
+    },
+    {
+     "over": 154259,
+     "rate": 0.12
+    },
+    {
+     "over": 185111,
+     "rate": 0.13
+    },
+    {
+     "over": 246813,
+     "rate": 0.14
+    },
+    {
+     "over": 370220,
+     "rate": 0.15
+    }
+   ],
+   "bpa": 22769,
+   "dividends": {
+    "eligible_dtc": 0.0812,
+    "non_eligible_dtc": 0.0218
+   },
+   "sales_tax": {
+    "type": "GST",
+    "gst_hst": 0.05,
+    "pst": 0.0,
+    "pst_name": null,
+    "pst_collector": null,
+    "total": 0.05
+   },
+   "corporate": {
+    "small": 0.02,
+    "general": 0.08,
+    "small_business_limit": 500000
+   },
+   "source": [
+    "cra_t4127",
+    "tt_rates",
+    "tt_dtc_e",
+    "tt_dtc_n",
+    "tt_corp",
+    "tt_sales"
+   ]
+  },
+  "BC": {
+   "name": "British Columbia",
+   "brackets": [
+    {
+     "over": 0,
+     "rate": 0.056
+    },
+    {
+     "over": 50363,
+     "rate": 0.077
+    },
+    {
+     "over": 100728,
+     "rate": 0.105
+    },
+    {
+     "over": 115648,
+     "rate": 0.1229
+    },
+    {
+     "over": 140430,
+     "rate": 0.147
+    },
+    {
+     "over": 190405,
+     "rate": 0.168
+    },
+    {
+     "over": 265545,
+     "rate": 0.205
+    }
+   ],
+   "bpa": 13216,
+   "dividends": {
+    "eligible_dtc": 0.12,
+    "non_eligible_dtc": 0.0196
+   },
+   "sales_tax": {
+    "type": "GST+PST",
+    "gst_hst": 0.05,
+    "pst": 0.07,
+    "pst_name": "PST",
+    "pst_collector": "BC Ministry of Finance",
+    "total": 0.12
+   },
+   "corporate": {
+    "small": 0.02,
+    "general": 0.12,
+    "small_business_limit": 500000
+   },
+   "tax_reduction": {
+    "max": 575,
+    "phase_start": 25570,
+    "rate": 0.0356,
+    "phase_end": 41722
+   },
+   "notes": [
+    "Lowest rate is 5.60% for 2026 (BC Budget 2026); CRA's January 2026 payroll table still showed 5.06%.",
+    "BC tax reduction figures are from CRA's January 2026 table; confirm they were not changed by BC Budget 2026."
+   ],
+   "source": [
+    "cra_t4127",
+    "tt_rates",
+    "tt_dtc_e",
+    "tt_dtc_n",
+    "tt_corp",
+    "tt_sales"
+   ]
+  },
+  "MB": {
+   "name": "Manitoba",
+   "brackets": [
+    {
+     "over": 0,
+     "rate": 0.108
+    },
+    {
+     "over": 47000,
+     "rate": 0.1275
+    },
+    {
+     "over": 100000,
+     "rate": 0.174
+    }
+   ],
+   "bpa": 15780,
+   "dividends": {
+    "eligible_dtc": 0.08,
+    "non_eligible_dtc": 0.007835
+   },
+   "sales_tax": {
+    "type": "GST+PST",
+    "gst_hst": 0.05,
+    "pst": 0.07,
+    "pst_name": "RST",
+    "pst_collector": "Manitoba Finance",
+    "total": 0.12
+   },
+   "corporate": {
+    "small": 0.0,
+    "general": 0.12,
+    "small_business_limit": 500000
+   },
+   "bpa_phase_out": {
+    "start": 200000,
+    "end": 400000
+   },
+   "source": [
+    "cra_t4127",
+    "tt_rates",
+    "tt_dtc_e",
+    "tt_dtc_n",
+    "tt_corp",
+    "tt_sales"
+   ]
+  },
+  "NB": {
+   "name": "New Brunswick",
+   "brackets": [
+    {
+     "over": 0,
+     "rate": 0.094
+    },
+    {
+     "over": 52333,
+     "rate": 0.14
+    },
+    {
+     "over": 104666,
+     "rate": 0.16
+    },
+    {
+     "over": 193861,
+     "rate": 0.195
+    }
+   ],
+   "bpa": 13664,
+   "dividends": {
+    "eligible_dtc": 0.14,
+    "non_eligible_dtc": 0.0275
+   },
+   "sales_tax": {
+    "type": "HST",
+    "gst_hst": 0.15,
+    "pst": 0.0,
+    "pst_name": null,
+    "pst_collector": null,
+    "total": 0.15
+   },
+   "corporate": {
+    "small": 0.025,
+    "general": 0.14,
+    "small_business_limit": 500000
+   },
+   "source": [
+    "cra_t4127",
+    "tt_rates",
+    "tt_dtc_e",
+    "tt_dtc_n",
+    "tt_corp",
+    "tt_sales"
+   ]
+  },
+  "NL": {
+   "name": "Newfoundland and Labrador",
+   "brackets": [
+    {
+     "over": 0,
+     "rate": 0.087
+    },
+    {
+     "over": 44678,
+     "rate": 0.145
+    },
+    {
+     "over": 89354,
+     "rate": 0.158
+    },
+    {
+     "over": 159528,
+     "rate": 0.178
+    },
+    {
+     "over": 223340,
+     "rate": 0.198
+    },
+    {
+     "over": 285319,
+     "rate": 0.208
+    },
+    {
+     "over": 570638,
+     "rate": 0.213
+    },
+    {
+     "over": 1141275,
+     "rate": 0.218
+    }
+   ],
+   "bpa": 13094,
+   "dividends": {
+    "eligible_dtc": 0.063,
+    "non_eligible_dtc": 0.032
+   },
+   "sales_tax": {
+    "type": "HST",
+    "gst_hst": 0.15,
+    "pst": 0.0,
+    "pst_name": null,
+    "pst_collector": null,
+    "total": 0.15
+   },
+   "corporate": {
+    "small": 0.02,
+    "general": 0.15,
+    "small_business_limit": 500000
+   },
+   "notes": [
+    "Basic personal amount is $13,094 for 2026 (NL Budget 2026); CRA's January 2026 payroll table showed $11,188."
+   ],
+   "source": [
+    "cra_t4127",
+    "tt_rates",
+    "tt_dtc_e",
+    "tt_dtc_n",
+    "tt_corp",
+    "tt_sales"
+   ]
+  },
+  "NS": {
+   "name": "Nova Scotia",
+   "brackets": [
+    {
+     "over": 0,
+     "rate": 0.0879
+    },
+    {
+     "over": 30995,
+     "rate": 0.1495
+    },
+    {
+     "over": 61991,
+     "rate": 0.1667
+    },
+    {
+     "over": 97417,
+     "rate": 0.175
+    },
+    {
+     "over": 157124,
+     "rate": 0.21
+    }
+   ],
+   "bpa": 11932,
+   "dividends": {
+    "eligible_dtc": 0.0885,
+    "non_eligible_dtc": 0.015
+   },
+   "sales_tax": {
+    "type": "HST",
+    "gst_hst": 0.14,
+    "pst": 0.0,
+    "pst_name": null,
+    "pst_collector": null,
+    "total": 0.14
+   },
+   "corporate": {
+    "small": 0.015,
+    "general": 0.14,
+    "small_business_limit": 700000
+   },
+   "source": [
+    "cra_t4127",
+    "tt_rates",
+    "tt_dtc_e",
+    "tt_dtc_n",
+    "tt_corp",
+    "tt_sales"
+   ]
+  },
+  "NT": {
+   "name": "Northwest Territories",
+   "brackets": [
+    {
+     "over": 0,
+     "rate": 0.059
+    },
+    {
+     "over": 53003,
+     "rate": 0.086
+    },
+    {
+     "over": 106009,
+     "rate": 0.122
+    },
+    {
+     "over": 172346,
+     "rate": 0.1405
+    }
+   ],
+   "bpa": 18198,
+   "dividends": {
+    "eligible_dtc": 0.115,
+    "non_eligible_dtc": 0.06
+   },
+   "sales_tax": {
+    "type": "GST",
+    "gst_hst": 0.05,
+    "pst": 0.0,
+    "pst_name": null,
+    "pst_collector": null,
+    "total": 0.05
+   },
+   "corporate": {
+    "small": 0.02,
+    "general": 0.115,
+    "small_business_limit": 500000
+   },
+   "source": [
+    "cra_t4127",
+    "tt_rates",
+    "tt_dtc_e",
+    "tt_dtc_n",
+    "tt_corp",
+    "tt_sales"
+   ]
+  },
+  "NU": {
+   "name": "Nunavut",
+   "brackets": [
+    {
+     "over": 0,
+     "rate": 0.04
+    },
+    {
+     "over": 55801,
+     "rate": 0.07
+    },
+    {
+     "over": 111602,
+     "rate": 0.09
+    },
+    {
+     "over": 181439,
+     "rate": 0.115
+    }
+   ],
+   "bpa": 19659,
+   "dividends": {
+    "eligible_dtc": 0.0551,
+    "non_eligible_dtc": 0.0261
+   },
+   "sales_tax": {
+    "type": "GST",
+    "gst_hst": 0.05,
+    "pst": 0.0,
+    "pst_name": null,
+    "pst_collector": null,
+    "total": 0.05
+   },
+   "corporate": {
+    "small": 0.03,
+    "general": 0.12,
+    "small_business_limit": 500000
+   },
+   "source": [
+    "cra_t4127",
+    "tt_rates",
+    "tt_dtc_e",
+    "tt_dtc_n",
+    "tt_corp",
+    "tt_sales"
+   ]
+  },
+  "ON": {
+   "name": "Ontario",
+   "brackets": [
+    {
+     "over": 0,
+     "rate": 0.0505
+    },
+    {
+     "over": 53891,
+     "rate": 0.0915
+    },
+    {
+     "over": 107785,
+     "rate": 0.1116
+    },
+    {
+     "over": 150000,
+     "rate": 0.1216
+    },
+    {
+     "over": 220000,
+     "rate": 0.1316
+    }
+   ],
+   "bpa": 12989,
+   "dividends": {
+    "eligible_dtc": 0.1,
+    "non_eligible_dtc": 0.029863
+   },
+   "sales_tax": {
+    "type": "HST",
+    "gst_hst": 0.13,
+    "pst": 0.0,
+    "pst_name": null,
+    "pst_collector": null,
+    "total": 0.13
+   },
+   "corporate": {
+    "small": 0.032,
+    "general": 0.115,
+    "small_business_limit": 500000,
+    "small_change": {
+     "date": "2026-07-01",
+     "rate": 0.022,
+     "method": "prorate_days"
+    },
+    "note": "Small business rate 3.2% until June 30, 2026 and 2.2% from July 1, 2026 (Ontario Budget 2026); prorate by days in the tax year."
+   },
+   "surtax": [
+    {
+     "over": 5818,
+     "rate": 0.2
+    },
+    {
+     "over": 7446,
+     "rate": 0.36
+    }
+   ],
+   "tax_reduction": {
+    "basic": 300
+   },
+   "health_premium": [
+    {
+     "over": 20000,
+     "base": 0,
+     "rate": 0.06,
+     "max": 300
+    },
+    {
+     "over": 36000,
+     "base": 300,
+     "rate": 0.06,
+     "max": 450
+    },
+    {
+     "over": 48000,
+     "base": 450,
+     "rate": 0.25,
+     "max": 600
+    },
+    {
+     "over": 72000,
+     "base": 600,
+     "rate": 0.25,
+     "max": 750
+    },
+    {
+     "over": 200000,
+     "base": 750,
+     "rate": 0.25,
+     "max": 900
+    }
+   ],
+   "source": [
+    "cra_t4127",
+    "tt_rates",
+    "tt_dtc_e",
+    "tt_dtc_n",
+    "tt_corp",
+    "tt_sales"
+   ]
+  },
+  "PE": {
+   "name": "Prince Edward Island",
+   "brackets": [
+    {
+     "over": 0,
+     "rate": 0.095
+    },
+    {
+     "over": 33928,
+     "rate": 0.1347
+    },
+    {
+     "over": 65820,
+     "rate": 0.166
+    },
+    {
+     "over": 106890,
+     "rate": 0.1762
+    },
+    {
+     "over": 142520,
+     "rate": 0.19
+    },
+    {
+     "over": 200000,
+     "rate": 0.2
+    }
+   ],
+   "bpa": 15000,
+   "dividends": {
+    "eligible_dtc": 0.105,
+    "non_eligible_dtc": 0.013
+   },
+   "sales_tax": {
+    "type": "HST",
+    "gst_hst": 0.15,
+    "pst": 0.0,
+    "pst_name": null,
+    "pst_collector": null,
+    "total": 0.15
+   },
+   "corporate": {
+    "small": 0.01,
+    "general": 0.15,
+    "small_business_limit": 600000
+   },
+   "notes": [
+    "The 5th bracket starts at $142,520 per CRA (updated May 2026); TaxTips shows $142,250. The difference is under $4 of tax.",
+    "The 20% bracket over $200,000 was added by the PEI 2026 Budget."
+   ],
+   "source": [
+    "cra_t4127",
+    "tt_rates",
+    "tt_dtc_e",
+    "tt_dtc_n",
+    "tt_corp",
+    "tt_sales"
+   ]
+  },
+  "QC": {
+   "name": "Quebec",
+   "brackets": [
+    {
+     "over": 0,
+     "rate": 0.14
+    },
+    {
+     "over": 54345,
+     "rate": 0.19
+    },
+    {
+     "over": 108680,
+     "rate": 0.24
+    },
+    {
+     "over": 132245,
+     "rate": 0.2575
+    }
+   ],
+   "bpa": 18952,
+   "dividends": {
+    "eligible_dtc": 0.117,
+    "non_eligible_dtc": 0.0342
+   },
+   "sales_tax": {
+    "type": "GST+QST",
+    "gst_hst": 0.05,
+    "pst": 0.09975,
+    "pst_name": "QST",
+    "pst_collector": "Revenu Québec (also collects the GST in Quebec)",
+    "total": 0.14975
+   },
+   "corporate": {
+    "small": 0.032,
+    "general": 0.115,
+    "small_business_limit": 500000,
+    "small_change": {
+     "date": "2026-04-30",
+     "rate": 0.022,
+     "method": "tax_years_beginning_after"
+    },
+    "note": "Small business rate drops from 3.2% to 2.2% for taxation years beginning after April 29, 2026. Quebec has extra eligibility conditions for its small business deduction."
+   },
+   "credit_rate": 0.14,
+   "notes": [
+    "Quebec runs its own tax system (TP-1 return, Revenu Québec). Figures here give an estimate only; TaxTips notes the 2026 Quebec thresholds were not yet confirmed against Quebec Ministry of Finance publications.",
+    "Quebec residents get a 16.5% abatement of basic federal tax."
+   ],
+   "source": [
+    "cra_t4127",
+    "tt_rates",
+    "tt_dtc_e",
+    "tt_dtc_n",
+    "tt_corp",
+    "tt_sales"
+   ]
+  },
+  "SK": {
+   "name": "Saskatchewan",
+   "brackets": [
+    {
+     "over": 0,
+     "rate": 0.105
+    },
+    {
+     "over": 54532,
+     "rate": 0.125
+    },
+    {
+     "over": 155805,
+     "rate": 0.145
+    }
+   ],
+   "bpa": 20381,
+   "dividends": {
+    "eligible_dtc": 0.11,
+    "non_eligible_dtc": 0.02519
+   },
+   "sales_tax": {
+    "type": "GST+PST",
+    "gst_hst": 0.05,
+    "pst": 0.06,
+    "pst_name": "PST",
+    "pst_collector": "Saskatchewan Finance",
+    "total": 0.11
+   },
+   "corporate": {
+    "small": 0.01,
+    "general": 0.12,
+    "small_business_limit": 600000
+   },
+   "source": [
+    "cra_t4127",
+    "tt_rates",
+    "tt_dtc_e",
+    "tt_dtc_n",
+    "tt_corp",
+    "tt_sales"
+   ]
+  },
+  "YT": {
+   "name": "Yukon",
+   "brackets": [
+    {
+     "over": 0,
+     "rate": 0.064
+    },
+    {
+     "over": 58523,
+     "rate": 0.09
+    },
+    {
+     "over": 117045,
+     "rate": 0.109
+    },
+    {
+     "over": 181440,
+     "rate": 0.128
+    },
+    {
+     "over": 500000,
+     "rate": 0.15
+    }
+   ],
+   "bpa": null,
+   "dividends": {
+    "eligible_dtc": 0.1202,
+    "non_eligible_dtc": 0.0067
+   },
+   "sales_tax": {
+    "type": "GST",
+    "gst_hst": 0.05,
+    "pst": 0.0,
+    "pst_name": null,
+    "pst_collector": null,
+    "total": 0.05
+   },
+   "corporate": {
+    "small": 0.0,
+    "general": 0.12,
+    "small_business_limit": 500000
+   },
+   "bpa_mirrors_federal": true,
+   "source": [
+    "cra_t4127",
+    "tt_rates",
+    "tt_dtc_e",
+    "tt_dtc_n",
+    "tt_corp",
+    "tt_sales"
+   ]
+  }
+ },
+ "gst_hst": {
+  "small_supplier_threshold": 30000,
+  "small_supplier_rule": "Must register once taxable sales (worldwide, including associates) pass $30,000 in a single calendar quarter or over four consecutive calendar quarters. Over the limit in one quarter: registered from the sale that crossed it. Over four quarters: small-supplier status ends at the end of the month after that quarter.",
+  "filing_frequency": [
+   {
+    "annual_sales_up_to": 1500000,
+    "assigned": "annual",
+    "optional": "monthly or quarterly"
+   },
+   {
+    "annual_sales_up_to": 6000000,
+    "assigned": "quarterly",
+    "optional": "monthly"
+   },
+   {
+    "annual_sales_up_to": null,
+    "assigned": "monthly",
+    "optional": null
+   }
+  ],
+  "annual_filer_instalment_threshold": 3000,
+  "annual_filer_instalment_rule": "Annual filers whose net GST/HST for a fiscal year is $3,000 or more must pay equal quarterly instalments the next fiscal year.",
+  "quick_method": {
+   "eligibility_limit_sales_incl_tax": 400000,
+   "first_30000_credit_rate": 0.01,
+   "note": "Remit a flat % of GST/HST-INCLUDED sales instead of tracking input tax credits on everyday expenses (ITCs on capital purchases can still be claimed). 1% credit on the first $30,000 of eligible sales each fiscal year. Not allowed for accountants, bookkeepers, lawyers, financial consultants, and some others.",
+   "service_rates": {
+    "gst_5": 0.036,
+    "hst_13": 0.088,
+    "hst_15": 0.1,
+    "hst_14": null
+   },
+   "goods_rates": {
+    "gst_5": null,
+    "hst_13": null,
+    "hst_15": null,
+    "hst_14": null
+   },
+   "verified": false,
+   "verify_note": "Service rates 3.6% / 8.8% / 10% are for a business selling in its own province; they were corroborated only by secondary sites on 2026-11-16 because canada.ca could not be read. The Nova Scotia 14% rate and all goods-reseller rates are not filled in. Confirm on RC4058 before quoting.",
+   "source": [
+    "cra_rc4058"
+   ]
+  },
+  "source": [
+   "tt_gst",
+   "tt_sales"
+  ]
+ },
+ "instalments": {
+  "threshold_net_tax_owing": 3000,
+  "threshold_quebec": 1800,
+  "rule": "Instalments are required when net tax owing is more than the threshold in the current year AND in either of the two previous years.",
+  "due_dates": [
+   "03-15",
+   "06-15",
+   "09-15",
+   "12-15"
+  ],
+  "methods": [
+   "no-calculation (pay what CRA's reminder says)",
+   "prior-year (last year's net tax owing, in four equal payments)",
+   "current-year (estimate this year's tax, in four equal payments)"
+  ],
+  "source": [
+   "cra_inst"
+  ]
+ },
+ "deadlines": {
+  "personal_return_and_balance_due": "04-30",
+  "self_employed_return_due": "06-15",
+  "self_employed_note": "Self-employed people (and their spouses) file by June 15, but any balance owing is still due April 30; interest runs from May 1.",
+  "tax_year_2026": {
+   "balance_due": "2027-04-30",
+   "self_employed_filing": "2027-06-15"
+  },
+  "gst_annual_individual_dec31": {
+   "file_by": "06-15",
+   "pay_by": "04-30"
+  },
+  "gst_annual_other": "3 months after fiscal year end",
+  "gst_quarterly_monthly": "1 month after the end of the reporting period",
+  "t4_t4a_slips": "last day of February",
+  "corporate": {
+   "t2_due_months_after_year_end": 6,
+   "balance_due_months": 2,
+   "balance_due_months_ccpc_small": 3
+  },
+  "payroll_regular_remitter": "15th of the month after the pay date",
+  "records_retention_years": 6,
+  "source": [
+   "tt_due",
+   "cra_inst"
+  ]
+ },
+ "vehicle": {
+  "class_10_1_ceiling": 39000,
+  "zero_emission_class_54_ceiling": 61000,
+  "ceiling_note": "Ceilings are before sales tax. A passenger vehicle costing more goes in its own class 10.1 and CCA is calculated on the ceiling.",
+  "cca_rate": 0.3,
+  "first_year_rate": 0.15,
+  "tax_free_allowance_per_km": {
+   "first_5000": 0.73,
+   "after_5000": 0.67,
+   "territories_first_5000": 0.77,
+   "territories_after_5000": 0.71
+  },
+  "logbook": "CRA expects a logbook of business trips (date, destination, purpose, km) plus odometer readings at the start and end of the year. After one full base year, a representative 3-month sample can be used.",
+  "source": [
+   "tt_veh"
+  ]
+ },
+ "cca": {
+  "half_year_rule": "In the year you buy an asset, only half the normal CCA is usually allowed. Most class 12 items are exempt from the half-year rule.",
+  "classes": {
+   "1": {
+    "rate": 0.04,
+    "what": "Most buildings acquired after 1987"
+   },
+   "8": {
+    "rate": 0.2,
+    "what": "Furniture, appliances, tools costing $500 or more, equipment not in another class, photo and video gear"
+   },
+   "10": {
+    "rate": 0.3,
+    "what": "Motor vehicles, trucks, vans; passenger vehicles under the class 10.1 ceiling"
+   },
+   "10.1": {
+    "rate": 0.3,
+    "what": "A passenger vehicle costing more than the ceiling (each in its own class; CCA on the ceiling only)"
+   },
+   "12": {
+    "rate": 1.0,
+    "what": "Tools, kitchen utensils and medical or dental instruments under $500; linens, uniforms; most application software"
+   },
+   "14.1": {
+    "rate": 0.05,
+    "what": "Goodwill, customer lists, franchises with no fixed term"
+   },
+   "50": {
+    "rate": 0.55,
+    "what": "Computers, tablets and systems software"
+   },
+   "54": {
+    "rate": 0.3,
+    "what": "Zero-emission passenger vehicles (up to the ceiling)"
+   }
+  },
+  "confidence": "Class rates are long-standing regulation values that could not be re-read on canada.ca on 2026-11-16. Confirm the class for any single asset over $5,000.",
+  "proposed": {
+   "name": "Productivity Mega Deduction",
+   "status": "PROPOSED, not law as of late September 2026",
+   "summary": "Announced Sept 15, 2026 with draft legislation: permanent 100% first-year write-off for most new or used depreciable property acquired on or after Sept 15, 2026. Check whether it has been enacted before using it; until then the engine uses normal CCA.",
+   "source": [
+    "fin_mega"
+   ]
+  },
+  "source": [
+   "tt_cca",
+   "cra_cca"
+  ]
+ },
+ "t2125": {
+  "income": {
+   "8000": "Gross sales, commissions or fees (adjusted)",
+   "8299": "Gross business or professional income",
+   "9369": "Net income (loss) before adjustments",
+   "9946": "Your net income (loss)"
+  },
+  "expenses": {
+   "8521": "Advertising",
+   "8523": "Meals and entertainment",
+   "8590": "Bad debts",
+   "8690": "Insurance",
+   "8710": "Interest and bank charges",
+   "8760": "Business taxes, licences and memberships",
+   "8810": "Office expenses",
+   "8811": "Office stationery and supplies",
+   "8860": "Professional fees (includes legal and accounting fees)",
+   "8871": "Management and administration fees",
+   "8910": "Rent",
+   "8960": "Repairs and maintenance",
+   "9060": "Salaries, wages and benefits (including employer's contributions)",
+   "9180": "Property taxes",
+   "9200": "Travel expenses",
+   "9220": "Utilities",
+   "9224": "Fuel costs (except for motor vehicles)",
+   "9275": "Delivery, freight and express",
+   "9281": "Motor vehicle expenses (not including CCA)",
+   "9936": "Capital cost allowance (CCA)",
+   "9270": "Other expenses",
+   "9945": "Business-use-of-home expenses"
+  },
+  "category_to_line": {
+   "Advertising": "8521",
+   "Meals and entertainment": "8523",
+   "Bad debts": "8590",
+   "Insurance": "8690",
+   "Interest and bank charges": "8710",
+   "Business taxes, licences, memberships": "8760",
+   "Office expenses": "8810",
+   "Supplies": "8811",
+   "Legal, accounting, professional fees": "8860",
+   "Management and administration fees": "8871",
+   "Rent": "8910",
+   "Repairs and maintenance": "8960",
+   "Salaries, wages, benefits": "9060",
+   "Property taxes": "9180",
+   "Travel": "9200",
+   "Telephone and utilities": "9220",
+   "Fuel costs (except motor vehicles)": "9224",
+   "Delivery, freight, express": "9275",
+   "Motor vehicle expenses": "9281",
+   "Software and subscriptions": "8810",
+   "Business-use-of-home": "9945"
+  },
+  "meals_deductible_share": 0.5,
+  "confidence": "Line numbers are from the T2125 form layout used for recent tax years and could not be re-read on canada.ca on 2026-11-16. The accountant should confirm against the current-year form.",
+  "source": [
+   "cra_t2125"
+  ]
+ },
+ "small_claims": {
+  "ON": {
+   "limit": 50000,
+   "note": "Raised from $35,000 on October 1, 2025 (O. Reg. 42/25)."
+  },
+  "QC": {
+   "limit": 15000,
+   "note": "Small Claims Division of the Court of Québec; principal before interest. Businesses with more than 10 employees generally cannot sue there."
+  },
+  "BC": {
+   "limit": 35000,
+   "note": "Civil Resolution Tribunal (online) handles claims up to $5,000; Provincial Court small claims from $5,001 to $35,000."
+  },
+  "AB": {
+   "limit": 100000,
+   "note": "Alberta Court of Justice, civil claims (since August 2023)."
+  },
+  "missing": [
+   "SK",
+   "MB",
+   "NB",
+   "NS",
+   "PE",
+   "NL",
+   "YT",
+   "NT",
+   "NU"
+  ],
+  "confidence": "Found through secondary legal sites on 2026-11-16. Look up the court's own site before filing; for provinces listed as missing, search the provincial court site.",
+  "source": [
+   "small_claims"
+  ]
+ },
+ "watch": [
+  {
+   "what": "Productivity Mega Deduction (100% first-year write-off)",
+   "status": "Proposed Sept 15, 2026; not confirmed as enacted",
+   "affects": "CCA on equipment bought on or after Sept 15, 2026"
+  },
+  {
+   "what": "Tax return due date moving to May 15",
+   "status": "Proposed in Budget 2026 for 2027 returns (filed in 2028). The 2026 return keeps April 30 / June 15",
+   "affects": "deadlines from 2028"
+  },
+  {
+   "what": "CPP 2027",
+   "status": "Announced: YMPE $76,700, YAMPE $87,400, employee rate 5.75%",
+   "affects": "2027 rates file"
+  },
+  {
+   "what": "EI 2027",
+   "status": "Announced: maximum insurable earnings $70,800, rate 1.64% (Quebec 1.29%)",
+   "affects": "2027 rates file"
+  },
+  {
+   "what": "Ontario non-eligible dividend tax credit",
+   "status": "Drops from 2.9863% to 1.9863% on January 1, 2027",
+   "affects": "2027 salary vs dividend"
+  },
+  {
+   "what": "Quebec non-eligible dividend tax credit",
+   "status": "Drops from 3.42% to 2.69% for 2027",
+   "affects": "2027 salary vs dividend"
+  },
+  {
+   "what": "BC basic personal amount",
+   "status": "New BC government pledged $32,000 for 2027; not legislated",
+   "affects": "2027 BC estimates"
+  },
+  {
+   "what": "Newfoundland and Labrador",
+   "status": "Small business rate 2% (2026), 1.5% (2027), 1% (2028); basic personal amount pledge of $15,000",
+   "affects": "2027 NL estimates"
+  }
+ ]
+}

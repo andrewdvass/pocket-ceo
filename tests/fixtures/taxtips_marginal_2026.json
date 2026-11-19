@@ -1,0 +1,960 @@
+{
+ "source": "https://www.taxtips.ca/taxrates/<province>.htm combined federal+provincial marginal rate tables for 2026, retrieved 2026-11-16",
+ "note": "Rates are % of actual income; they exclude CPP/EI and the Ontario Health Premium.",
+ "tables": {
+  "AB": [
+   {
+    "from": 0,
+    "to": 58523.0,
+    "other": 22.0,
+    "capital_gains": 11.0,
+    "eligible_div": -1.57,
+    "non_eligible_div": 12.41
+   },
+   {
+    "from": 58523.0,
+    "to": 61200.0,
+    "other": 28.5,
+    "capital_gains": 14.25,
+    "eligible_div": 7.4,
+    "non_eligible_div": 19.88
+   },
+   {
+    "from": 61200.0,
+    "to": 117045.0,
+    "other": 30.5,
+    "capital_gains": 15.25,
+    "eligible_div": 10.16,
+    "non_eligible_div": 22.18
+   },
+   {
+    "from": 117045.0,
+    "to": 154259.0,
+    "other": 36.0,
+    "capital_gains": 18.0,
+    "eligible_div": 17.75,
+    "non_eligible_div": 28.51
+   },
+   {
+    "from": 154259.0,
+    "to": 181440.0,
+    "other": 38.0,
+    "capital_gains": 19.0,
+    "eligible_div": 20.51,
+    "non_eligible_div": 30.81
+   },
+   {
+    "from": 181440.0,
+    "to": 185111.0,
+    "other": 41.29,
+    "capital_gains": 20.65,
+    "eligible_div": 25.05,
+    "non_eligible_div": 34.59
+   },
+   {
+    "from": 185111.0,
+    "to": 246813.0,
+    "other": 42.29,
+    "capital_gains": 21.15,
+    "eligible_div": 26.43,
+    "non_eligible_div": 35.74
+   },
+   {
+    "from": 246813.0,
+    "to": 258482.0,
+    "other": 43.29,
+    "capital_gains": 21.65,
+    "eligible_div": 27.81,
+    "non_eligible_div": 36.89
+   },
+   {
+    "from": 258482.0,
+    "to": 370220.0,
+    "other": 47.0,
+    "capital_gains": 23.5,
+    "eligible_div": 32.93,
+    "non_eligible_div": 41.16
+   },
+   {
+    "from": 370220.0,
+    "to": null,
+    "other": 48.0,
+    "capital_gains": 24.0,
+    "eligible_div": 34.31,
+    "non_eligible_div": 42.31
+   }
+  ],
+  "BC": [
+   {
+    "from": 0,
+    "to": 50363.0,
+    "other": 19.6,
+    "capital_gains": 9.8,
+    "eligible_div": -10.24,
+    "non_eligible_div": 9.91
+   },
+   {
+    "from": 50363.0,
+    "to": 58523.0,
+    "other": 21.7,
+    "capital_gains": 10.85,
+    "eligible_div": -7.34,
+    "non_eligible_div": 12.32
+   },
+   {
+    "from": 58523.0,
+    "to": 100728.0,
+    "other": 28.2,
+    "capital_gains": 14.1,
+    "eligible_div": 1.63,
+    "non_eligible_div": 19.8
+   },
+   {
+    "from": 100728.0,
+    "to": 115648.0,
+    "other": 31.0,
+    "capital_gains": 15.5,
+    "eligible_div": 5.49,
+    "non_eligible_div": 23.02
+   },
+   {
+    "from": 115648.0,
+    "to": 117045.0,
+    "other": 32.79,
+    "capital_gains": 16.4,
+    "eligible_div": 7.96,
+    "non_eligible_div": 25.07
+   },
+   {
+    "from": 117045.0,
+    "to": 140430.0,
+    "other": 38.29,
+    "capital_gains": 19.15,
+    "eligible_div": 15.55,
+    "non_eligible_div": 31.4
+   },
+   {
+    "from": 140430.0,
+    "to": 181440.0,
+    "other": 40.7,
+    "capital_gains": 20.35,
+    "eligible_div": 18.88,
+    "non_eligible_div": 34.17
+   },
+   {
+    "from": 181440.0,
+    "to": 190405.0,
+    "other": 43.99,
+    "capital_gains": 22.0,
+    "eligible_div": 23.42,
+    "non_eligible_div": 37.95
+   },
+   {
+    "from": 190405.0,
+    "to": 258482.0,
+    "other": 46.09,
+    "capital_gains": 23.05,
+    "eligible_div": 26.32,
+    "non_eligible_div": 40.37
+   },
+   {
+    "from": 258482.0,
+    "to": 265545.0,
+    "other": 49.8,
+    "capital_gains": 24.9,
+    "eligible_div": 31.44,
+    "non_eligible_div": 44.64
+   },
+   {
+    "from": 265545.0,
+    "to": null,
+    "other": 53.5,
+    "capital_gains": 26.75,
+    "eligible_div": 36.54,
+    "non_eligible_div": 48.89
+   }
+  ],
+  "MB": [
+   {
+    "from": 0,
+    "to": 47000.0,
+    "other": 24.8,
+    "capital_gains": 12.4,
+    "eligible_div": 2.46,
+    "non_eligible_div": 17.23
+   },
+   {
+    "from": 47000.0,
+    "to": 58523.0,
+    "other": 26.75,
+    "capital_gains": 13.38,
+    "eligible_div": 5.15,
+    "non_eligible_div": 19.48
+   },
+   {
+    "from": 58523.0,
+    "to": 100000.0,
+    "other": 33.25,
+    "capital_gains": 16.63,
+    "eligible_div": 14.12,
+    "non_eligible_div": 26.95
+   },
+   {
+    "from": 100000.0,
+    "to": 117045.0,
+    "other": 37.9,
+    "capital_gains": 18.95,
+    "eligible_div": 20.53,
+    "non_eligible_div": 32.3
+   },
+   {
+    "from": 117045.0,
+    "to": 181440.0,
+    "other": 43.4,
+    "capital_gains": 21.7,
+    "eligible_div": 28.12,
+    "non_eligible_div": 38.62
+   },
+   {
+    "from": 181440.0,
+    "to": 200000.0,
+    "other": 46.69,
+    "capital_gains": 23.35,
+    "eligible_div": 32.67,
+    "non_eligible_div": 42.4
+   },
+   {
+    "from": 200000.0,
+    "to": 258482.0,
+    "other": 47.54,
+    "capital_gains": 23.77,
+    "eligible_div": 33.84,
+    "non_eligible_div": 43.38
+   },
+   {
+    "from": 258482.0,
+    "to": 400000.0,
+    "other": 51.25,
+    "capital_gains": 25.63,
+    "eligible_div": 38.96,
+    "non_eligible_div": 47.65
+   },
+   {
+    "from": 400000.0,
+    "to": null,
+    "other": 50.4,
+    "capital_gains": 25.2,
+    "eligible_div": 37.78,
+    "non_eligible_div": 46.67
+   }
+  ],
+  "NB": [
+   {
+    "from": 0,
+    "to": 52333.0,
+    "other": 23.4,
+    "capital_gains": 11.7,
+    "eligible_div": -7.76,
+    "non_eligible_div": 13.36
+   },
+   {
+    "from": 52333.0,
+    "to": 58523.0,
+    "other": 28.0,
+    "capital_gains": 14.0,
+    "eligible_div": -1.41,
+    "non_eligible_div": 18.65
+   },
+   {
+    "from": 58523.0,
+    "to": 104666.0,
+    "other": 34.5,
+    "capital_gains": 17.25,
+    "eligible_div": 7.56,
+    "non_eligible_div": 26.13
+   },
+   {
+    "from": 104666.0,
+    "to": 117045.0,
+    "other": 36.5,
+    "capital_gains": 18.25,
+    "eligible_div": 10.32,
+    "non_eligible_div": 28.43
+   },
+   {
+    "from": 117045.0,
+    "to": 181440.0,
+    "other": 42.0,
+    "capital_gains": 21.0,
+    "eligible_div": 17.91,
+    "non_eligible_div": 34.75
+   },
+   {
+    "from": 181440.0,
+    "to": 193861.0,
+    "other": 45.29,
+    "capital_gains": 22.65,
+    "eligible_div": 22.45,
+    "non_eligible_div": 38.53
+   },
+   {
+    "from": 193861.0,
+    "to": 258482.0,
+    "other": 48.79,
+    "capital_gains": 24.4,
+    "eligible_div": 27.28,
+    "non_eligible_div": 42.56
+   },
+   {
+    "from": 258482.0,
+    "to": null,
+    "other": 52.5,
+    "capital_gains": 26.25,
+    "eligible_div": 32.4,
+    "non_eligible_div": 46.83
+   }
+  ],
+  "NL": [
+   {
+    "from": 0,
+    "to": 44678.0,
+    "other": 22.7,
+    "capital_gains": 11.35,
+    "eligible_div": 1.9,
+    "non_eligible_div": 12.04
+   },
+   {
+    "from": 44678.0,
+    "to": 58523.0,
+    "other": 28.5,
+    "capital_gains": 14.25,
+    "eligible_div": 9.91,
+    "non_eligible_div": 18.71
+   },
+   {
+    "from": 58523.0,
+    "to": 89354.0,
+    "other": 35.0,
+    "capital_gains": 17.5,
+    "eligible_div": 18.88,
+    "non_eligible_div": 26.19
+   },
+   {
+    "from": 89354.0,
+    "to": 117045.0,
+    "other": 36.3,
+    "capital_gains": 18.15,
+    "eligible_div": 20.67,
+    "non_eligible_div": 27.68
+   },
+   {
+    "from": 117045.0,
+    "to": 159528.0,
+    "other": 41.8,
+    "capital_gains": 20.9,
+    "eligible_div": 28.26,
+    "non_eligible_div": 34.01
+   },
+   {
+    "from": 159528.0,
+    "to": 181440.0,
+    "other": 43.8,
+    "capital_gains": 21.9,
+    "eligible_div": 31.02,
+    "non_eligible_div": 36.31
+   },
+   {
+    "from": 181440.0,
+    "to": 223340.0,
+    "other": 47.09,
+    "capital_gains": 23.55,
+    "eligible_div": 35.56,
+    "non_eligible_div": 40.09
+   },
+   {
+    "from": 223340.0,
+    "to": 258482.0,
+    "other": 49.09,
+    "capital_gains": 24.55,
+    "eligible_div": 38.32,
+    "non_eligible_div": 42.39
+   },
+   {
+    "from": 258482.0,
+    "to": 285319.0,
+    "other": 52.8,
+    "capital_gains": 26.4,
+    "eligible_div": 43.44,
+    "non_eligible_div": 46.66
+   },
+   {
+    "from": 285319.0,
+    "to": 570638.0,
+    "other": 53.8,
+    "capital_gains": 26.9,
+    "eligible_div": 44.82,
+    "non_eligible_div": 47.81
+   },
+   {
+    "from": 570638.0,
+    "to": 1141275.0,
+    "other": 54.3,
+    "capital_gains": 27.15,
+    "eligible_div": 45.51,
+    "non_eligible_div": 48.38
+   },
+   {
+    "from": 1141275.0,
+    "to": null,
+    "other": 54.8,
+    "capital_gains": 27.4,
+    "eligible_div": 46.2,
+    "non_eligible_div": 48.96
+   }
+  ],
+  "NS": [
+   {
+    "from": 0,
+    "to": 30995.0,
+    "other": 22.79,
+    "capital_gains": 11.4,
+    "eligible_div": -1.49,
+    "non_eligible_div": 14.1
+   },
+   {
+    "from": 30995.0,
+    "to": 58523.0,
+    "other": 28.95,
+    "capital_gains": 14.48,
+    "eligible_div": 7.01,
+    "non_eligible_div": 21.18
+   },
+   {
+    "from": 58523.0,
+    "to": 61991.0,
+    "other": 35.45,
+    "capital_gains": 17.73,
+    "eligible_div": 15.98,
+    "non_eligible_div": 28.66
+   },
+   {
+    "from": 61991.0,
+    "to": 97417.0,
+    "other": 37.17,
+    "capital_gains": 18.59,
+    "eligible_div": 18.35,
+    "non_eligible_div": 30.64
+   },
+   {
+    "from": 97417.0,
+    "to": 117045.0,
+    "other": 38.0,
+    "capital_gains": 19.0,
+    "eligible_div": 19.5,
+    "non_eligible_div": 31.59
+   },
+   {
+    "from": 117045.0,
+    "to": 157124.0,
+    "other": 43.5,
+    "capital_gains": 21.75,
+    "eligible_div": 27.09,
+    "non_eligible_div": 37.92
+   },
+   {
+    "from": 157124.0,
+    "to": 181440.0,
+    "other": 47.0,
+    "capital_gains": 23.5,
+    "eligible_div": 31.92,
+    "non_eligible_div": 41.94
+   },
+   {
+    "from": 181440.0,
+    "to": 258482.0,
+    "other": 50.29,
+    "capital_gains": 25.15,
+    "eligible_div": 36.46,
+    "non_eligible_div": 45.72
+   },
+   {
+    "from": 258482.0,
+    "to": null,
+    "other": 54.0,
+    "capital_gains": 27.0,
+    "eligible_div": 41.58,
+    "non_eligible_div": 49.99
+   }
+  ],
+  "NT": [
+   {
+    "from": 0,
+    "to": 53003.0,
+    "other": 19.9,
+    "capital_gains": 9.95,
+    "eligible_div": -9.14,
+    "non_eligible_div": 5.6
+   },
+   {
+    "from": 53003.0,
+    "to": 58523.0,
+    "other": 22.6,
+    "capital_gains": 11.3,
+    "eligible_div": -5.41,
+    "non_eligible_div": 8.71
+   },
+   {
+    "from": 58523.0,
+    "to": 106009.0,
+    "other": 29.1,
+    "capital_gains": 14.55,
+    "eligible_div": 3.56,
+    "non_eligible_div": 16.18
+   },
+   {
+    "from": 106009.0,
+    "to": 117045.0,
+    "other": 32.7,
+    "capital_gains": 16.35,
+    "eligible_div": 8.53,
+    "non_eligible_div": 20.32
+   },
+   {
+    "from": 117045.0,
+    "to": 172346.0,
+    "other": 38.2,
+    "capital_gains": 19.1,
+    "eligible_div": 16.12,
+    "non_eligible_div": 26.65
+   },
+   {
+    "from": 172346.0,
+    "to": 181440.0,
+    "other": 40.05,
+    "capital_gains": 20.03,
+    "eligible_div": 18.67,
+    "non_eligible_div": 28.77
+   },
+   {
+    "from": 181440.0,
+    "to": 258482.0,
+    "other": 43.34,
+    "capital_gains": 21.67,
+    "eligible_div": 23.21,
+    "non_eligible_div": 32.55
+   },
+   {
+    "from": 258482.0,
+    "to": null,
+    "other": 47.05,
+    "capital_gains": 23.53,
+    "eligible_div": 28.33,
+    "non_eligible_div": 36.82
+   }
+  ],
+  "NU": [
+   {
+    "from": 0,
+    "to": 55801.0,
+    "other": 18.0,
+    "capital_gains": 9.0,
+    "eligible_div": -3.49,
+    "non_eligible_div": 7.31
+   },
+   {
+    "from": 55801.0,
+    "to": 58523.0,
+    "other": 21.0,
+    "capital_gains": 10.5,
+    "eligible_div": 0.65,
+    "non_eligible_div": 10.76
+   },
+   {
+    "from": 58523.0,
+    "to": 111602.0,
+    "other": 27.5,
+    "capital_gains": 13.75,
+    "eligible_div": 9.62,
+    "non_eligible_div": 18.24
+   },
+   {
+    "from": 111602.0,
+    "to": 117045.0,
+    "other": 29.5,
+    "capital_gains": 14.75,
+    "eligible_div": 12.38,
+    "non_eligible_div": 20.54
+   },
+   {
+    "from": 117045.0,
+    "to": 181439.0,
+    "other": 35.0,
+    "capital_gains": 17.5,
+    "eligible_div": 19.97,
+    "non_eligible_div": 26.86
+   },
+   {
+    "from": 181439.0,
+    "to": 258482.0,
+    "other": 40.79,
+    "capital_gains": 20.4,
+    "eligible_div": 27.96,
+    "non_eligible_div": 33.52
+   },
+   {
+    "from": 258482.0,
+    "to": null,
+    "other": 44.5,
+    "capital_gains": 22.25,
+    "eligible_div": 33.08,
+    "non_eligible_div": 37.79
+   }
+  ],
+  "ON": [
+   {
+    "from": 0,
+    "to": 53891.0,
+    "other": 19.05,
+    "capital_gains": 9.53,
+    "eligible_div": -8.24,
+    "non_eligible_div": 8.09
+   },
+   {
+    "from": 53891.0,
+    "to": 58523.0,
+    "other": 23.15,
+    "capital_gains": 11.58,
+    "eligible_div": -2.58,
+    "non_eligible_div": 12.8
+   },
+   {
+    "from": 58523.0,
+    "to": 94907.0,
+    "other": 29.65,
+    "capital_gains": 14.83,
+    "eligible_div": 6.39,
+    "non_eligible_div": 20.28
+   },
+   {
+    "from": 94907.0,
+    "to": 107785.0,
+    "other": 31.48,
+    "capital_gains": 15.74,
+    "eligible_div": 8.92,
+    "non_eligible_div": 22.38
+   },
+   {
+    "from": 107785.0,
+    "to": 111814.0,
+    "other": 33.89,
+    "capital_gains": 16.95,
+    "eligible_div": 12.24,
+    "non_eligible_div": 25.16
+   },
+   {
+    "from": 111814.0,
+    "to": 117045.0,
+    "other": 37.91,
+    "capital_gains": 18.95,
+    "eligible_div": 17.79,
+    "non_eligible_div": 29.78
+   },
+   {
+    "from": 117045.0,
+    "to": 150000.0,
+    "other": 43.41,
+    "capital_gains": 21.7,
+    "eligible_div": 25.38,
+    "non_eligible_div": 36.1
+   },
+   {
+    "from": 150000.0,
+    "to": 181440.0,
+    "other": 44.97,
+    "capital_gains": 22.48,
+    "eligible_div": 27.53,
+    "non_eligible_div": 37.9
+   },
+   {
+    "from": 181440.0,
+    "to": 220000.0,
+    "other": 48.26,
+    "capital_gains": 24.13,
+    "eligible_div": 32.07,
+    "non_eligible_div": 41.68
+   },
+   {
+    "from": 220000.0,
+    "to": 258482.0,
+    "other": 49.82,
+    "capital_gains": 24.91,
+    "eligible_div": 34.22,
+    "non_eligible_div": 43.47
+   },
+   {
+    "from": 258482.0,
+    "to": null,
+    "other": 53.53,
+    "capital_gains": 26.76,
+    "eligible_div": 39.34,
+    "non_eligible_div": 47.74
+   }
+  ],
+  "PE": [
+   {
+    "from": 0,
+    "to": 33928.0,
+    "other": 23.5,
+    "capital_gains": 11.75,
+    "eligible_div": -2.79,
+    "non_eligible_div": 15.15
+   },
+   {
+    "from": 33928.0,
+    "to": 58523.0,
+    "other": 27.47,
+    "capital_gains": 13.74,
+    "eligible_div": 2.69,
+    "non_eligible_div": 19.71
+   },
+   {
+    "from": 58523.0,
+    "to": 65820.0,
+    "other": 33.97,
+    "capital_gains": 16.99,
+    "eligible_div": 11.66,
+    "non_eligible_div": 27.19
+   },
+   {
+    "from": 65820.0,
+    "to": 106890.0,
+    "other": 37.1,
+    "capital_gains": 18.55,
+    "eligible_div": 15.98,
+    "non_eligible_div": 30.79
+   },
+   {
+    "from": 106890.0,
+    "to": 117045.0,
+    "other": 38.12,
+    "capital_gains": 19.06,
+    "eligible_div": 17.39,
+    "non_eligible_div": 31.96
+   },
+   {
+    "from": 117045.0,
+    "to": 142250.0,
+    "other": 43.62,
+    "capital_gains": 21.81,
+    "eligible_div": 24.98,
+    "non_eligible_div": 38.28
+   },
+   {
+    "from": 142250.0,
+    "to": 181440.0,
+    "other": 45.0,
+    "capital_gains": 22.5,
+    "eligible_div": 26.88,
+    "non_eligible_div": 39.87
+   },
+   {
+    "from": 181440.0,
+    "to": 200000.0,
+    "other": 48.29,
+    "capital_gains": 24.15,
+    "eligible_div": 31.42,
+    "non_eligible_div": 43.65
+   },
+   {
+    "from": 200000.0,
+    "to": 258482.0,
+    "other": 49.29,
+    "capital_gains": 24.65,
+    "eligible_div": 32.8,
+    "non_eligible_div": 44.8
+   },
+   {
+    "from": 258482.0,
+    "to": null,
+    "other": 53.0,
+    "capital_gains": 26.5,
+    "eligible_div": 37.92,
+    "non_eligible_div": 49.07
+   }
+  ],
+  "QC": [
+   {
+    "from": 0,
+    "to": 54345.0,
+    "other": 25.69,
+    "capital_gains": 12.85,
+    "eligible_div": 2.0,
+    "non_eligible_div": 16.94
+   },
+   {
+    "from": 54345.0,
+    "to": 58523.0,
+    "other": 30.69,
+    "capital_gains": 15.35,
+    "eligible_div": 8.9,
+    "non_eligible_div": 22.69
+   },
+   {
+    "from": 58523.0,
+    "to": 108680.0,
+    "other": 36.12,
+    "capital_gains": 18.06,
+    "eligible_div": 16.39,
+    "non_eligible_div": 28.93
+   },
+   {
+    "from": 108680.0,
+    "to": 117045.0,
+    "other": 41.12,
+    "capital_gains": 20.56,
+    "eligible_div": 23.29,
+    "non_eligible_div": 34.68
+   },
+   {
+    "from": 117045.0,
+    "to": 132245.0,
+    "other": 45.71,
+    "capital_gains": 22.86,
+    "eligible_div": 29.63,
+    "non_eligible_div": 39.96
+   },
+   {
+    "from": 132245.0,
+    "to": 181440.0,
+    "other": 47.46,
+    "capital_gains": 23.73,
+    "eligible_div": 32.04,
+    "non_eligible_div": 41.97
+   },
+   {
+    "from": 181440.0,
+    "to": 258482.0,
+    "other": 50.21,
+    "capital_gains": 25.1,
+    "eligible_div": 35.83,
+    "non_eligible_div": 45.13
+   },
+   {
+    "from": 258482.0,
+    "to": null,
+    "other": 53.31,
+    "capital_gains": 26.65,
+    "eligible_div": 40.11,
+    "non_eligible_div": 48.7
+   }
+  ],
+  "SK": [
+   {
+    "from": 0,
+    "to": 54532.0,
+    "other": 24.5,
+    "capital_gains": 12.25,
+    "eligible_div": -2.1,
+    "non_eligible_div": 14.89
+   },
+   {
+    "from": 54532.0,
+    "to": 58523.0,
+    "other": 26.5,
+    "capital_gains": 13.25,
+    "eligible_div": 0.66,
+    "non_eligible_div": 17.19
+   },
+   {
+    "from": 58523.0,
+    "to": 117045.0,
+    "other": 33.0,
+    "capital_gains": 16.5,
+    "eligible_div": 9.63,
+    "non_eligible_div": 24.67
+   },
+   {
+    "from": 117045.0,
+    "to": 155805.0,
+    "other": 38.5,
+    "capital_gains": 19.25,
+    "eligible_div": 17.22,
+    "non_eligible_div": 30.99
+   },
+   {
+    "from": 155805.0,
+    "to": 181440.0,
+    "other": 40.5,
+    "capital_gains": 20.25,
+    "eligible_div": 19.98,
+    "non_eligible_div": 33.29
+   },
+   {
+    "from": 181440.0,
+    "to": 258482.0,
+    "other": 43.79,
+    "capital_gains": 21.9,
+    "eligible_div": 24.52,
+    "non_eligible_div": 37.07
+   },
+   {
+    "from": 258482.0,
+    "to": null,
+    "other": 47.5,
+    "capital_gains": 23.75,
+    "eligible_div": 29.64,
+    "non_eligible_div": 41.34
+   }
+  ],
+  "YT": [
+   {
+    "from": 0,
+    "to": 58523.0,
+    "other": 20.4,
+    "capital_gains": 10.2,
+    "eligible_div": -9.16,
+    "non_eligible_div": 12.3
+   },
+   {
+    "from": 58523.0,
+    "to": 117045.0,
+    "other": 29.5,
+    "capital_gains": 14.75,
+    "eligible_div": 3.4,
+    "non_eligible_div": 22.77
+   },
+   {
+    "from": 117045.0,
+    "to": 181440.0,
+    "other": 36.9,
+    "capital_gains": 18.45,
+    "eligible_div": 13.61,
+    "non_eligible_div": 31.28
+   },
+   {
+    "from": 181440.0,
+    "to": 258482.0,
+    "other": 42.22,
+    "capital_gains": 21.11,
+    "eligible_div": 20.95,
+    "non_eligible_div": 37.39
+   },
+   {
+    "from": 258482.0,
+    "to": 500000.0,
+    "other": 45.8,
+    "capital_gains": 22.9,
+    "eligible_div": 25.89,
+    "non_eligible_div": 41.51
+   },
+   {
+    "from": 500000.0,
+    "to": null,
+    "other": 48.0,
+    "capital_gains": 24.0,
+    "eligible_div": 28.93,
+    "non_eligible_div": 44.04
+   }
+  ]
+ }
+}
