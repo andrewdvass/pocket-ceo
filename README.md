@@ -58,7 +58,9 @@ Just talk to it like a person. Some things to try:
 | Get paid | "I invoiced Sarah $1,200" · "Who owes me money?" or `/owed` |
 | Get ready for tax time | "Get everything ready for my accountant" or `/year-end` |
 | Log a business drive | "Log my drive to the supplier, 30 km" |
-| Check a contract before signing | "Read this contract" and drag the file in |
+| Check a contract before signing | "Read this contract" and drag the file in. You get a Word copy with the changes tracked, ready to send |
+| Hire your first person | "I want to hire someone at $50k" (true cost, job post, offer letter, payroll checklist) |
+| Know your numbers | "What's my break-even?" "Am I charging enough?" |
 | Clean up your email | "Sort my inbox" or `/inbox` |
 | Reply to someone fast | "Draft a reply to Sarah" |
 | Grow the business | "How do I get more customers?" or `/grow` |
