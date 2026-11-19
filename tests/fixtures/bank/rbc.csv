@@ -1,0 +1,5 @@
+"Account Type","Account Number","Transaction Date","Cheque Number","Description 1","Description 2","CAD$","USD$"
+Chequing,01234-5678901,10/2/2026,,"MISC PAYMENT","ROGERS ******1234",-95.00,
+Chequing,01234-5678901,10/3/2026,,"Payroll Deposit","SQUARE CANADA",1250.50,
+Chequing,01234-5678901,10/5/2026,,"Contactless Interac purchase - 1234","TIM HORTONS #2231",-6.45,
+Chequing,01234-5678901,10/15/2026,,"MONTHLY FEE","",-4.00,

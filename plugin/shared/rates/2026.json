@@ -105,6 +105,12 @@
    "kind": "official",
    "checked": null
   },
+  "cra_aii": {
+   "name": "CRA: Accelerated investment incentive (phase-out for property available for use after 2023)",
+   "url": "https://www.canada.ca/taxes-accelerated-investment-income",
+   "kind": "official",
+   "checked": "2026-11-16"
+  },
   "fin_mega": {
    "name": "Department of Finance: Productivity Mega Deduction announcement, Sept 15, 2026",
    "url": "https://www.canada.ca/en/department-finance/news/2026/09/government-of-canada-introduces-new-productivity-mega-deduction-to-boost-canadas-advantage-as-the-most-competitive-g7-country-for-new-business-inve.html",
@@ -1085,6 +1091,21 @@
  },
  "cca": {
   "half_year_rule": "In the year you buy an asset, only half the normal CCA is usually allowed. Most class 12 items are exempt from the half-year rule.",
+  "first_year": {
+   "rule": "Accelerated Investment Incentive phase-out: for property that becomes available for use in 2024 to 2027, the half-year rule is effectively suspended, so the first-year claim is 2x the normal first-year CCA (the full class rate on the cost).",
+   "multiplier_vs_half_year": 2.0,
+   "applies_to_available_for_use": [
+    2024,
+    2027
+   ],
+   "unconfirmed_proposals": [
+    "Reaccelerated investment incentive (Budget 2025 proposal, 3x normal first-year CCA for property acquired after 2024): enactment not verified.",
+    "Productivity Mega Deduction (Sept 15, 2026 proposal, 100% first-year): not law yet."
+   ],
+   "source": [
+    "cra_aii"
+   ]
+  },
   "classes": {
    "1": {
     "rate": 0.04,

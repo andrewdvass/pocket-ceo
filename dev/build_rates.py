@@ -26,6 +26,7 @@ SOURCES = {
  "cra_rc4058": {"name": "CRA RC4058 Quick Method of Accounting for GST/HST", "url": "https://www.canada.ca/en/revenue-agency/services/forms-publications/publications/rc4058/quick-method-accounting-gst-hst.html", "kind": "official", "checked": None},
  "cra_cca": {"name": "CRA CCA classes", "url": "https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/sole-proprietorships-partnerships/report-business-income-expenses/claiming-capital-cost-allowance/classes.html", "kind": "official", "checked": None},
  "cra_t2125": {"name": "CRA Form T2125 Statement of Business or Professional Activities", "url": "https://www.canada.ca/en/revenue-agency/services/forms-publications/forms/t2125.html", "kind": "official", "checked": None},
+ "cra_aii": {"name": "CRA: Accelerated investment incentive (phase-out for property available for use after 2023)", "url": "https://www.canada.ca/taxes-accelerated-investment-income", "kind": "official", "checked": CHECKED},
  "fin_mega": {"name": "Department of Finance: Productivity Mega Deduction announcement, Sept 15, 2026", "url": "https://www.canada.ca/en/department-finance/news/2026/09/government-of-canada-introduces-new-productivity-mega-deduction-to-boost-canadas-advantage-as-the-most-competitive-g7-country-for-new-business-inve.html", "kind": "official", "checked": None},
  "small_claims": {"name": "Provincial court sites (limits found via search on 2026-11-16; only ON, QC, BC, AB located)", "url": "https://www.ontario.ca/laws/regulation/r25042", "kind": "secondary", "checked": CHECKED},
 }
@@ -159,6 +160,11 @@ VEHICLE = {
 
 CCA = {
  "half_year_rule": "In the year you buy an asset, only half the normal CCA is usually allowed. Most class 12 items are exempt from the half-year rule.",
+ "first_year": {"rule": "Accelerated Investment Incentive phase-out: for property that becomes available for use in 2024 to 2027, the half-year rule is effectively suspended, so the first-year claim is 2x the normal first-year CCA (the full class rate on the cost).",
+                "multiplier_vs_half_year": 2.0, "applies_to_available_for_use": [2024, 2027],
+                "unconfirmed_proposals": ["Reaccelerated investment incentive (Budget 2025 proposal, 3x normal first-year CCA for property acquired after 2024): enactment not verified.",
+                                          "Productivity Mega Deduction (Sept 15, 2026 proposal, 100% first-year): not law yet."],
+                "source": ["cra_aii"]},
  "classes": {
    "1": {"rate": .04, "what": "Most buildings acquired after 1987"},
    "8": {"rate": .20, "what": "Furniture, appliances, tools costing $500 or more, equipment not in another class, photo and video gear"},

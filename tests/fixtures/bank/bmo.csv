@@ -1,0 +1,7 @@
+Following data is valid as of 20261020123456 (Year/Month/Day/Hour/Minute/Second)
+
+
+First Bank Card,Transaction Type,Date Posted, Transaction Amount,Description
+'5191xxxxxxxx1234',DEBIT,20261001,-42.50,[CW]STARBUCKS 1234
+'5191xxxxxxxx1234',CREDIT,20261002,2200.00,[DN]SHOPIFY PAYMENTS
+'5191xxxxxxxx1234',DEBIT,20261003,-1450.00,[PR]RENT OCT STUDIO
