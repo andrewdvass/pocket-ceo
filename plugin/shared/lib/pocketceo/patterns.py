@@ -12,7 +12,7 @@ from . import data_dir
 
 BUILT_IN = {"tax", "taxes", "accounting", "gst", "hst", "receipts", "cash", "cashflow", "cash-flow", "invoices",
             "collections", "contracts", "legal", "email", "inbox", "growth", "marketing-plan", "hiring", "video",
-            "brief", "memory", "ai"}
+            "brief", "memory", "ai", "google-ads", "ppc", "meetings", "meeting-prep", "debrief", "decisions"}
 
 
 def slug(t):

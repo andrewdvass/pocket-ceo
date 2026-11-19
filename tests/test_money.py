@@ -336,15 +336,15 @@ class Patterns(TempHome):
         from pocketceo import patterns
         logs = Path(self.tmp) / "memory" / "log"
         logs.mkdir(parents=True)
-        for d, t in [("2026-11-01", "pricing, google-ads"), ("2026-11-04", "Google Ads"), ("2026-11-09", "google ads, tax"),
+        for d, t in [("2026-11-01", "pricing, meta-ads"), ("2026-11-04", "Meta Ads"), ("2026-11-09", "meta ads, google-ads, tax"),
                      ("2026-11-10", "pricing"), ("2026-11-12", "tax")]:
             (logs / ("%s.md" % d)).write_text("## Chat\nasked stuff\nTopics: %s\n" % t)
         os.environ["HOME_BACKUP"] = os.environ.get("HOME", "")
         os.environ["HOME"] = self.tmp
         try:
             r = patterns.suggestions(today=D(2026, 11, 19))
-            self.assertEqual([x["topic"] for x in r["suggest"]], ["google-ads"])  # pricing only 2 days; tax is built in
-            patterns.decline("google ads")
+            self.assertEqual([x["topic"] for x in r["suggest"]], ["meta-ads"])  # pricing only 2 days; tax, google-ads built in
+            patterns.decline("meta ads")
             self.assertEqual(patterns.suggestions(today=D(2026, 11, 19))["suggest"], [])
             d = patterns.create_skill("Pricing", "Use when pricing comes up.", "# Pricing\nBody", {"value.md": "# Value"})
             self.assertTrue((Path(d) / "SKILL.md").read_text().startswith("---\nname: pceo-pricing\n"))

@@ -1,0 +1,11 @@
+schema_version: "1.1"
+name: gads-worth-it
+tags: [google-ads]
+execution:
+  prompt: "I spend about $800 a month on Google Ads for my electrical company and get maybe 3 calls a month, and I book 2 of them. An average job is $650 at about 45% margin, and customers book about 1.5 times over the years. Is it worth it, and what should I fix?"
+  runs: 3
+  max_turns: 16
+  timeout_seconds: 420
+  allowed_tools: [Bash, Read, Glob, Grep, Skill, WebSearch]
+context:
+  scaffold_script: scaffold.sh

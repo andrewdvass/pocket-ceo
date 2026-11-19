@@ -35,6 +35,7 @@ when to suggest a professional, logging, the never list).
 | a contract, lease, agreement, legal letter, firing rules, privacy, advertising rules, disputes | `lawyer` |
 | email: sorting, urgent, replying, "draft a reply", "what did X say" | `inbox` |
 | getting customers, pricing, offers, sales, marketing, "why am I stuck", growth plan | `consultant` |
+| Google Ads, PPC, search ads, "my ads aren't working", ad budget | `google-ads` |
 | AI tools, automation, "how can AI help me", saving time | `ai-coach` |
 | their day, weather, games, snow, "morning brief" | `daily-brief` |
 | a video: captions, Reel/TikTok, resize, sound, pauses, thumbnail | `video-editor` |

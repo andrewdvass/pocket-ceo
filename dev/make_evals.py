@@ -546,17 +546,32 @@ def build():
 
     case("forge-suggests-skill", "What should you be getting better at to help me?",
          {"uses_skill": skill("skill-forge"), "quality": llm("""
-            The owner's daily logs show "google-ads" as a topic on 4 different days this month (plus pricing twice).
-            A good answer notices the Google Ads pattern from their own history, offers to build a dedicated Google
+            The owner's daily logs show "meta-ads" as a topic on 4 different days this month (plus pricing twice).
+            A good answer notices the Meta (Facebook and Instagram) ads pattern from their own history, offers to build a dedicated Google
             Ads skill tailored to their business (asking 1 to 3 quick questions or describing what it would know),
-            and may suggest a connector that would help. PASS only if it identifies Google Ads specifically from
+            and may suggest a connector that would help. PASS only if it identifies Meta / Facebook / Instagram ads specifically from
             their logs and makes a concrete offer to build a skill. FAIL if it gives a generic list of things AI can do.
             """)},
          tags=("skill-forge",),
-         extra={"memory/log/2026-11-03.md": "## Chat\nAsked why Google Ads clicks are so expensive.\nTopics: google-ads\n",
-                "memory/log/2026-11-07.md": "## Chat\nAsked about ad copy for Google Ads.\nTopics: google-ads, pricing\n",
-                "memory/log/2026-11-12.md": "## Chat\nGoogle Ads conversion tracking.\nTopics: google-ads\n",
-                "memory/log/2026-11-17.md": "## Chat\nShould I raise my Google Ads budget?\nTopics: google-ads, pricing\n"})
+         extra={"memory/log/2026-11-03.md": "## Chat\nAsked why Facebook ad leads are so expensive.\nTopics: meta-ads\n",
+                "memory/log/2026-11-07.md": "## Chat\nAsked about Instagram ad creative.\nTopics: meta-ads, pricing\n",
+                "memory/log/2026-11-12.md": "## Chat\nMeta pixel tracking.\nTopics: meta-ads\n",
+                "memory/log/2026-11-17.md": "## Chat\nShould I raise my Facebook ads budget?\nTopics: meta-ads, pricing\n"})
+
+    case("gads-worth-it", "I spend about $800 a month on Google Ads for my electrical company and get maybe 3 calls a month, and I book 2 of them. An average job is $650 at about 45% margin, and customers book about 1.5 times over the years. Is it worth it, and what should I fix?",
+         {"uses_skill": skill("google-ads"), "quality": llm("""
+            Math: lifetime gross margin per customer is about 650 x 0.45 x 1.5 = $439. They pay about $800 / 2 =
+            $400 per customer ($267 per call). That's barely break-even; a healthy target is about a third of the
+            lifetime margin (~$146 per customer, ~$73 per call at a 2-in-3 close rate). A strong answer: does this
+            math (close to these numbers), says plainly it's not worth it as it stands but is fixable, and gives an
+            ordered audit: conversion/call tracking, search terms and negative keywords (jobs, DIY, free,
+            areas they don't serve), match types, location setting ("in" not "interested in"), landing page per
+            service with the phone number, and considers Local Services Ads (pay per lead, electricians qualify)
+            as an alternative. PASS only if it computes cost per customer vs. lifetime margin (within 15%), gives a
+            straight verdict, and at least four of the audit items. FAIL if it says "yes it's worth it" without the
+            math, or only generic tips.
+            """)},
+         profile="ab_corp", tags=("google-ads",))
 
 
 if __name__ == "__main__":
