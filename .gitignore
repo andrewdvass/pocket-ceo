@@ -1,2 +1,5 @@
 SELLER-NOTES.md
 .DS_Store
+__pycache__/
+*.pyc
+evals/results/
