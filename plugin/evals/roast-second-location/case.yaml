@@ -1,0 +1,11 @@
+schema_version: "1.1"
+name: roast-second-location
+tags: [ceo, straight-talk]
+execution:
+  prompt: "I want to open a second studio location across town next month. Rent would be $2,100 a month plus about $9,000 to fit it out. Roast this plan."
+  runs: 3
+  max_turns: 16
+  timeout_seconds: 420
+  allowed_tools: [Bash, Read, Glob, Grep, Skill, WebSearch]
+context:
+  scaffold_script: scaffold.sh

@@ -61,6 +61,10 @@ Just talk to it like a person. Some things to try:
 | Check a contract before signing | "Read this contract" and drag the file in. You get a Word copy with the changes tracked, ready to send |
 | Hire your first person | "I want to hire someone at $50k" (true cost, job post, offer letter, payroll checklist) |
 | Know your numbers | "What's my break-even?" "Am I charging enough?" |
+| Hand over your day | Each evening tap the microphone: "Here's my day…" or `/debrief`. It drafts the follow-ups and preps tomorrow |
+| Walk into a meeting prepared | "Prep me for my 10:00" or `/prep` |
+| Get the truth about a plan | "Roast my plan to…" or `/roast` |
+| Teach it something new | It offers to build an expert skill when a topic keeps coming up, or say "Build me a skill for…" |
 | Clean up your email | "Sort my inbox" or `/inbox` |
 | Reply to someone fast | "Draft a reply to Sarah" |
 | Grow the business | "How do I get more customers?" or `/grow` |

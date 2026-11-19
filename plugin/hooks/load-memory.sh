@@ -22,8 +22,12 @@ N=$(find "$DIR/receipts/inbox" -maxdepth 1 -type f ! -name '.*' 2>/dev/null | wc
 [ "${N:-0}" -gt 0 ] && echo && echo "Receipts inbox has $N file(s) waiting. File them with the receipts skill."
 PCEO="${CLAUDE_PLUGIN_ROOT:-}/shared/tools/pceo.sh"
 if [ -f "$PCEO" ]; then
+  LIC=$(bash "$PCEO" license status 2>/dev/null | head -1)
+  [ -n "$LIC" ] && echo && echo "$LIC"
   echo; echo "Pocket CEO calculator: bash \"$PCEO\" (house rules: ${CLAUDE_PLUGIN_ROOT}/shared/rules.md)"
-  echo "For any business question, load the matching Pocket CEO skill first (accountant, cashflow, collections, receipts, hiring, lawyer, inbox, consultant, ceo): it says which calculator command to run and how to answer."
+  echo "For any business question, load the matching Pocket CEO skill first (accountant, cashflow, collections, receipts, hiring, lawyer, inbox, consultant, roast-room, meeting-prep, debrief, ceo): it says which calculator command to run and how to answer."
+  SUG=$(bash "$PCEO" skills patterns 2>/dev/null | grep "^SUGGEST SKILL" | head -1)
+  [ -n "$SUG" ] && echo "$SUG (see the skill-forge skill; offer once, at the end of your first answer)"
   if [ -f "$DIR/money/transactions.csv" ] || [ -f "$DIR/money/invoices.csv" ]; then
     LINES=$(bash "$PCEO" brief money 2>/dev/null | head -3)
     [ -n "$LINES" ] && echo "Money today: $LINES"

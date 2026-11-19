@@ -329,3 +329,58 @@ class BriefLines(TempHome):
         lines = brief.money_lines(R, D(2026, 12, 10), instalment_amount=1000)
         self.assertIn("Owed to you: $1,200 overdue (Sarah 70 days).", lines)
         self.assertTrue(any("instalment" in l for l in lines))
+
+
+class Patterns(TempHome):
+    def test_repeating_topics_become_suggestions(self):
+        from pocketceo import patterns
+        logs = Path(self.tmp) / "memory" / "log"
+        logs.mkdir(parents=True)
+        for d, t in [("2026-11-01", "pricing, google-ads"), ("2026-11-04", "Google Ads"), ("2026-11-09", "google ads, tax"),
+                     ("2026-11-10", "pricing"), ("2026-11-12", "tax")]:
+            (logs / ("%s.md" % d)).write_text("## Chat\nasked stuff\nTopics: %s\n" % t)
+        os.environ["HOME_BACKUP"] = os.environ.get("HOME", "")
+        os.environ["HOME"] = self.tmp
+        try:
+            r = patterns.suggestions(today=D(2026, 11, 19))
+            self.assertEqual([x["topic"] for x in r["suggest"]], ["google-ads"])  # pricing only 2 days; tax is built in
+            patterns.decline("google ads")
+            self.assertEqual(patterns.suggestions(today=D(2026, 11, 19))["suggest"], [])
+            d = patterns.create_skill("Pricing", "Use when pricing comes up.", "# Pricing\nBody", {"value.md": "# Value"})
+            self.assertTrue((Path(d) / "SKILL.md").read_text().startswith("---\nname: pceo-pricing\n"))
+            self.assertIn("pricing", patterns.existing_skills())
+            with self.assertRaises(SystemExit):
+                patterns.create_skill("pricing", "x", "y")
+        finally:
+            os.environ["HOME"] = os.environ.pop("HOME_BACKUP")
+
+
+class License(TempHome):
+    def test_activation_daily_check_and_offline_grace(self):
+        import http.server, threading
+        from pocketceo import license as lic
+        state = {"active": True}
+        class H(http.server.BaseHTTPRequestHandler):
+            def do_POST(self):
+                self.rfile.read(int(self.headers["content-length"]))
+                body = json.dumps({"active": state["active"], "status": "active" if state["active"] else "canceled"}).encode()
+                self.send_response(200); self.send_header("content-type", "application/json"); self.end_headers(); self.wfile.write(body)
+            def log_message(self, *a):
+                pass
+        srv = http.server.HTTPServer(("127.0.0.1", 0), H)
+        threading.Thread(target=srv.serve_forever, daemon=True).start()
+        old = lic.conf
+        lic.conf = lambda: {"endpoint": "http://127.0.0.1:%d" % srv.server_port}
+        try:
+            self.assertEqual(lic.status()["status"], "not_activated")
+            self.assertTrue(lic.activate("owner@example.com")["active"])
+            self.assertTrue(lic.status(D.today() + datetime.timedelta(days=1))["active"])
+            state["active"] = False
+            self.assertFalse(lic.status(D.today() + datetime.timedelta(days=2))["active"])
+            state["active"] = True
+            self.assertTrue(lic.status(D.today() + datetime.timedelta(days=3))["active"])
+            srv.shutdown(); srv.server_close()
+            self.assertEqual(lic.status(D.today() + datetime.timedelta(days=5))["status"], "offline_grace")
+            self.assertEqual(lic.status(D.today() + datetime.timedelta(days=20))["status"], "offline_too_long")
+        finally:
+            lic.conf = old

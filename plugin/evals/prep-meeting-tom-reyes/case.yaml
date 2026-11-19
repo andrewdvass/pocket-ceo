@@ -1,0 +1,11 @@
+schema_version: "1.1"
+name: prep-meeting-tom-reyes
+tags: [meeting-prep]
+execution:
+  prompt: "Prep me for my call with Tom Reyes tomorrow at 10."
+  runs: 3
+  max_turns: 16
+  timeout_seconds: 420
+  allowed_tools: [Bash, Read, Glob, Grep, Skill, WebSearch]
+context:
+  scaffold_script: scaffold.sh

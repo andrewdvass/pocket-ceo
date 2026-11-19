@@ -36,6 +36,11 @@ brief at the time and delivery they chose). Keep the whole thing to as few messa
 > Hi! I'm your Pocket CEO. I'll help with your books, contracts, email and growing your business.
 > Setup takes about 5 minutes. I'll ask a few quick questions and do the rest. Ready?
 
+## Step 1b: Activate their subscription (only if the hook mentioned SUBSCRIPTION)
+If the session start shows "SUBSCRIPTION: not activated", ask: "What email did you use to buy Pocket
+CEO?" and run `license activate --email <email>` with the calculator. If it isn't found, say so kindly,
+check the spelling once, and point them to the purchase page; their folder and files always stay theirs.
+
 ## Step 2: The business profile (ask one at a time)
 1. "What's your first name?"
 2. "What's your business called, and what do you do in one sentence?"
@@ -138,12 +143,21 @@ from online banking, I can forecast the next 3 months and tell you before money 
   unpaid ones now and add them (`collections` skill).
 - If not now: "No problem. Any time, just drag a bank file in."
 
+## Step 6d: The evening debrief (the habit that makes it smart)
+Say: "Here's the trick most people miss with AI: tell it about your life. Each evening, tap the
+microphone and talk me through your day for two minutes. I'll remember the people and plans, draft
+your follow-ups and prep tomorrow's meetings before you ask." Ask what time suits them (most pick 8 or
+9 pm) and create a daily scheduled task at that time that runs `/debrief`. If scheduling isn't
+available, the morning brief will remind them instead.
+
 ## Step 7: Show them how to use it (short)
 > You're all set! Just talk to me like a person. Try things like:
 > - "How much should I set aside for tax?"
 > - "Can I afford a $8,000 truck in March?" (after you've shared a bank file)
 > - "Who owes me money?" or "I invoiced Sarah $1,200"
 > - "Can I write off my phone?"
+> - Each evening: tap the microphone and say "Here's my day…" (or /debrief)
+> - "Roast my plan to open a second location" (or /roast)
 > - "Read this contract" (and drop the file in)
 > - "Sort my inbox" or type /inbox
 > - "How do I get more customers?" or type /grow

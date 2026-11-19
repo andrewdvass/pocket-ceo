@@ -53,6 +53,14 @@ promise, a preference, a problem, a plan, a feeling about a person or a deal.
 4. **Date every entry** (YYYY-MM-DD) and say where it came from: chat, email, receipt, contract.
 5. **Write to the daily log too**: every conversation gets a section in `log/<today>.md` with what
    they asked, what you answered (the key numbers and verdicts, not a one-liner), and anything saved.
+   End each section with one line `Topics: <2 to 6 short topic names>` (e.g. `Topics: pricing,
+   google-ads, hiring`). Use the same name for the same topic every time. This is how Pocket CEO
+   notices what keeps coming up and offers to build a skill for it (`skill-forge`).
+5b. **People are relationships, not contacts.** In `people.md` keep what the owner tells you and what
+   they'd want remembered: role and company, how they met, what they talked about, their interests and
+   hobbies, who they know in common, what they're working on, and the last time they spoke. That's
+   what makes meeting prep and follow-ups feel personal. Never store health details, family problems
+   told in confidence, or anything the owner says to keep private.
 6. **Update `index.md`** when you add a new file, a new important person, or a fact that should be in
    the top 10.
 7. If they say "forget that" or "delete that", remove only that entry and add a dated line saying it

@@ -1,0 +1,11 @@
+schema_version: "1.1"
+name: forge-suggests-skill
+tags: [skill-forge]
+execution:
+  prompt: "What should you be getting better at to help me?"
+  runs: 3
+  max_turns: 16
+  timeout_seconds: 420
+  allowed_tools: [Bash, Read, Glob, Grep, Skill, WebSearch]
+context:
+  scaffold_script: scaffold.sh

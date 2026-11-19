@@ -35,7 +35,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "lib"))
 from pocketceo import load_rates, data_dir, province_code, money, source_lines  # noqa: E402
 from pocketceo import tax, bank, cashflow, reconcile, yearend  # noqa: E402
 from pocketceo import collections_ as inv  # noqa: E402
-from pocketceo import mileage, brief, redline, unit  # noqa: E402
+from pocketceo import mileage, brief, redline, unit, patterns, license as lic  # noqa: E402
 
 
 def profile():
@@ -441,6 +441,42 @@ def c_unit(a):
     out(a, r, "\n".join(t))
 
 
+def c_patterns(a):
+    r = patterns.suggestions(a.days, a.min_times)
+    t = []
+    for x in r["suggest"]:
+        t.append("SUGGEST SKILL: \"%s\" came up %d times on %d days (since %s). Offer to build a dedicated skill." % (x["topic"], x["times"], x["days"], x["first_seen"]))
+    if not t:
+        t.append("No new repeating topics. Top topics: " + ", ".join("%s (%d)" % kv for kv in r["top_topics"][:6]) if r["top_topics"] else "No topics logged yet.")
+    out(a, r, "\n".join(t))
+
+
+def c_skill_new(a):
+    body = Path(a.body).read_text(encoding="utf-8")
+    know = {Path(k).name: Path(k).read_text(encoding="utf-8") for k in (a.knowledge or [])}
+    d = patterns.create_skill(a.topic, a.description, body, know)
+    out(a, {"path": d}, "Built the skill at %s. It loads in the next new conversation." % d)
+
+
+def c_skill_decline(a):
+    patterns.decline(a.topic)
+    out(a, {"ok": True}, "Okay, I won't suggest a %s skill again." % a.topic)
+
+
+def c_lic_act(a):
+    r = lic.activate(a.email, a.github)
+    out(a, r, "Subscription active. Thanks!" if r.get("active") else "Not active: %s" % (r.get("message") or r.get("status")))
+
+
+def c_lic_status(a):
+    r = lic.status()
+    msg = {"checks_off": "", "offline_grace": "", "not_activated": "SUBSCRIPTION: not activated yet. Ask for the email they bought Pocket CEO with and run license activate.",
+           "offline_too_long": "SUBSCRIPTION: couldn't reach the licence server for over a week. Ask the owner to check their internet; their files are fine."}
+    line = msg.get(r["status"], "" if r["active"] else "SUBSCRIPTION INACTIVE (%s). Pocket CEO's assistant is paused: help them renew%s; they can still open and export their own files." % (
+        r["status"], (" at " + r["buy_url"]) if r.get("buy_url") else ""))
+    out(a, r, line)
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(prog="pceo", description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--json", action="store_true")
@@ -458,7 +494,7 @@ def main(argv=None):
             p.add_argument(*a[0], **a[1])
         return p
     groups = {}
-    for g in ("tax", "rates", "money", "cash", "receipts", "yearend", "invoices", "mileage", "brief", "contract", "biz"):
+    for g in ("tax", "rates", "money", "cash", "receipts", "yearend", "invoices", "mileage", "brief", "contract", "biz", "skills", "license"):
         groups[g] = sub.add_parser(g).add_subparsers(dest="cmd", required=True)
     f = lambda *n, **k: (n, k)
     num = dict(type=float, default=0.0)
@@ -506,6 +542,11 @@ def main(argv=None):
     cmd("biz", "unit-economics", c_unit, f("--price", type=float, required=True), f("--cost", type=float, required=True),
         f("--fixed", type=float, required=True), f("--sales", type=float), f("--marketing", type=float), f("--new-customers", type=float),
         f("--months-retained", type=float, default=1.0), f("--per-month", type=float, default=1.0), f("--owner-pay", type=float, default=0.0))
+    cmd("skills", "patterns", c_patterns, f("--days", type=int, default=45), f("--min-times", type=int, default=3))
+    cmd("skills", "new", c_skill_new, f("topic"), f("--description", required=True), f("--body", required=True), f("--knowledge", nargs="*"))
+    cmd("skills", "decline", c_skill_decline, f("topic"))
+    cmd("license", "activate", c_lic_act, f("--email", required=True), f("--github"))
+    cmd("license", "status", c_lic_status)
     a = ap.parse_args(argv)
     if a.year and not 2000 < a.year < 2100:
         sys.exit("Year looks wrong: %s" % a.year)

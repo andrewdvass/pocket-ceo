@@ -42,6 +42,8 @@ main one on to the owner in one line.
 | All money lines for the morning brief | `brief money [--floor 2000] [--instalment 1125]` |
 | Read a Word contract | `contract text <file.docx>` |
 | Marked-up contract with tracked changes | `contract redline <contract.docx/.txt> <changes.json> "<out>.docx"` |
+| Repeating topics worth a skill | `skills patterns`; build with `skills new "<topic>" --description ".." --body body.md --knowledge a.md b.md`; `skills decline "<topic>"` |
+| Subscription | `license status`; `license activate --email <purchase email> [--github <username>]` |
 | Price, margin, break-even, cost per customer | `biz unit-economics --price 120 --cost 35 --fixed 4200 [--sales 60] [--marketing 900 --new-customers 12 --months-retained 8] [--owner-pay 5000]` |
 
 Categories match the receipts skill (`receipts/templates/categories.md`) plus: `Sales / income`,

@@ -1,0 +1,11 @@
+schema_version: "1.1"
+name: debrief-full-day
+tags: [debrief]
+execution:
+  prompt: "Here's my day. Woke up, read my Bible, made a coffee, drove to breakfast with Lisa Park from Brightside Dental, she's thinking about a rebrand for their new Airdrie clinic and wants a proposal by Friday. Went to the office, answered emails and went through the monthly report for Harbour Dental. Had a call with a potential client, Tom Reyes at Reyes Plumbing, he wants a new logo and truck wraps, he said he knows Dave Patel. Noon hockey, lunch with the guys. Team meeting at 3. Dinner with my family. After that I was on my phone looking at flights to Vancouver for February and checking if the Flames are playing there while I'm in town."
+  runs: 3
+  max_turns: 20
+  timeout_seconds: 420
+  allowed_tools: [Bash, Read, Glob, Grep, Skill, WebSearch]
+context:
+  scaffold_script: scaffold.sh

@@ -28,6 +28,8 @@ PROFILES = {
                  struct="corporation (CCPC)", gst="yes", rev="$100k–$500k", city="Calgary, Mountain time"),
  "bc_sole": dict(name="Priya", biz="Priya Shah Bookkeeping", what="Bookkeeping for trades businesses", prov="British Columbia",
                  struct="sole proprietor", gst="yes", rev="$30k–$100k", city="Kelowna, Pacific time"),
+ "ab_sole": dict(name="Andrew", biz="Summit Brand Studio", what="Branding and design for clinics and trades", prov="Alberta",
+                 struct="sole proprietor", gst="yes", rev="$100k–$500k", city="Calgary, Mountain time"),
  "qc_sole": dict(name="Luc", biz="Luc Tremblay Photo", what="Wedding and event photography", prov="Quebec",
                  struct="sole proprietor", gst="yes", rev="$30k–$100k", city="Montréal, Eastern time"),
 }
@@ -113,13 +115,17 @@ def bookkeeping_state(home):
     (home / "decisions.md").write_text("2026-10-02 | cashflow | Cash cushion $2,000 | follow-up: monthly CSV\n")
 
 
-def scaffold(profile_key, books=False):
+def scaffold(profile_key, books=False, extra=None):
     tmp = Path(tempfile.mkdtemp())
     home = tmp / "Pocket CEO"
     home.mkdir()
     (home / "profile.md").write_text(profile_md(PROFILES[profile_key]))
     if books:
         bookkeeping_state(home)
+    for rel, text in (extra or {}).items():
+        f = home / rel
+        f.parent.mkdir(parents=True, exist_ok=True)
+        f.write_text(textwrap.dedent(text))
     files = {}
     for p in home.rglob("*"):
         if p.is_file():
@@ -131,7 +137,7 @@ def scaffold(profile_key, books=False):
         except OSError: pass
     shutil.rmtree(tmp, ignore_errors=True)
     os.environ.pop("POCKET_CEO_HOME", None)
-    payload = json.dumps({"anchor": ANCHOR.isoformat(), "shift_dates": books, "files": files})
+    payload = json.dumps({"anchor": ANCHOR.isoformat(), "shift_dates": books or bool(extra), "files": files})
     return SCAFFOLD % payload
 
 
@@ -158,7 +164,7 @@ PY
 '''
 
 
-def case(name, prompt, graders, profile="on_sole", books=False, tags=(), max_turns=16, runs=3):
+def case(name, prompt, graders, profile="on_sole", books=False, tags=(), max_turns=16, runs=3, extra=None):
     d = OUT / name
     (d / "graders").mkdir(parents=True, exist_ok=True)
     (d / "case.yaml").write_text(textwrap.dedent("""\
@@ -175,7 +181,7 @@ def case(name, prompt, graders, profile="on_sole", books=False, tags=(), max_tur
       scaffold_script: scaffold.sh
     """).format(name=name, tags=", ".join(tags), prompt=json.dumps(prompt), runs=runs, mt=max_turns))
     s = d / "scaffold.sh"
-    s.write_text(scaffold(profile, books))
+    s.write_text(scaffold(profile, books, extra))
     s.chmod(0o755)
     for gname, g in graders.items():
         fm = {k: v for k, v in g.items() if k != "criteria"}
@@ -481,6 +487,76 @@ def build():
             for affordability AND covers the 70% business-use / logbook point. FAIL if it is generic with no numbers.
             """)},
          books=True, tags=("ceo",))
+
+    # ---------- v0.6: get ahead of the owner ----------
+    case("roast-second-location", "I want to open a second studio location across town next month. Rent would be $2,100 a month plus about $9,000 to fit it out. Roast this plan.",
+         {"uses_skill": skill("roast-room"), "quality": llm("""
+            The owner (Ontario graphic designer, solo, ~$1,180/week of Stripe income, current rent $1,450, cash
+            cushion $2,000, bank history in their folder) wants a second studio location. A good roast: uses their
+            real numbers (income about $5,100/month vs. adding $2,100/month rent and $9,000 up front), points out
+            they're a solo service business so a second location doesn't add capacity by itself, checks cash
+            (the $9,000 against their balance and cushion), and gives a clear verdict (very likely "Not yet" or
+            "No") with specific conditions that would change it, a kill signal, and a cheap test first. It must
+            say at least one thing the owner won't want to hear. PASS only if it uses their actual income or
+            cash figures, gives a clear verdict, and proposes a cheaper test. FAIL if it's generic pros and cons
+            or cheerleads.
+            """)},
+         books=True, tags=("ceo", "straight-talk"))
+
+    case("debrief-full-day", ("Here's my day. Woke up, read my Bible, made a coffee, drove to breakfast with Lisa Park from "
+          "Brightside Dental, she's thinking about a rebrand for their new Airdrie clinic and wants a proposal by Friday. "
+          "Went to the office, answered emails and went through the monthly report for Harbour Dental. Had a call with a "
+          "potential client, Tom Reyes at Reyes Plumbing, he wants a new logo and truck wraps, he said he knows Dave Patel. "
+          "Noon hockey, lunch with the guys. Team meeting at 3. Dinner with my family. After that I was on my phone looking "
+          "at flights to Vancouver for February and checking if the Flames are playing there while I'm in town."),
+         {"uses_skill": skill("debrief"), "quality": llm("""
+            A great debrief response: (1) does not interrupt with many questions (at most two follow-ups);
+            (2) reports what it took off their plate: at least a drafted or outlined follow-up for Lisa Park
+            (proposal due Friday) and for Tom Reyes (logo and truck wraps), presented as drafts, not sent;
+            (3) flags the promise "proposal to Lisa by Friday" (saving to memory is blocked in this test sandbox,
+            so clearly stating the deadline, or trying to save it, counts); (4) notes the Dave Patel
+            connection for future meetings; (5) does real legwork on the personal plan (Vancouver flights in
+            February and whether the Flames play in Vancouver then) using web search or clearly offers to, without
+            inventing a game date it didn't check and without booking anything. Notes about a read-only folder
+            are a test artifact. PASS only if it covers at least (2), (3) and (5) without claiming to have sent
+            or booked anything. FAIL if it just summarizes the day back.
+            """)},
+         profile="ab_sole", tags=("debrief",), max_turns=20)
+
+    case("prep-meeting-tom-reyes", "Prep me for my call with Tom Reyes tomorrow at 10.",
+         {"uses_skill": skill("meeting-prep"), "quality": llm("""
+            The owner's memory has: Tom Reyes, owner of Reyes Plumbing (Ottawa, 6 trucks), met at a chamber
+            mixer Nov 12, wants a new logo and truck wraps, budget unsure, coaches his son's hockey team, knows Dave
+            Patel (the owner's hockey buddy). A good brief uses that memory (the Dave Patel connection and the
+            hockey common ground), names what he likely needs (a recognizable brand across 6 trucks; truck wraps
+            are a big ticket) and the likely objection (cost or timing), sets one goal for the call (e.g. a paid
+            discovery or a quote with options), suggests an opener, and either adds public professional
+            information with sources or says it couldn't find/confirm any. PASS only if it uses the memory facts,
+            gives a goal and an opener, and doesn't invent public facts without sources. FAIL if it asks the owner
+            who Tom is.
+            """)},
+         tags=("meeting-prep",),
+         extra={"memory/people.md": """\
+            # People
+
+            - 2026-11-12 (chat): Tom Reyes, owner of Reyes Plumbing (Ottawa, 6 trucks). Met at the Ottawa chamber
+              mixer. Wants a new logo and truck wraps; budget not set. Coaches his son's hockey team. Knows Dave Patel.
+            - 2026-09-03 (chat): Dave Patel, the owner's hockey buddy (noon hockey Tue/Thu), sales manager at Northwind.
+            """})
+
+    case("forge-suggests-skill", "What should you be getting better at to help me?",
+         {"uses_skill": skill("skill-forge"), "quality": llm("""
+            The owner's daily logs show "google-ads" as a topic on 4 different days this month (plus pricing twice).
+            A good answer notices the Google Ads pattern from their own history, offers to build a dedicated Google
+            Ads skill tailored to their business (asking 1 to 3 quick questions or describing what it would know),
+            and may suggest a connector that would help. PASS only if it identifies Google Ads specifically from
+            their logs and makes a concrete offer to build a skill. FAIL if it gives a generic list of things AI can do.
+            """)},
+         tags=("skill-forge",),
+         extra={"memory/log/2026-11-03.md": "## Chat\nAsked why Google Ads clicks are so expensive.\nTopics: google-ads\n",
+                "memory/log/2026-11-07.md": "## Chat\nAsked about ad copy for Google Ads.\nTopics: google-ads, pricing\n",
+                "memory/log/2026-11-12.md": "## Chat\nGoogle Ads conversion tracking.\nTopics: google-ads\n",
+                "memory/log/2026-11-17.md": "## Chat\nShould I raise my Google Ads budget?\nTopics: google-ads, pricing\n"})
 
 
 if __name__ == "__main__":

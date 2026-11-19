@@ -36,7 +36,10 @@ their spots, brief time, delivery). If the Personal section is empty, ask the se
    - Anything else they named: the one number they'd care about.
 4. **Business day:**
    - Urgent emails: count and one line each (from the `inbox` skill's Urgent label).
-   - Today's calendar events, if a calendar connector is available.
+   - Today's calendar events, if a calendar connector is available. For each meeting with someone
+     outside the business, one line from `meeting-prep` ("10:00 Lisa Park, Brightside Dental: she's
+     opening an Airdrie clinic; you both know Dave Patel"). Full brief on request.
+   - Last night's debrief follow-ups: drafts waiting and anything researched ("3 drafts ready in Gmail").
    - **Money:** run `brief money` with the calculator (`../../shared/tools.md`; pass `--floor` with
      their cash cushion from `memory/preferences.md` and `--instalment` if they pay instalments). It
      prints up to three lines (cash, money owed to them, tax deadlines in the next 14 days) and prints
@@ -44,7 +47,10 @@ their spots, brief time, delivery). If the Personal section is empty, ask the se
    - Other deadlines in the next 14 days: contract renewals, notice dates and promises from
      `memory/promises.md` and `decisions.md`.
 5. **Mondays only:** the 90-day plan scorecard from `memory/goals.md` (one line: last week vs target),
-   and one AI tip from the `ai-coach` skill (one line).
+   one AI tip from the `ai-coach` skill (one line), and any `SUGGEST SKILL` line from
+   `skills patterns` (one line, phrased as an offer).
+6. **Last line, every day without a debrief yesterday:** "Tonight, tap the mic and tell me about your
+   day: /debrief".
 
 ## Format (keep it under ~150 words)
 ```
