@@ -1,7 +1,8 @@
 # Pocket CEO
 
-Your accountant, contract reviewer, inbox manager, business consultant, video editor and AI coach, plus a morning
-brief with your weather, your games and your day. Built for Canadian small-business owners.
+Your accountant, cash-flow forecaster, collections helper, contract reviewer, inbox manager, business
+consultant, video editor and AI coach, plus a morning brief with your weather, your games and your day.
+Built for Canadian small-business owners.
 
 ---
 
@@ -50,7 +51,13 @@ Just talk to it like a person. Some things to try:
 
 | You want to… | Say |
 |---|---|
+| Know what to put aside for tax | "How much should I set aside?" or `/set-aside` |
 | Know if something is a write-off | "Can I write off my truck?" |
+| See your cash for the next 3 months | Drag in a bank CSV and say "How's my cash?" or `/cash` |
+| Check a big purchase | "Can I afford an $8,400 truck in March?" |
+| Get paid | "I invoiced Sarah $1,200" · "Who owes me money?" or `/owed` |
+| Get ready for tax time | "Get everything ready for my accountant" or `/year-end` |
+| Log a business drive | "Log my drive to the supplier, 30 km" |
 | Check a contract before signing | "Read this contract" and drag the file in |
 | Clean up your email | "Sort my inbox" or `/inbox` |
 | Reply to someone fast | "Draft a reply to Sarah" |
@@ -73,6 +80,24 @@ Snap a photo, send it. Pocket CEO reads the vendor, date, taxes and total, sorts
 category, saves the photo, and adds it to your receipt log (**Documents > Pocket CEO > receipts**).
 At tax time say "Get my receipts ready for my accountant." You can also drop a pile of photos in the
 **receipts > inbox** folder and it files them next time you chat.
+
+## Exact numbers, not guesses
+Pocket CEO does the tax math with a built-in calculator that uses the 2026 federal and provincial rates
+(every number has its source and the date it was checked). It works out income tax, CPP (both halves
+when you're self-employed), EI, GST/HST, instalments, salary vs dividends and what an employee really
+costs, for your province. It checked out against all 336 published 2026 marginal tax rates (federal plus
+all 13 provinces and territories). Rates are refreshed every January.
+
+## Your cash and your bank file
+Download a CSV of your business bank or credit card account from online banking and drag it in. Pocket
+CEO sorts every transaction (and learns from your corrections), finds your repeating bills, forecasts
+the next 13 weeks including GST/HST and tax instalments, and tells you before money gets tight. It
+never asks for your banking password and never connects to your bank. It only reads files you give it.
+
+## Tax time
+Say "Get everything ready for my accountant." Pocket CEO matches your receipts to your bank, lists what's
+missing, asks about your home office and car, and builds a folder for your accountant: T2125 totals,
+a GST/HST worksheet, a CCA schedule, every receipt photo, and a one-page PDF summary.
 
 ## Your privacy
 - Pocket CEO **never sends email to anyone**. It only writes drafts. You press Send. (The one exception

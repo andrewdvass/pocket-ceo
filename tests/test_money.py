@@ -300,3 +300,32 @@ class Invoices(TempHome):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class Mileage(TempHome):
+    def test_log_from_known_places(self):
+        from pocketceo import mileage
+        mileage.set_place("Dr. Lee clinic", 14)
+        mileage.add("2026-03-02", "Dr. Lee clinic", "client visit", source="calendar")
+        self.assertIsNone(mileage.add("2026-03-02", "Dr. Lee clinic", "client visit", source="calendar"))  # no doubles
+        mileage.add("2026-03-09", "Supplier", "pick up stock", km=30)
+        mileage.odometer("2026-01-01", 48000)
+        mileage.odometer("2026-12-31", 58000)
+        s = mileage.summary(2026)
+        self.assertEqual((s["trips"], s["business_km"], s["total_km"], s["business_pct"]), (2, 58, 10000, 0.58))
+        with self.assertRaises(SystemExit):
+            mileage.add("2026-03-10", "Somewhere new", "meeting")
+
+
+class BriefLines(TempHome):
+    def test_deadlines_and_owed(self):
+        from pocketceo import brief
+        R = load_rates(2026)
+        d = brief.deadlines(R, D(2026, 4, 20), 14, gst="quarterly", instalments=False)
+        self.assertEqual(sorted(w for _, w in d), ["GST/HST return and payment due for last quarter",
+                                                   "Personal tax balance due (and return, if not self-employed)"])
+        self.assertEqual(brief.money_lines(R, D(2026, 11, 19)), [])  # nothing to say -> no lines
+        inv.add("Sarah Chen", 1200, issued="2026-09-01", due="2026-10-01")
+        lines = brief.money_lines(R, D(2026, 12, 10), instalment_amount=1000)
+        self.assertIn("Owed to you: $1,200 overdue (Sarah 70 days).", lines)
+        self.assertTrue(any("instalment" in l for l in lines))

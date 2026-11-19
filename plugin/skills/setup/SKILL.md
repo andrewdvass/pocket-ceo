@@ -80,6 +80,14 @@ Ask: "Want me to back this folder up online so you never lose it? It's free and 
   skip the backup, say "No problem, your folder is saved on this computer. We can add a backup later",
   and move on. Never leave them stuck.
 
+### Make sure the calculator can run (quietly, no questions)
+Run `bash "<plugin>/shared/tools/pceo.sh" rates get tax_year` (the path is printed at the start of the
+conversation). If it prints `2026` (or the current year), move on without mentioning it. If it prints
+`NEEDS PYTHON`, say "One quick install so I can do exact tax math for you," and follow what it printed:
+on a Mac, run `xcode-select --install` and tell them to click **Install** in the pop-up and wait until it
+finishes; on Windows, run the `winget` line. Then re-check. If it still fails, carry on; the accountant
+can still answer, just without the exact calculator, and you'll retry next time.
+
 ## Step 4: Connect Gmail
 Check whether a Gmail connector is available in this session.
 - If yes: "Your Gmail is connected."
@@ -121,8 +129,20 @@ Save all of it under **Personal** in `profile.md`. Then set up where it runs:
 Send today's brief right away so they see what it looks like. Don't say it's scheduled until the task or
 routine actually exists.
 
+## Step 6c: Your money (optional, 2 minutes, big payoff)
+Ask: "Want me to keep an eye on your cash? If you download a spreadsheet of your business bank account
+from online banking, I can forecast the next 3 months and tell you before money gets tight."
+- If yes: walk them through the export (open the account, Download or Export, CSV, last 3 to 6 months),
+  then follow the `cashflow` skill's **Getting their bank data**. Ask for their cash cushion.
+- Ask: "Do you send invoices? I can track who owes you and write the reminders." If yes, ask for any
+  unpaid ones now and add them (`collections` skill).
+- If not now: "No problem. Any time, just drag a bank file in."
+
 ## Step 7: Show them how to use it (short)
 > You're all set! Just talk to me like a person. Try things like:
+> - "How much should I set aside for tax?"
+> - "Can I afford a $8,000 truck in March?" (after you've shared a bank file)
+> - "Who owes me money?" or "I invoiced Sarah $1,200"
 > - "Can I write off my phone?"
 > - "Read this contract" (and drop the file in)
 > - "Sort my inbox" or type /inbox

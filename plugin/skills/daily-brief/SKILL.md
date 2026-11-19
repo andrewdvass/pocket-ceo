@@ -37,8 +37,12 @@ their spots, brief time, delivery). If the Personal section is empty, ask the se
 4. **Business day:**
    - Urgent emails: count and one line each (from the `inbox` skill's Urgent label).
    - Today's calendar events, if a calendar connector is available.
-   - Deadlines in the next 14 days: tax dates for their province and structure (from the accountant
-     rules), contract renewals or notice dates noted in `decisions.md`.
+   - **Money:** run `brief money` with the calculator (`../../shared/tools.md`; pass `--floor` with
+     their cash cushion from `memory/preferences.md` and `--instalment` if they pay instalments). It
+     prints up to three lines (cash, money owed to them, tax deadlines in the next 14 days) and prints
+     nothing when there's nothing to say. Use its lines as they are; don't add money lines of your own.
+   - Other deadlines in the next 14 days: contract renewals, notice dates and promises from
+     `memory/promises.md` and `decisions.md`.
 5. **One small win** (optional, one line): an AI tip from the `ai-coach` skill on Mondays only.
 
 ## Format (keep it under ~150 words)
@@ -54,7 +58,8 @@ Sunshine Village: 12 cm overnight, 18 cm more by tomorrow morning. Powder day! ð
 Your day:
 - 2 urgent emails (Sarah re: invoice, landlord re: lease renewal)
 - 10:00 call with Dr. Lee
-- GST/HST return due in 9 days
+- Cash: rent $1,450 on Dec 1; GST/HST $2,310 due Jan 31.
+- Owed to you: $1,200 overdue (Sarah 49 days). Reminder drafted.
 
 Have a great one!
 ```
@@ -73,20 +78,9 @@ Lead with whatever is most exciting or most important today. Skip any section wi
   the brief, or anything else, to anyone else.
 - Otherwise, or if email delivery fails, show it in the app as the morning message.
 
-## Fact-check everything. "I don't know yet" beats a guess.
-People run their business on these answers. A wrong answer can cost them money, a penalty or a lawsuit.
-- **Check before you state it.** Any number, rate, threshold, deadline, law, rule or "you can / can't"
-  gets checked against an official or primary source first (canada.ca/CRA, Revenu QuÃ©bec, the
-  province's own site, CanLII or e-Laws for laws, the regulator's site). Name the source and date in
-  one short line: "Source: CRA, checked Oct 2026."
-- **If you can't confirm it, don't guess.** Say so plainly and say what you need:
-  "I don't know yet. I couldn't confirm this on CRA's site. Give me a bit more time, or tell me
-  [the specific detail], and I'll check properly." Then list exactly what you'd check and where.
-- **Never fill a gap with a likely-sounding answer**, a number from memory, or "usually". Memory and the
-  reference files are a starting point, not proof. If a source is old, a draft or only one blog, say that.
-- **Say how sure you are** when it matters: "Confirmed on CRA's site", "Proposed, not law yet",
-  "I couldn't confirm this".
-- Asking one clarifying question (province, structure, dates, amounts) is always better than assuming.
+## House rules
+Follow `../../shared/rules.md` (fact-checking, the rates file, using the calculator, serious
+situations, logging). Read it once per conversation if you haven't.
 
 ## Never
 Never include passwords, account numbers or private client details in the subject line. Never invent a

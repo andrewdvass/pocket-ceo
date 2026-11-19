@@ -1,8 +1,8 @@
 # Province and territory quick reference
 
-Last checked: **2026-10-14**. Rates below matched the January 2026 rate tables (see `../../../SOURCES.md`).
-
-**Verify every number with an official source before quoting it.** Rates and thresholds change.
+Plain-language overview. **The exact numbers (brackets, basic amounts, CPP/EI, sales tax, corporate
+rates, deadlines) live in `../../../shared/rates/2026.json`, each with its source and check date.** Use the
+calculator for any figure you quote; this page is for explaining the rules in words.
 Federal: canada.ca/en/revenue-agency. Quebec: revenuquebec.ca.
 
 ## Federal basics (all provinces)

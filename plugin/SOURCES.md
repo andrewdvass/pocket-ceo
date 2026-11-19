@@ -18,3 +18,12 @@ Re-check every January and after each federal or provincial budget.
 
 Not re-checked this round (stable rules, but confirm in January): GST $30,000 small-supplier threshold,
 meals at 50%, home-office rules, 6-year record keeping, limitation periods, employment-standards law names.
+
+## 2026-11-16: the rates file
+
+All numbers the calculator uses now live in `shared/rates/2026.json`, built by `dev/build_rates.py`.
+Each section names its sources (CRA T4127 payroll formulas, 122nd edition; TaxTips.ca 2026 pages,
+which reconcile to CRA). The test suite checks the engine against all 336 published 2026 combined
+marginal rates. Values marked `"verified": false` (GST/HST Quick Method rates, QPIP self-employed rate),
+the `watch` list (proposals and 2027 changes) and the small-claims limits must be confirmed live before
+quoting. Re-run the January checklist in `dev/RATES-REFRESH.md` every year.

@@ -18,9 +18,11 @@ checked 2026-10-15. Routines are a research preview, so re-check these facts if 
 ## Before creating it: put the brief inside their repository
 Routines run the skills committed to the cloned repository, not installed plugins. So:
 1. Copy this skill's `SKILL.md` to `~/Documents/Pocket CEO/.claude/skills/daily-brief/SKILL.md`.
-2. Make sure `profile.md` (with the **Personal** section) is in the folder.
-3. Commit and push the folder to their private repository. Confirm the push worked.
-Re-copy and push the skill whenever Pocket CEO is updated.
+2. Copy the plugin's `shared/` folder to `~/Documents/Pocket CEO/.claude/pocket-ceo/shared/` so the
+   cloud run can compute the money lines from the backed-up `money/` folder.
+3. Make sure `profile.md` (with the **Personal** section) is in the folder.
+4. Commit and push the folder to their private repository. Confirm the push worked.
+Re-copy and push the skill and `shared/` whenever Pocket CEO is updated.
 
 ## Create the routine
 Use the `schedule` skill (or tell them to type `/schedule`), with these settings:
@@ -49,6 +51,8 @@ so finish the whole job without asking questions.
    Never guess. If you can't confirm something, leave it out or write "couldn't confirm".
 3. Use Gmail to count urgent emails from the last 24 hours, and Google Calendar (if connected) for
    today's events. Read only; never reply to, label, delete or archive anything.
+   For the money lines run: POCKET_CEO_HOME=. python3 .claude/pocket-ceo/shared/tools/pceo.py brief money
+   and use each line it prints as is (it prints nothing when there's nothing to say).
 4. Deliver it: send ONE email to OWNER_EMAIL from their own Gmail, with the brief as the body and the
    subject line from the skill. Send it to OWNER_EMAIL only, never to anyone else. If Gmail can't
    send, create it as a Gmail draft addressed to OWNER_EMAIL instead.

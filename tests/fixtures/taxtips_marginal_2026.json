@@ -1,5 +1,5 @@
 {
- "source": "https://www.taxtips.ca/taxrates/<province>.htm combined federal+provincial marginal rate tables for 2026, retrieved 2026-11-16",
+ "source": "https://www.taxtips.ca/taxrates/<province>.htm combined federal+provincial marginal rate tables for 2026, retrieved 2026-11-19",
  "note": "Rates are % of actual income; they exclude CPP/EI and the Ontario Health Premium.",
  "tables": {
   "AB": [

@@ -118,7 +118,11 @@ def build(year, province=None, out_dir=None, today=None):
         e["items"] += 1
         e["from_receipts" if src == "receipt" else "from_bank_only"] += amount
 
-    veh = inputs.get("vehicle") or {}
+    veh = dict(inputs.get("vehicle") or {})
+    from . import mileage as _mi
+    ms = _mi.summary(year)
+    if not (veh.get("business_km") and veh.get("total_km")) and ms["business_pct"] is not None:
+        veh["business_km"], veh["total_km"] = ms["business_km"], ms["total_km"]
     veh_pct = None
     if veh.get("business_km") and veh.get("total_km"):
         veh_pct = 100.0 * _f(veh["business_km"]) / _f(veh["total_km"])

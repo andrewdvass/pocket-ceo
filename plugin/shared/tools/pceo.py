@@ -17,9 +17,11 @@
   python3 pceo.py cash forecast [--balance 12000] [--floor 2000] [--conservative]
   python3 pceo.py cash afford 8400 2027-03-01 --what "truck"
   python3 pceo.py cash brief
+  python3 pceo.py brief money                              all money lines for the morning brief
   python3 pceo.py receipts reconcile --year 2026
   python3 pceo.py yearend build --year 2026
   python3 pceo.py invoices add "Sarah Chen" 1200 [--due 2026-12-01] | paid INV-2026-001 | aging | match
+  python3 pceo.py mileage place "Dr. Lee clinic" 14 | add 2026-11-19 "Dr. Lee clinic" "client visit" | odometer 2026-01-01 48210 | summary
 
 Province and GST/HST status default to the owner's profile.md. Add --json to any command for raw data.
 """
@@ -30,6 +32,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "lib"))
 from pocketceo import load_rates, data_dir, province_code, money, source_lines  # noqa: E402
 from pocketceo import tax, bank, cashflow, reconcile, yearend  # noqa: E402
 from pocketceo import collections_ as inv  # noqa: E402
+from pocketceo import mileage, brief  # noqa: E402
 
 
 def profile():
@@ -46,6 +49,12 @@ def profile():
         m = re.search(r"\*\*Charges GST/HST:\*\*\s*(\w+)", t)
         if m:
             out["gst"] = m.group(1).lower().startswith("y")
+        m = re.search(r"\*\*Structure:\*\*\s*(.+)", t)
+        if m and "corporation" in m.group(1).lower() and "/" not in m.group(1):
+            out["structure"] = "corporation"
+        m = re.search(r"\*\*Employees / contractors:\*\*\s*(.+)", t)
+        if m and re.search(r"\b[1-9]\d* employee|employees?:?\s*[1-9]|\byes\b", m.group(1).lower()):
+            out["employees"] = True
     return out
 
 
@@ -354,6 +363,39 @@ def c_match(a):
     out(a, r, "\n".join("%s (%s): deposit %s on %s looks like payment [%s]" % (m["invoice"], m["client"], MC(m["amount"]), m["deposit_date"], m["confidence"]) for m in r) or "No deposits match open invoices.")
 
 
+def c_mi_place(a):
+    mileage.set_place(a.place, a.km)
+    out(a, {"ok": True}, "Saved: %s is %g km from home (one way)." % (a.place, a.km))
+
+
+def c_mi_add(a):
+    r = mileage.add(a.date, a.destination, a.purpose, a.km, a.source, a.note or "", not a.one_way)
+    out(a, r, ("Logged %s: %s, %g km (%s)." % (r["date"], r["destination"], r["km"], r["purpose"])) if r else "Already logged.")
+
+
+def c_mi_odo(a):
+    mileage.odometer(a.date, a.reading)
+    out(a, {"ok": True}, "Odometer %g km saved for %s." % (a.reading, a.date))
+
+
+def c_mi_sum(a):
+    r = mileage.summary(a.year)
+    t = ["%d business trips, %s business km%s." % (r["trips"], format(r["business_km"], ",g"),
+         (" of %s total km = %s%% business use" % (format(r["total_km"], ",g"), r["business_pct"])) if r["total_km"] else "")]
+    if r.get("missing"):
+        t.append("Missing: " + r["missing"])
+    out(a, r, "\n".join(t))
+
+
+def c_brief_money(a):
+    R = load_rates(a.year)
+    pr = profile()
+    gst = a.gst or ("quarterly" if pr.get("gst") else None)
+    lines = brief.money_lines(R, floor=a.floor, balance=a.balance, gst=gst, structure=pr.get("structure", "sole"),
+                              employees=a.employees or pr.get("employees", False), instalment_amount=a.instalment, days=a.days)
+    out(a, {"lines": lines}, "\n".join(lines))
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(prog="pceo", description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--json", action="store_true")
@@ -371,7 +413,7 @@ def main(argv=None):
             p.add_argument(*a[0], **a[1])
         return p
     groups = {}
-    for g in ("tax", "rates", "money", "cash", "receipts", "yearend", "invoices"):
+    for g in ("tax", "rates", "money", "cash", "receipts", "yearend", "invoices", "mileage", "brief"):
         groups[g] = sub.add_parser(g).add_subparsers(dest="cmd", required=True)
     f = lambda *n, **k: (n, k)
     num = dict(type=float, default=0.0)
@@ -408,6 +450,12 @@ def main(argv=None):
     cmd("invoices", "reminded", c_inv_rem, f("id"), f("stage", choices=["polite", "firm", "final"]))
     cmd("invoices", "aging", c_aging)
     cmd("invoices", "match", c_match)
+    cmd("mileage", "place", c_mi_place, f("place"), f("km", type=float))
+    cmd("mileage", "add", c_mi_add, f("date"), f("destination"), f("purpose"), f("--km", type=float), f("--one-way", action="store_true"),
+        f("--source", default="owner"), f("--note"))
+    cmd("mileage", "odometer", c_mi_odo, f("date"), f("reading", type=float))
+    cmd("mileage", "summary", c_mi_sum)
+    cmd("brief", "money", c_brief_money, f("--days", type=int, default=14), f("--employees", action="store_true"), *cash_args)
     a = ap.parse_args(argv)
     if a.year and not 2000 < a.year < 2100:
         sys.exit("Year looks wrong: %s" % a.year)

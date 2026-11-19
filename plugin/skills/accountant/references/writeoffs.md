@@ -1,6 +1,8 @@
 # Common write-offs for small businesses (federal rules, apply everywhere)
 
 Last checked against official and professional sources: **2026-10-14** (see `../../../SOURCES.md`).
+Vehicle ceilings, per-km allowance rates, CCA class rates and the 2026 first-year rule are in
+`../../../shared/rates/2026.json` (`vehicle`, `cca`); the year-end package applies them.
 
 The test for any expense: **was it spent to earn business income, and is it reasonable?** Keep the
 receipt plus a one-line note of the business purpose. Personal portions are never deductible.
@@ -9,7 +11,7 @@ receipt plus a one-line note of the business purpose. Personal portions are neve
 |---|---|---|
 | Phone and internet | Business-use % only (e.g. 70%) | Bill + a short usage estimate |
 | Home office | Only if it's the main place of business, or used only for business and regularly to meet clients. Deduct the workspace % of rent/mortgage interest, utilities, insurance, property tax. Can't create or increase a loss (carry forward instead) | Floor-plan % calculation |
-| Vehicle | Business km ÷ total km × costs (gas, insurance, repairs, lease or depreciation). Commuting to a regular workplace is personal | **A logbook** (a full year, or a representative 3-month sample after a base year) |
+| Vehicle | Business km ÷ total km × costs (gas, insurance, repairs, lease or depreciation). Commuting to a regular workplace is personal. A passenger vehicle over $39,000 (2026, before tax) is capped (class 10.1) | **A logbook** (a full year, or a representative 3-month sample after a base year). The `receipts` skill builds one from the calendar |
 | Meals and entertainment with clients | 50% deductible | Receipt + who and why |
 | Software, subscriptions, apps | 100% if for the business | Invoice |
 | Advertising and marketing | 100% (some limits on foreign media) | Invoices |

@@ -1,9 +1,21 @@
 {
   "name": "pocket-ceo",
-  "version": "0.4.0",
-  "description": "A CEO in your pocket for Canadian small-business owners: accountant, contract reviewer, receipt tracker, a memory that never forgets, inbox manager that writes in your voice, business consultant, video editor, daily brief, and a weekly AI coach. Type /start to set it up.",
+  "version": "0.5.0",
+  "description": "A CEO in your pocket for Canadian small-business owners: an accountant that calculates exact tax and CPP for your province and builds your year-end package, a 13-week cash forecast from your bank file, invoice tracking with reminders, contract reviewer, receipt tracker, a memory that never forgets, inbox manager that writes in your voice, business consultant, video editor, daily brief, and a weekly AI coach. Type /start to set it up.",
   "author": {
     "name": "Lead Shark Marketing"
   },
-  "keywords": ["small business", "canada", "accounting", "contracts", "email", "consultant", "ai"]
+  "keywords": [
+    "small business",
+    "canada",
+    "accounting",
+    "contracts",
+    "email",
+    "consultant",
+    "ai",
+    "cash flow",
+    "bookkeeping",
+    "gst",
+    "t2125"
+  ]
 }
