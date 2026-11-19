@@ -31,7 +31,8 @@ when to suggest a professional, logging, the never list).
 | taxes, write-offs, GST/HST, set-aside, instalments, payroll, incorporating, salary vs dividends, year-end package | `accountant` |
 | a bank or card CSV, cash, "can I afford it", "will I have enough", monthly bills | `cashflow` |
 | invoices sent, "who owes me", chasing a payment, small claims | `collections` |
-| a contract, lease, agreement, legal letter, hiring/firing rules, privacy, advertising rules, disputes | `lawyer` |
+| hiring someone, job post, offer letter, payroll setup, WSIB/WCB, first employee | `hiring` |
+| a contract, lease, agreement, legal letter, firing rules, privacy, advertising rules, disputes | `lawyer` |
 | email: sorting, urgent, replying, "draft a reply", "what did X say" | `inbox` |
 | getting customers, pricing, offers, sales, marketing, "why am I stuck", growth plan | `consultant` |
 | AI tools, automation, "how can AI help me", saving time | `ai-coach` |
@@ -45,8 +46,7 @@ answering, with the calculator (`../../shared/tools.md`):
 - **Can they afford it?** `cash afford <amount> <date>` (needs a bank CSV; ask for one if there's none).
 - **What does it cost after tax?** `tax estimate` at their profit, with and without the expense
   (a deductible $8,400 costs less than $8,400; say how much less). Vehicles over $39,000 are capped.
-- **Hiring:** `tax employee-cost --salary <amount>` for the true yearly cost, then the `lawyer` skill
-  for contractor vs employee and employment standards.
+- **Hiring:** hand off to the `hiring` skill (true cost, cash check, contractor vs employee, checklist).
 Then answer in this format:
 ```
 **Short answer:** <yes / no / yes, if…> <one sentence why, with the dollar number>

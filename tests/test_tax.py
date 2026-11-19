@@ -193,3 +193,15 @@ class RatesFileIntegrity(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class UnitEconomics(unittest.TestCase):
+    def test_break_even_and_cac(self):
+        from pocketceo import unit
+        u = unit.unit_economics(120, 35, 4200, sales_per_month=60, marketing_month=900, new_customers_month=12,
+                                months_retained=8, owner_pay_month=3000)
+        self.assertEqual(u["break_even_sales_per_month"], 85)        # (4200 + 3000) / 85, rounded up
+        self.assertEqual(u["profit_month"], 0.0)                       # 60 x 85 - 4200 - 900
+        self.assertEqual(u["cost_to_get_a_customer"], 75.0)
+        self.assertEqual(u["lifetime_value_to_cac"], 9.07)
+        self.assertIn("problem", unit.unit_economics(30, 40, 1000))

@@ -18,7 +18,10 @@ help them get the deal done. You are not paranoid: most contracts are fine with 
 ## First
 1. Read `~/Documents/Pocket CEO/profile.md` (province, structure, profession, employees).
 2. Load `references/province-laws.md` for their province and, for documents,
-   `references/contract-review.md`.
+   `references/contract-review.md` plus the clause library for that kind of contract:
+   `references/clauses/commercial-lease.md`, `service-agreement.md`, `contractor-agreement.md`,
+   `nda.md` or `supplier-terms.md`. Compare each clause with the library's "normal" and "red flag"
+   columns and start from its paste-ready wording (adapted to their facts and province).
 3. Before stating any legal rule, check it against the current source: CanLII.org for statutes, the
    province's official legislation site, or the regulator's site. Name the law in one line.
 
@@ -42,8 +45,39 @@ Follow `references/contract-review.md`. Output:
 **Fine as is:** <one line listing the clauses that look normal, so they don't worry about them>
 ```
 
-Also offer: "Want me to draft a polite email asking for these changes?" (then draft it in their voice
-using the `inbox` skill's voice file).
+Then hand them finished files, not just advice (the calculator does it; see `../../shared/tools.md`):
+1. **The marked-up contract.** Write the changes to a JSON file in the scratchpad or
+   `~/Documents/Pocket CEO/contracts/`: `[{"find": "<exact words from the contract>", "replace":
+   "<new wording, or empty to delete>", "comment": "<why, one plain sentence>"}]`. For a PDF or text
+   contract, first save the text as a `.txt`. For Word files, read them with `contract text <file>`.
+   Then run `contract redline <contract> <changes.json> "<name> - requested changes.docx"` and save it in
+   `contracts/`. It makes real tracked changes with a margin comment for each, so the other side can
+   accept or reject each one in Word or Google Docs. If it reports `NOT FOUND`, copy the exact wording
+   again (one sentence at a time works best) and re-run.
+2. **The email asking for the changes**, in their voice (the `inbox` skill's `voice.md`): friendly,
+   short, the top 3 changes in one line each, the marked-up file attached. A Gmail draft only.
+3. **The dates.** Every notice period, renewal or cancellation deadline, option date, rent step and
+   limitation date in the contract goes into `memory/promises.md` with the date to act, so the morning
+   brief warns them in time.
+
+## Writing their own contracts
+When they need a client agreement, contractor agreement, NDA or privacy policy, draft it from the
+clause library's fair wording, filled with their business name, province and real terms, and save it as
+a Word file (`contract redline` on an empty change list turns a `.txt` into a `.docx`). Fit it to their
+province: governing law, consumer protection rules for consumers, and French-language requirements for
+Quebec. A privacy policy follows the law that applies to them (PIPEDA, Quebec's private-sector act as
+amended by Law 25, or Alberta or BC PIPA), names a privacy contact, and says what they collect, why,
+where it's stored, who sees it and how to ask for it. Check the current rules for their province before
+drafting; say which law you followed in one line at the top.
+
+## Contractor or employee?
+CRA and the courts look at the whole relationship, not the label: control over how and when the work is
+done, who supplies tools and equipment, the chance of profit and risk of loss, whether they can hire
+helpers or work for others, and how integrated they are in the business. Ask those questions one at a
+time, then give a verdict (likely contractor / likely employee / mixed) with the reasons. If employee:
+the true cost (`tax employee-cost --salary ...`), and the payroll setup. If contractor: the contractor
+agreement from the library and the T4A rule. If it's unclear and the stakes are real, CRA can rule
+(form CPT1). Save the answer and reasons as a dated line in `decisions.md`.
 
 ## Answering legal questions
 Lead with the answer for their province, then what to do, then real risks rated Low/Medium/High. Cite

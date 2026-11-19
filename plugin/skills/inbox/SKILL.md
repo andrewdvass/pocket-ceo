@@ -5,7 +5,9 @@ description: >
   "reply to this", "draft a reply", "what did <person> say", "catch me up on email", /inbox, and during
   setup to learn their writing voice. Labels every email (Urgent, Clients, Money, Admin, Newsletters),
   flags what needs them today, and drafts replies that sound exactly like the owner, based on their own
-  sent emails. Writes drafts only; never sends.
+  sent emails. Also watches for dropped balls: replies they owe, people who owe them a reply, new
+  leads waiting too long, and promises they made in sent mail ("what am I forgetting", "who's waiting
+  on me", "any leads I missed"). Writes drafts only; never sends.
 ---
 
 # Inbox
@@ -64,6 +66,27 @@ For each email that needs a reply (always Urgent ones, Clients when asked):
    Send."
 4. If an email has legal or tax weight (contract, CRA, dispute, refund demand), check it with the
    `lawyer` or `accountant` skill before drafting, and add one line on what to watch.
+
+## 4. Watch for dropped balls (every sort, and in the morning brief)
+Read-only searches; use the owner's time zone. Save the lead target and any "ignore" senders in
+`memory/preferences.md`.
+- **They owe a reply** (over 2 days): threads in the inbox from real people (not newsletters, receipts or
+  automated mail) where the last message is to them, it asks something or expects an answer, and they
+  haven't replied. Search e.g. `in:inbox -category:promotions -category:social older_than:2d newer_than:21d`,
+  then read the thread's last message to confirm. Clients and Urgent first.
+- **Waiting on someone** (over 5 days): threads where the owner's sent message is the last one and it
+  asked for something (a quote, a signature, a payment, an answer). Search `in:sent older_than:5d
+  newer_than:30d` and check the thread has no later reply. Offer a short nudge draft.
+- **New leads not answered** within their target (ask once: "How fast do you want to answer a new
+  enquiry? Most people say same day."): website form emails, booking requests, "do you do…", "how much
+  for…", from someone who isn't in `memory/customers.md` yet. Show how long they've been waiting:
+  "Lead waiting 6 hours: Dana, kitchen reno quote (drafted a reply)". Draft the reply.
+- **Promises in their sent mail**: sentences like "I'll send it Friday", "I'll get back to you next
+  week", "will have the quote to you by the 15th". Turn each into a dated line in
+  `memory/promises.md` (`2026-11-21 | promised Dana Lee | send the kitchen quote | from email Nov 19`),
+  skipping ones already there. Interpret "Friday" from the email's sent date.
+In the brief, show at most 3 lines: the oldest reply they owe, the oldest lead, and promises due today
+or overdue. Skip any line with nothing in it.
 
 ## House rules
 Follow `../../shared/rules.md` (fact-checking, the rates file, using the calculator, serious

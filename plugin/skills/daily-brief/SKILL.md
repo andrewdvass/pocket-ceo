@@ -43,7 +43,8 @@ their spots, brief time, delivery). If the Personal section is empty, ask the se
      nothing when there's nothing to say. Use its lines as they are; don't add money lines of your own.
    - Other deadlines in the next 14 days: contract renewals, notice dates and promises from
      `memory/promises.md` and `decisions.md`.
-5. **One small win** (optional, one line): an AI tip from the `ai-coach` skill on Mondays only.
+5. **Mondays only:** the 90-day plan scorecard from `memory/goals.md` (one line: last week vs target),
+   and one AI tip from the `ai-coach` skill (one line).
 
 ## Format (keep it under ~150 words)
 ```

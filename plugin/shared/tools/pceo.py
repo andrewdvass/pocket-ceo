@@ -20,6 +20,7 @@
   python3 pceo.py brief money                              all money lines for the morning brief
   python3 pceo.py contract redline lease.docx changes.json "lease - requested changes.docx"
   python3 pceo.py contract text lease.docx                 read a Word contract as plain text
+  python3 pceo.py biz unit-economics --price 120 --cost 35 --fixed 4200 --sales 60 [--marketing 900 --new-customers 12 --months-retained 8]
   python3 pceo.py receipts reconcile --year 2026
   python3 pceo.py yearend build --year 2026
   python3 pceo.py invoices add "Sarah Chen" 1200 [--due 2026-12-01] | paid INV-2026-001 | aging | match
@@ -34,7 +35,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "lib"))
 from pocketceo import load_rates, data_dir, province_code, money, source_lines  # noqa: E402
 from pocketceo import tax, bank, cashflow, reconcile, yearend  # noqa: E402
 from pocketceo import collections_ as inv  # noqa: E402
-from pocketceo import mileage, brief, redline  # noqa: E402
+from pocketceo import mileage, brief, redline, unit  # noqa: E402
 
 
 def profile():
@@ -421,6 +422,25 @@ def c_docx_text(a):
     print(redline.docx_text(a.file))
 
 
+def c_unit(a):
+    r = unit.unit_economics(a.price, a.cost, a.fixed, a.sales, a.marketing, a.new_customers, a.months_retained, a.per_month, a.owner_pay)
+    t = ["Each sale: price %s, cost to deliver %s, margin %s (%.0f%%)." % (MC(r["price"]), MC(r["cost_to_deliver"]), MC(r["gross_margin"]), r["gross_margin_pct"])]
+    if r.get("problem"):
+        t.append(r["problem"])
+    else:
+        t.append("Break-even: %d sales a month (%s revenue) to cover %s of fixed costs%s." % (
+            r["break_even_sales_per_month"], M(r["break_even_revenue_month"]), M(r["fixed_costs_month"]),
+            (" and %s of owner pay" % M(r["owner_pay_month"])) if r["owner_pay_month"] else ""))
+    if "profit_month" in r:
+        t.append("At %g sales a month: profit %s a month%s. A 10%% price rise would add %s a month." % (
+            a.sales, M(r["profit_month"]), (" (%s after your pay)" % M(r["profit_after_owner_pay_month"])) if r["owner_pay_month"] else "",
+            M(r.get("price_up_10pct_adds_month", 0))))
+    if "cost_to_get_a_customer" in r:
+        t.append("Cost to get a customer %s; each is worth %s in margin over %g months; payback %s months. %s" % (
+            M(r["cost_to_get_a_customer"]), M(r["lifetime_gross_margin"]), a.months_retained, r["payback_months"], r["acquisition_verdict"]))
+    out(a, r, "\n".join(t))
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(prog="pceo", description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--json", action="store_true")
@@ -438,7 +458,7 @@ def main(argv=None):
             p.add_argument(*a[0], **a[1])
         return p
     groups = {}
-    for g in ("tax", "rates", "money", "cash", "receipts", "yearend", "invoices", "mileage", "brief", "contract"):
+    for g in ("tax", "rates", "money", "cash", "receipts", "yearend", "invoices", "mileage", "brief", "contract", "biz"):
         groups[g] = sub.add_parser(g).add_subparsers(dest="cmd", required=True)
     f = lambda *n, **k: (n, k)
     num = dict(type=float, default=0.0)
@@ -483,6 +503,9 @@ def main(argv=None):
     cmd("brief", "money", c_brief_money, f("--days", type=int, default=14), f("--employees", action="store_true"), *cash_args)
     cmd("contract", "redline", c_redline, f("contract"), f("changes"), f("out"))
     cmd("contract", "text", c_docx_text, f("file"))
+    cmd("biz", "unit-economics", c_unit, f("--price", type=float, required=True), f("--cost", type=float, required=True),
+        f("--fixed", type=float, required=True), f("--sales", type=float), f("--marketing", type=float), f("--new-customers", type=float),
+        f("--months-retained", type=float, default=1.0), f("--per-month", type=float, default=1.0), f("--owner-pay", type=float, default=0.0))
     a = ap.parse_args(argv)
     if a.year and not 2000 < a.year < 2100:
         sys.exit("Year looks wrong: %s" % a.year)

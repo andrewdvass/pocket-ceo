@@ -38,6 +38,11 @@ main one on to the owner in one line.
 | "Who owes me money?" | `invoices aging`, `invoices match` (finds payments in the bank file) |
 | After drafting a reminder | `invoices reminded INV-2026-003 firm` |
 | They got paid | `invoices paid INV-2026-003 [--amount 600]` |
+| Mileage log | `mileage place "<place>" <one-way km>`, `mileage add <date> "<place>" "<purpose>" [--km N]`, `mileage odometer <date> <km>`, `mileage summary` |
+| All money lines for the morning brief | `brief money [--floor 2000] [--instalment 1125]` |
+| Read a Word contract | `contract text <file.docx>` |
+| Marked-up contract with tracked changes | `contract redline <contract.docx/.txt> <changes.json> "<out>.docx"` |
+| Price, margin, break-even, cost per customer | `biz unit-economics --price 120 --cost 35 --fixed 4200 [--sales 60] [--marketing 900 --new-customers 12 --months-retained 8] [--owner-pay 5000]` |
 
 Categories match the receipts skill (`receipts/templates/categories.md`) plus: `Sales / income`,
 `Transfer (not income or expense)`, `Owner pay / draw`, `Tax payment (CRA / Revenu Québec)`,

@@ -19,17 +19,34 @@ def _norm(s):
 
 
 def _t(text, tag="w:t"):
-    return '<%s xml:space="preserve">%s</%s>' % (tag, escape(text), tag)
+    """Text element(s); tabs become <w:tab/> so layout survives."""
+    out = []
+    for i, piece in enumerate(text.split("\t")):
+        if i:
+            out.append("<w:tab/>")
+        if piece:
+            out.append('<%s xml:space="preserve">%s</%s>' % (tag, escape(piece), tag))
+    return "".join(out)
+
+
+_RUN = re.compile(r"<w:r(?:\s[^>]*)?>(.*?)</w:r>", re.S)
+_PIECE = re.compile(r"<w:t(?:\s[^>]*)?>(.*?)</w:t>|<w:tab/>|<w:br/>", re.S)
+
+
+def _runs(p_xml):
+    """[(rPr, text)] for the paragraph's direct runs, in order."""
+    out = []
+    for m in _RUN.finditer(p_xml):
+        inner = m.group(1)
+        rp = re.search(r"<w:rPr>.*?</w:rPr>", inner, re.S)
+        text = "".join(html.unescape(x.group(1)) if x.group(0).startswith("<w:t") else ("\t" if x.group(0) == "<w:tab/>" else "\n")
+                       for x in _PIECE.finditer(inner))
+        out.append((rp.group(0) if rp else "", text))
+    return out
 
 
 def _paragraph_text(p_xml):
-    parts = re.findall(r"<w:t(?:\s[^>]*)?>(.*?)</w:t>|<w:tab/>", p_xml, re.S)
-    return html.unescape("".join(x if x else "" for x in parts))
-
-
-def _first_rpr(p_xml):
-    m = re.search(r"<w:r(?:\s[^>]*)?>\s*(<w:rPr>.*?</w:rPr>)", p_xml, re.S)
-    return m.group(1) if m else ""
+    return "".join(t for _, t in _runs(p_xml))
 
 
 def _ppr(p_xml):
@@ -50,27 +67,34 @@ class _Ids:
 
 
 def _rebuild(p_xml, text, hits, ids):
-    """Rebuild one paragraph: plain runs around tracked deletions/insertions, with comment ranges."""
-    rpr = _first_rpr(p_xml)
-    out, pos = [], 0
-    run = lambda s: '<w:r>%s%s</w:r>' % (rpr, _t(s)) if s else ""
+    """Rebuild one paragraph, keeping each original run's formatting: plain pieces stay as they were,
+    deleted pieces are wrapped in <w:del>, and each insertion takes the formatting of the text it replaces."""
+    runs, spans, pos = _runs(p_xml), [], 0
+    for rpr, t in runs:
+        spans.append((pos, pos + len(t), rpr)); pos += len(t)
+    def pieces(a, b):
+        return [(max(a, s0), min(b, e0), rpr) for s0, e0, rpr in spans if s0 < b and a < e0]
+    def plain(a, b):
+        return "".join('<w:r>%s%s</w:r>' % (rpr, _t(text[x:y].replace("\n", " "))) for x, y, rpr in pieces(a, b) if y > x)
+    attrs = 'w:author="%s" w:date="%s"' % (escape(AUTHOR), ids.date)
+    out, cur = [], 0
     for start, end, ch in sorted(hits, key=lambda h: h[0]):
-        out.append(run(text[pos:start]))
+        out.append(plain(cur, start))
         cid = None
         if ch.get("comment"):
-            cid = ids.comment
-            ids.comment += 1
+            cid = ids.comment; ids.comment += 1
             ids.comments.append((cid, ch["comment"]))
             out.append('<w:commentRangeStart w:id="%d"/>' % cid)
-        a = 'w:author="%s" w:date="%s"' % (escape(AUTHOR), ids.date)
-        if text[start:end]:
-            out.append('<w:del w:id="%d" %s><w:r>%s%s</w:r></w:del>' % (ids.next_rev(), a, rpr, _t(text[start:end], "w:delText")))
+        for x, y, rpr in pieces(start, end):
+            if y > x:
+                out.append('<w:del w:id="%d" %s><w:r>%s%s</w:r></w:del>' % (ids.next_rev(), attrs, rpr, _t(text[x:y], "w:delText")))
         if ch.get("replace"):
-            out.append('<w:ins w:id="%d" %s><w:r>%s%s</w:r></w:ins>' % (ids.next_rev(), a, rpr, _t(ch["replace"])))
+            base = (pieces(start, max(end, start + 1)) or pieces(max(0, start - 1), start) or [(0, 0, "")])[0][2]
+            out.append('<w:ins w:id="%d" %s><w:r>%s%s</w:r></w:ins>' % (ids.next_rev(), attrs, base, _t(ch["replace"])))
         if cid is not None:
             out.append('<w:commentRangeEnd w:id="%d"/><w:r><w:rPr><w:rStyle w:val="CommentReference"/></w:rPr><w:commentReference w:id="%d"/></w:r>' % (cid, cid))
-        pos = end
-    out.append(run(text[pos:]))
+        cur = end
+    out.append(plain(cur, len(text)))
     return "<w:p>%s%s</w:p>" % (_ppr(p_xml), "".join(out))
 
 
@@ -131,8 +155,8 @@ def redline(src, changes, dest):
     new_doc, last = [], 0
     for m in paras:
         p_xml = m.group(0)
-        if "<w:t" not in p_xml:
-            continue
+        if "<w:t" not in p_xml or "<w:hyperlink" in p_xml or "<w:fldSimple" in p_xml or "w:fldChar" in p_xml:
+            continue  # links and fields: leave the paragraph alone rather than risk breaking it
         text = _paragraph_text(p_xml)
         hits, taken = [], []
         for n, ch in list(pending):
